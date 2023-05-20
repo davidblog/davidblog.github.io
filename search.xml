@@ -1,86 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>AJAX 動態資料串接</title>
-    <url>/david-blog/2020/06/20/ajax/</url>
-    <content><![CDATA[<p>A: 這個是用 ajax 作的嗎<br>B: ajax 還是 $.ajax 呢</p>
-<p>AJAX 可以說是前端最重要的技術沒有之一<br>主要功用是在不重刷頁面下作局部資料的動態更新</p>
-<p>底下介紹常用的 ajax 技術</p>
-<p>內文</p>
-<ul>
-<li>xhr</li>
-<li>$.ajax</li>
-<li>fetch</li>
-<li>axios</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="xhr"><a href="#xhr" class="headerlink" title="xhr"></a>xhr</h1><br>
-
-<p>xhr 是最古老的 Ajax 技術 現在已經很少使用<br>但如果是為了支援一些古老的版本的瀏覽器 可以稍微認識一下<br>先來看一下簡單的代碼範例<br>此範例用於 get 方法請求取得隨機狗狗圖片的 JSON 資料</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 宣告請求成功和失敗的函式 (此函式為請求成功或失敗後的 callback)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reqOnload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText);</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reqError</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立 XMLHttpRequest 物件 (在 console 裡 type 此物件即可以見當前狀態所有屬性內容)</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 設定方法與 url</span></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"https://dog.ceo/api/breeds/image/random"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 送出</span></span><br><span class="line">xhr.send();</span><br><span class="line"></span><br><span class="line">xhr.onload = reqOnload;</span><br><span class="line">xhr.onerror = reqError;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;message: "https://images.dog.ceo/breeds/groenendael/n02105056_4591.jpg", status: "success"&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>補充 (設定標頭)</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">"token"</span>, <span class="string">"wefuni2hu43f9hr"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/json; charset=utf-8"</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>補充 (post 方法下設定 payload)</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.send(<span class="built_in">JSON</span>.stringify(&#123; <span class="attr">key</span>: <span class="string">"value"</span> &#125;));</span><br></pre></td></tr></table></figure>
-
-<h1 id="ajax"><a href="#ajax" class="headerlink" title="$.ajax"></a>$.ajax</h1><br>
-
-<p>此方法為 jQuery 所提供的 ajax 方法 實際上由 xhr 所封裝的<br>如果專案下以有引用此 library<br>則可以直接使用此方法<br>底下為代碼的部分</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 建立 請求物件</span></span><br><span class="line"><span class="keyword">const</span> requestOptions = &#123;</span><br><span class="line">  url: <span class="string">"https://dog.ceo/api/breeds/image/random"</span>,</span><br><span class="line">  type: <span class="string">"get"</span>, <span class="comment">//</span></span><br><span class="line">  dataType: <span class="string">"json"</span>, <span class="comment">// server的回傳格式</span></span><br><span class="line">  success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 請求成功的callback</span></span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">  &#125;,</span><br><span class="line">  error: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 請求失敗的callback</span></span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 送出請求</span></span><br><span class="line">$.ajax(requestOptions);</span><br></pre></td></tr></table></figure>
-
-<p><strong>補充(post 方法的 payload)</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">requestOptions.type = <span class="string">"post"</span>; <span class="comment">// 請求方法</span></span><br><span class="line">requestOptions.data = payload; <span class="comment">// payload</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><br>
-
-<p>fetch 是一個 HTML5 的 API 會回傳一個 es6 的 promise 物件<br>如果是在主流瀏覽器的執行環境下是可以直接使用的</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fetch(<span class="string">"https://dog.ceo/api/breeds/image/random"</span>)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">  .then(<span class="function">(<span class="params">json</span>) =&gt;</span> <span class="built_in">console</span>.log(json))</span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="built_in">console</span>.log(err));</span><br></pre></td></tr></table></figure>
-
-<p><strong>補充 (加入其他 options)</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  method: <span class="string">"POST"</span>,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  body: <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">    email: <span class="string">"xxx@mail.com"</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fetch(url, options)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">  .then(<span class="function">(<span class="params">json</span>) =&gt;</span> <span class="built_in">console</span>.log(json))</span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="built_in">console</span>.log(err));</span><br></pre></td></tr></table></figure>
-
-<h1 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h1><br>
-
-<p>一個非常流行的三方套件<br>支持瀏覽器中發送 XMLHttpRequests 與 Promise API<br>底下為參考的代碼範例</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">"axios"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  method: <span class="string">"get"</span>,</span><br><span class="line">  url: <span class="string">"https://dog.ceo/api/breeds/image/random"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">axios.request(options);</span><br></pre></td></tr></table></figure>
-
-<p><strong>補充 (post payload)</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">options.method = <span class="string">"post"</span>;</span><br><span class="line">options.headers = &#123; <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span> &#125;;</span><br><span class="line">options.data = payload;</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/20/ajax/">https://ckhoct.github.io//david-blog/2020/06/20/ajax/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>ajax</tag>
-        <tag>jQuery</tag>
-        <tag>javascript</tag>
-        <tag>axios</tag>
-        <tag>xhr</tag>
-        <tag>fetch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Bookmarklet 書籤小程式</title>
-    <url>/david-blog/2020/05/31/bml/</url>
-    <content><![CDATA[<p>javascript 在客戶端瀏覽器上, 除了console內可以執行外, 也可以在網址列URL上執行, 只需要將協定的部分改為 <code>javascript:</code> 即可, 如: <code>javascript: alert(&#39;Hello Bookmarklet&#39;)</code>, 之前在工作上會寫給一些非開發人員做產品上簡單的測試, 如在CMS後台添加測試資料, 或是在前後台快速登入並執行相關功能, 通常會把書籤程式寫進匿名函式並壓縮成一行, 然後存在 chrome 的書籤裡, 接下來只要在程式要執行的頁面點擊書籤就可以執行程式了</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/05/31/bml/">https://ckhoct.github.io//david-blog/2020/05/31/bml/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-        <tag>bookmarklet</tag>
-        <tag>協定</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Babel JS編譯器</title>
     <url>/david-blog/2020/06/21/babel/</url>
     <content><![CDATA[<p>JavaScript 的語法主要由 ECMA 組織所訂定<br>而語法上的支援則由各家瀏覽器來實作</p>
@@ -153,11 +73,76 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>javascript</tag>
         <tag>es5</tag>
         <tag>es6</tag>
         <tag>complier</tag>
+        <tag>javascript</tag>
         <tag>babel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AJAX 動態資料串接</title>
+    <url>/david-blog/2020/06/20/ajax/</url>
+    <content><![CDATA[<p>A: 這個是用 ajax 作的嗎<br>B: ajax 還是 $.ajax 呢</p>
+<p>AJAX 可以說是前端最重要的技術沒有之一<br>主要功用是在不重刷頁面下作局部資料的動態更新</p>
+<p>底下介紹常用的 ajax 技術</p>
+<p>內文</p>
+<ul>
+<li>xhr</li>
+<li>$.ajax</li>
+<li>fetch</li>
+<li>axios</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="xhr"><a href="#xhr" class="headerlink" title="xhr"></a>xhr</h1><br>
+
+<p>xhr 是最古老的 Ajax 技術 現在已經很少使用<br>但如果是為了支援一些古老的版本的瀏覽器 可以稍微認識一下<br>先來看一下簡單的代碼範例<br>此範例用於 get 方法請求取得隨機狗狗圖片的 JSON 資料</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 宣告請求成功和失敗的函式 (此函式為請求成功或失敗後的 callback)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reqOnload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText);</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reqError</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立 XMLHttpRequest 物件 (在 console 裡 type 此物件即可以見當前狀態所有屬性內容)</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 設定方法與 url</span></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"https://dog.ceo/api/breeds/image/random"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 送出</span></span><br><span class="line">xhr.send();</span><br><span class="line"></span><br><span class="line">xhr.onload = reqOnload;</span><br><span class="line">xhr.onerror = reqError;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;message: "https://images.dog.ceo/breeds/groenendael/n02105056_4591.jpg", status: "success"&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>補充 (設定標頭)</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">"token"</span>, <span class="string">"wefuni2hu43f9hr"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/json; charset=utf-8"</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>補充 (post 方法下設定 payload)</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.send(<span class="built_in">JSON</span>.stringify(&#123; <span class="attr">key</span>: <span class="string">"value"</span> &#125;));</span><br></pre></td></tr></table></figure>
+
+<h1 id="ajax"><a href="#ajax" class="headerlink" title="$.ajax"></a>$.ajax</h1><br>
+
+<p>此方法為 jQuery 所提供的 ajax 方法 實際上由 xhr 所封裝的<br>如果專案下以有引用此 library<br>則可以直接使用此方法<br>底下為代碼的部分</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 建立 請求物件</span></span><br><span class="line"><span class="keyword">const</span> requestOptions = &#123;</span><br><span class="line">  url: <span class="string">"https://dog.ceo/api/breeds/image/random"</span>,</span><br><span class="line">  type: <span class="string">"get"</span>, <span class="comment">//</span></span><br><span class="line">  dataType: <span class="string">"json"</span>, <span class="comment">// server的回傳格式</span></span><br><span class="line">  success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 請求成功的callback</span></span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">  &#125;,</span><br><span class="line">  error: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 請求失敗的callback</span></span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 送出請求</span></span><br><span class="line">$.ajax(requestOptions);</span><br></pre></td></tr></table></figure>
+
+<p><strong>補充(post 方法的 payload)</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">requestOptions.type = <span class="string">"post"</span>; <span class="comment">// 請求方法</span></span><br><span class="line">requestOptions.data = payload; <span class="comment">// payload</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h1><br>
+
+<p>fetch 是一個 HTML5 的 API 會回傳一個 es6 的 promise 物件<br>如果是在主流瀏覽器的執行環境下是可以直接使用的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fetch(<span class="string">"https://dog.ceo/api/breeds/image/random"</span>)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">  .then(<span class="function">(<span class="params">json</span>) =&gt;</span> <span class="built_in">console</span>.log(json))</span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="built_in">console</span>.log(err));</span><br></pre></td></tr></table></figure>
+
+<p><strong>補充 (加入其他 options)</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  method: <span class="string">"POST"</span>,</span><br><span class="line">  headers: &#123;</span><br><span class="line">    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  body: <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">    email: <span class="string">"xxx@mail.com"</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fetch(url, options)</span><br><span class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">  .then(<span class="function">(<span class="params">json</span>) =&gt;</span> <span class="built_in">console</span>.log(json))</span><br><span class="line">  .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="built_in">console</span>.log(err));</span><br></pre></td></tr></table></figure>
+
+<h1 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h1><br>
+
+<p>一個非常流行的三方套件<br>支持瀏覽器中發送 XMLHttpRequests 與 Promise API<br>底下為參考的代碼範例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">"axios"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  method: <span class="string">"get"</span>,</span><br><span class="line">  url: <span class="string">"https://dog.ceo/api/breeds/image/random"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">axios.request(options);</span><br></pre></td></tr></table></figure>
+
+<p><strong>補充 (post payload)</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">options.method = <span class="string">"post"</span>;</span><br><span class="line">options.headers = &#123; <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span> &#125;;</span><br><span class="line">options.data = payload;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/20/ajax/">https://ckhoct.github.io//david-blog/2020/06/20/ajax/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>ajax</tag>
+        <tag>jQuery</tag>
+        <tag>axios</tag>
+        <tag>xhr</tag>
+        <tag>fetch</tag>
       </tags>
   </entry>
   <entry>
@@ -269,6 +254,33 @@
       </tags>
   </entry>
   <entry>
+    <title>部落格近3週年久違的更新</title>
+    <url>/david-blog/2023/05/20/blogHistory/</url>
+    <content><![CDATA[<p>回憶起這個部落格只有在建立初起比較常使用<br>後續就默默的擺著  </p>
+<p>幾乎所有應用只要一陣子沒更新就會出問題<br>這個部落格也不例外</p>
+<p>底下就來講講這裡曾經發生過的事吧</p>
+<a id="more"></a>
+
+<h1 id="部落格的歷史"><a href="#部落格的歷史" class="headerlink" title="部落格的歷史"></a>部落格的歷史</h1><p>最初建立這個部落格<br>除了想記錄自己的學習歷程<br>也想留下一個類似作品集的東西  </p>
+<p>不過沒有選擇作品集而是部落格<br>是因為部落格更務實<br>而且使用上更方便  </p>
+<p>這個部落格始終是放在 github page 上的<br>但當初為了讓這個網站看起來更專業<br>就去 GoDaddy 租了個兩年的網域<br>然後用 CloudFlare 來做網站託管<br>這樣就有一個專門的網址可以連到我的網站<br>也可以在 google 上搜尋到這格部落格裡的文章</p>
+<p>CloudFlare 除了可以免費託管網站<br>還提供了免費的CDN和SSL憑證相當不錯</p>
+<p>印象中這個部落格有出現過幾次問題</p>
+<h2 id="Hexo-選用的主題不再更新-而導致版面出問題"><a href="#Hexo-選用的主題不再更新-而導致版面出問題" class="headerlink" title="Hexo 選用的主題不再更新 而導致版面出問題"></a>Hexo 選用的主題不再更新 而導致版面出問題</h2><p>這個部落格是用 Hexo 這個框架來做的<br>裡面有提供很多很棒的版型稱為主體<br>我當初選了一個挺熱門的主體滿多工程師在用的<br>不過後續這個主題沒有更新<br>版面就出現一些奇怪的問題<br>後來上網查很多人都有遇到這個問題<br>幸運的是有找到他們提供解決的辦法<br>不過我有點忘記solution是直接換一個主體<br>還是根據原本的主題進行了局部的修改才把它搞好…<br>總之現在的版面是一個叫 next 的主題</p>
+<h2 id="網域沒有續約-網址失效-導致網站無法正常訪問"><a href="#網域沒有續約-網址失效-導致網站無法正常訪問" class="headerlink" title="網域沒有續約 網址失效 導致網站無法正常訪問"></a>網域沒有續約 網址失效 導致網站無法正常訪問</h2><p>當初是把部落格設置在github page主頁<br>另外有設置CNAME及一些自動轉址的功能<br>例如你從github page進來也會直接換到我的網域<br>讓人看不出這個網站是放在github上面<br>不過網域沒有續約就要把CNAME和自動轉址的功能拿掉<br>這樣才能在github page上正常的讓人訪問</p>
+<h2 id="google-搜尋引擎找不到部落格的文章了"><a href="#google-搜尋引擎找不到部落格的文章了" class="headerlink" title="google 搜尋引擎找不到部落格的文章了"></a>google 搜尋引擎找不到部落格的文章了</h2><p>最近有在研究一些關於 seo 的東西<br>有發現我的部落格在 google 引擎上已經找不到了<br>據我目前搜集的資訊了解<br>是因為 google 爬蟲不會特別去爬 github 上的 github page<br>可是可以用 google 提供的 search console 主動提供網站資訊<br>讓爬蟲建立網站索引<br>所以我就小小的更新了一下 Blog 順便發篇文<br>順利的話之後這裡的文章也可以在 google 上直接找到囉~</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2023/05/20/blogHistory/">https://ckhoct.github.io//david-blog/2023/05/20/blogHistory/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+]]></content>
+      <categories>
+        <category>網站維護</category>
+      </categories>
+      <tags>
+        <tag>部落格</tag>
+        <tag>seo</tag>
+        <tag>網站維護</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何擁有一個網站</title>
     <url>/david-blog/2020/09/13/createWebsite/</url>
     <content><![CDATA[<p>將一個<code>網頁</code>放到一個<code>網頁空間</code><br>再用一個<code>網域</code>指向你的<code>網頁空間</code>即可<br>現在你有一個網站了,只要在瀏覽器的網址列輸入網址,人人都可以連到你的網站囉!</p>
@@ -336,94 +348,18 @@
       </tags>
   </entry>
   <entry>
-    <title>hosts 主機表</title>
-    <url>/david-blog/2020/06/08/hosts/</url>
-    <content><![CDATA[<p>A: 網址好像連不對地方!?<br>B: 你要不要檢查一下你的主機表..</p>
-<p>內文:</p>
-<ul>
-<li>主機表介紹</li>
-<li>檔案位置</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="hosts-主機表"><a href="#hosts-主機表" class="headerlink" title="hosts 主機表"></a>hosts 主機表</h1><h2 id="主機表介紹"><a href="#主機表介紹" class="headerlink" title="主機表介紹"></a>主機表介紹</h2><br>
-
-<blockquote>
-<p>這隻檔案其實就是本地的 DNS,<br>主要記載著 IP 與 Domain 的對應關係,<br>當輸入網址時就會根據 hosts 上的紀錄做解析,<br>當遇到本地沒有的紀錄時, 電腦才會上 DNS server 作詢問,</p>
-</blockquote>
-<p>雖然說這隻檔案現在很少會用到,<br>但有些專案在開發過程中,<br>還是會將內部網路的 IP 設定在主機表裡,<br>以便專案開發與測試</p>
-<p>下面附註檔案位置, 有興趣的話可以打開來看看</p>
-<h2 id="檔案位置"><a href="#檔案位置" class="headerlink" title="檔案位置"></a>檔案位置</h2><p><strong>Mac</strong>: <code>/private/etc/hosts</code></p>
-<p>在 CLI 上輸入 <code>sudo vim /private/etc/hosts</code><br>就可以用 vim 編輯器打開來了</p>
-<p>以下是我mac打開主機表的內容, 給大家參考一下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##</span><br><span class="line"># Host Database</span><br><span class="line">#</span><br><span class="line"># localhost is used to configure the loopback interface</span><br><span class="line"># when the system is booting.  Do not change this entry.</span><br><span class="line">##</span><br><span class="line">127.0.0.1       localhost</span><br><span class="line">255.255.255.255 broadcasthost</span><br><span class="line">::1             localhost</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/08/hosts/">https://ckhoct.github.io//david-blog/2020/06/08/hosts/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+    <title>Bookmarklet 書籤小程式</title>
+    <url>/david-blog/2020/05/31/bml/</url>
+    <content><![CDATA[<p>javascript 在客戶端瀏覽器上, 除了console內可以執行外, 也可以在網址列URL上執行, 只需要將協定的部分改為 <code>javascript:</code> 即可, 如: <code>javascript: alert(&#39;Hello Bookmarklet&#39;)</code>, 之前在工作上會寫給一些非開發人員做產品上簡單的測試, 如在CMS後台添加測試資料, 或是在前後台快速登入並執行相關功能, 通常會把書籤程式寫進匿名函式並壓縮成一行, 然後存在 chrome 的書籤裡, 接下來只要在程式要執行的頁面點擊書籤就可以執行程式了</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/05/31/bml/">https://ckhoct.github.io//david-blog/2020/05/31/bml/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
 ]]></content>
       <categories>
-        <category>域名解析</category>
+        <category>javascript</category>
       </categories>
       <tags>
-        <tag>dns</tag>
-        <tag>ip</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Frontend 前端免費資源匯集（ㄧ）</title>
-    <url>/david-blog/2020/06/27/free-sources/</url>
-    <content><![CDATA[<p>工程師不造輪胎 一個好的開始 就是直接站在巨人的肩膀上 這樣最快 最輕鬆 最開心!!!<br>所以這篇文章主要是彙整一些 優質 好用 而且<strong>免費</strong>的前端資源 感謝網路上巨人們的貢獻!!!</p>
-<p>p.s. 很多資源可以免費使用在商業上 但需不需要 credit 作者 記得還是先看一下 license</p>
-<p>內文</p>
-<ul>
-<li>圖片</li>
-<li>模板</li>
-<li>字型</li>
-<li>API</li>
-<li>CSS Animation</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="圖片"><a href="#圖片" class="headerlink" title="圖片"></a>圖片</h1><h2 id="Unsplash"><a href="#Unsplash" class="headerlink" title="Unsplash"></a><a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></h2><p>以前這個網站所有提供的圖片都是 CC0<br>真正的免費 可以完全任意的使用 無需標明出處來源 是一個非常受到歡迎的圖庫</p>
-<p>現在呢 許可改為 Unsplash 自己的許可 多了一些限制</p>
-<ul>
-<li>不能以 Unsplash 的圖片和 Unsplash 競爭</li>
-<li>圖片在未經過大幅度修改下不能直接進行販售</li>
-</ul>
-<p>但依然是可以進行商業或非商業使用 也無需標明出處來源<br>重點是品質都有相當高得水準 直接拿個一張圖片放在網頁上當 banner<br>你的網頁就直接昇華到了下一個檔次</p>
-<p>缺點是因為免費高品質 容易有撞衫的機會</p>
-<br>
-
-<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><h2 id="TEMPLATED"><a href="#TEMPLATED" class="headerlink" title="TEMPLATED"></a><a href="https://templated.co/" target="_blank" rel="noopener">TEMPLATED</a></h2><p>裡面超過 800 種版型 每種版型都包含了完整的 HTML, CSS 甚至是 RWD<br>可以做為商業與個人使用 主要的許可是 CC-by 簡單來說只要在網站上著名出處就可以了<br>如在 footer 上寫 <code>Designed by &lt;出處&gt;</code></p>
-<p>細部點進去看 還會發現有一些其實是 CC0 !!! 超級棒 !!!</p>
-<br>
-
-<h1 id="字型"><a href="#字型" class="headerlink" title="字型"></a>字型</h1><h2 id="Google-Fonts"><a href="#Google-Fonts" class="headerlink" title="Google Fonts"></a><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts</a></h2><p>字型推薦 Google Fonts<br>主要的許可是 Open Font License<br>可以自由地使用在產品 專案 及商業上 限制是不能直接去賣這個字型</p>
-<p>字型的使用上非常的便利<br>可以用 CDN 或是下載</p>
-<p>通常在網頁加上字型的話 可以大幅度的提升網頁的質感</p>
-<p>p.s. 如果網站地區是在大陸的話 要注意 CDN 可能會連不到 建議直接下載</p>
-<br>
-
-<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="public-apis"><a href="#public-apis" class="headerlink" title="public-apis"></a><a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis</a></h2><p>在 github 上有厲害的人們 彙整了相當多的 API<br>詳細可以直接閱讀 README 的部分<br>上面註明了是否需要授權以及可不可以跨域使用 etc.<br>另外 API 的種類還有分門別類 非常的用心</p>
-<p>如果前端應用需要一些動態資源 很適合來這邊尋找靈感</p>
-<br>
-
-<h1 id="CSS-Animation"><a href="#CSS-Animation" class="headerlink" title="CSS Animation"></a>CSS Animation</h1><h2 id="animate-style"><a href="#animate-style" class="headerlink" title="animate.style"></a><a href="https://animate.style/" target="_blank" rel="noopener">animate.style</a></h2><p>Animated.css 一個老牌的動畫 Library<br>不知道這個網站什麼時候改版了<br>一開始進去還有點認不出來<br>但看到熟悉的動畫效果馬上就認出來了<br>裡面提供非常多好用的 CSS Animation<br>許可為 MIT License</p>
-<p>以前只能使用 CDN 現在也提供了 npm 的使用方法<br>這個庫可以非常方便的在網頁上套用現成好看的動畫效果</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/27/free-sources/">https://ckhoct.github.io//david-blog/2020/06/27/free-sources/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
-]]></content>
-      <categories>
-        <category>免費資源</category>
-      </categories>
-      <tags>
-        <tag>free sources</tag>
-        <tag>api</tag>
-        <tag>images</tag>
-        <tag>cc0</tag>
-        <tag>font</tag>
-        <tag>css</tag>
-        <tag>animation</tag>
-        <tag>template</tag>
+        <tag>javascript</tag>
+        <tag>bookmarklet</tag>
+        <tag>協定</tag>
       </tags>
   </entry>
   <entry>
@@ -481,6 +417,63 @@
         <tag>Progressive Web App</tag>
         <tag>service work</tag>
         <tag>manifest</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Frontend 前端免費資源匯集（ㄧ）</title>
+    <url>/david-blog/2020/06/27/free-sources/</url>
+    <content><![CDATA[<p>工程師不造輪胎 一個好的開始 就是直接站在巨人的肩膀上 這樣最快 最輕鬆 最開心!!!<br>所以這篇文章主要是彙整一些 優質 好用 而且<strong>免費</strong>的前端資源 感謝網路上巨人們的貢獻!!!</p>
+<p>p.s. 很多資源可以免費使用在商業上 但需不需要 credit 作者 記得還是先看一下 license</p>
+<p>內文</p>
+<ul>
+<li>圖片</li>
+<li>模板</li>
+<li>字型</li>
+<li>API</li>
+<li>CSS Animation</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="圖片"><a href="#圖片" class="headerlink" title="圖片"></a>圖片</h1><h2 id="Unsplash"><a href="#Unsplash" class="headerlink" title="Unsplash"></a><a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></h2><p>以前這個網站所有提供的圖片都是 CC0<br>真正的免費 可以完全任意的使用 無需標明出處來源 是一個非常受到歡迎的圖庫</p>
+<p>現在呢 許可改為 Unsplash 自己的許可 多了一些限制</p>
+<ul>
+<li>不能以 Unsplash 的圖片和 Unsplash 競爭</li>
+<li>圖片在未經過大幅度修改下不能直接進行販售</li>
+</ul>
+<p>但依然是可以進行商業或非商業使用 也無需標明出處來源<br>重點是品質都有相當高得水準 直接拿個一張圖片放在網頁上當 banner<br>你的網頁就直接昇華到了下一個檔次</p>
+<p>缺點是因為免費高品質 容易有撞衫的機會</p>
+<br>
+
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><h2 id="TEMPLATED"><a href="#TEMPLATED" class="headerlink" title="TEMPLATED"></a><a href="https://templated.co/" target="_blank" rel="noopener">TEMPLATED</a></h2><p>裡面超過 800 種版型 每種版型都包含了完整的 HTML, CSS 甚至是 RWD<br>可以做為商業與個人使用 主要的許可是 CC-by 簡單來說只要在網站上著名出處就可以了<br>如在 footer 上寫 <code>Designed by &lt;出處&gt;</code></p>
+<p>細部點進去看 還會發現有一些其實是 CC0 !!! 超級棒 !!!</p>
+<br>
+
+<h1 id="字型"><a href="#字型" class="headerlink" title="字型"></a>字型</h1><h2 id="Google-Fonts"><a href="#Google-Fonts" class="headerlink" title="Google Fonts"></a><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts</a></h2><p>字型推薦 Google Fonts<br>主要的許可是 Open Font License<br>可以自由地使用在產品 專案 及商業上 限制是不能直接去賣這個字型</p>
+<p>字型的使用上非常的便利<br>可以用 CDN 或是下載</p>
+<p>通常在網頁加上字型的話 可以大幅度的提升網頁的質感</p>
+<p>p.s. 如果網站地區是在大陸的話 要注意 CDN 可能會連不到 建議直接下載</p>
+<br>
+
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="public-apis"><a href="#public-apis" class="headerlink" title="public-apis"></a><a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis</a></h2><p>在 github 上有厲害的人們 彙整了相當多的 API<br>詳細可以直接閱讀 README 的部分<br>上面註明了是否需要授權以及可不可以跨域使用 etc.<br>另外 API 的種類還有分門別類 非常的用心</p>
+<p>如果前端應用需要一些動態資源 很適合來這邊尋找靈感</p>
+<br>
+
+<h1 id="CSS-Animation"><a href="#CSS-Animation" class="headerlink" title="CSS Animation"></a>CSS Animation</h1><h2 id="animate-style"><a href="#animate-style" class="headerlink" title="animate.style"></a><a href="https://animate.style/" target="_blank" rel="noopener">animate.style</a></h2><p>Animated.css 一個老牌的動畫 Library<br>不知道這個網站什麼時候改版了<br>一開始進去還有點認不出來<br>但看到熟悉的動畫效果馬上就認出來了<br>裡面提供非常多好用的 CSS Animation<br>許可為 MIT License</p>
+<p>以前只能使用 CDN 現在也提供了 npm 的使用方法<br>這個庫可以非常方便的在網頁上套用現成好看的動畫效果</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/27/free-sources/">https://ckhoct.github.io//david-blog/2020/06/27/free-sources/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+]]></content>
+      <categories>
+        <category>免費資源</category>
+      </categories>
+      <tags>
+        <tag>free sources</tag>
+        <tag>api</tag>
+        <tag>images</tag>
+        <tag>cc0</tag>
+        <tag>font</tag>
+        <tag>css</tag>
+        <tag>animation</tag>
+        <tag>template</tag>
       </tags>
   </entry>
   <entry>
@@ -605,58 +598,49 @@
       </tags>
   </entry>
   <entry>
-    <title>部落格近3週年久違的更新</title>
-    <url>/david-blog/2023/05/20/blogHistory/</url>
-    <content><![CDATA[<p>回憶起這個部落格只有在建立初起比較常使用<br>後續就默默的擺著  </p>
-<p>幾乎所有應用只要一陣子沒更新就會出問題<br>這個部落格也不例外</p>
-<p>底下就來講講這裡曾經發生過的事吧</p>
-<a id="more"></a>
-
-<h1 id="部落格的歷史"><a href="#部落格的歷史" class="headerlink" title="部落格的歷史"></a>部落格的歷史</h1><p>最初建立這個部落格<br>除了想記錄自己的學習歷程<br>也想留下一個類似作品集的東西  </p>
-<p>不過沒有選擇作品集而是部落格<br>是因為部落格更務實<br>而且使用上更方便  </p>
-<p>這個部落格始終是放在 github page 上的<br>但當初為了讓這個網站看起來更專業<br>就去 GoDaddy 租了個兩年的網域<br>然後用 CloudFlare 來做網站託管<br>這樣就有一個專門的網址可以連到我的網站<br>也可以在 google 上搜尋到這格部落格裡的文章</p>
-<p>CloudFlare 除了可以免費託管網站<br>還提供了免費的CDN和SSL憑證相當不錯</p>
-<p>印象中這個部落格有出現過幾次問題</p>
-<h2 id="Hexo-選用的主題不再更新-而導致版面出問題"><a href="#Hexo-選用的主題不再更新-而導致版面出問題" class="headerlink" title="Hexo 選用的主題不再更新 而導致版面出問題"></a>Hexo 選用的主題不再更新 而導致版面出問題</h2><p>這個部落格是用 Hexo 這個框架來做的<br>裡面有提供很多很棒的版型稱為主體<br>我當初選了一個挺熱門的主體滿多工程師在用的<br>不過後續這個主題沒有更新<br>版面就出現一些奇怪的問題<br>後來上網查很多人都有遇到這個問題<br>幸運的是有找到他們提供解決的辦法<br>不過我有點忘記solution是直接換一個主體<br>還是根據原本的主題進行了局部的修改才把它搞好…<br>總之現在的版面是一個叫 next 的主題</p>
-<h2 id="網域沒有續約-網址失效-導致網站無法正常訪問"><a href="#網域沒有續約-網址失效-導致網站無法正常訪問" class="headerlink" title="網域沒有續約 網址失效 導致網站無法正常訪問"></a>網域沒有續約 網址失效 導致網站無法正常訪問</h2><p>當初是把部落格設置在github page主頁<br>另外有設置CNAME及一些自動轉址的功能<br>例如你從github page進來也會直接換到我的網域<br>讓人看不出這個網站是放在github上面<br>不過網域沒有續約就要把CNAME和自動轉址的功能拿掉<br>這樣才能在github page上正常的讓人訪問</p>
-<h2 id="google-搜尋引擎找不到部落格的文章了"><a href="#google-搜尋引擎找不到部落格的文章了" class="headerlink" title="google 搜尋引擎找不到部落格的文章了"></a>google 搜尋引擎找不到部落格的文章了</h2><p>最近有在研究一些關於 seo 的東西<br>有發現我的部落格在 google 引擎上已經找不到了<br>據我目前搜集的資訊了解<br>是因為 google 爬蟲不會特別去爬 github 上的 github page<br>可是可以用 google 提供的 search console 主動提供網站資訊<br>讓爬蟲建立網站索引<br>所以我就小小的更新了一下 Blog 順便發篇文<br>順利的話之後這裡的文章也可以在 google 上直接找到囉~</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2023/05/20/blogHistory/">https://ckhoct.github.io//david-blog/2023/05/20/blogHistory/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
-]]></content>
-      <categories>
-        <category>網站維護</category>
-      </categories>
-      <tags>
-        <tag>部落格</tag>
-        <tag>seo</tag>
-        <tag>網站維護</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript 如何重構代碼（一）</title>
-    <url>/david-blog/2020/06/15/refactor/</url>
-    <content><![CDATA[<p>這個主題打算寫系列文<br>先簡單介紹三個 if else 的重構方法</p>
+    <title>JavaScript 如何重構代碼（二）</title>
+    <url>/david-blog/2020/06/28/refactor2/</url>
+    <content><![CDATA[<p>重構代碼第二彈!!!<br>在沒有寫第二彈前…<br>我ㄧ直在想會不會所有規劃好的系列文 都只有一回…XD</p>
 <p>內文</p>
 <ul>
-<li>更好的 if else 寫法 (三元運算子)</li>
-<li>更好的 if else 寫法（return）</li>
-<li>更好的 if else 寫法（物件）</li>
+<li>更好的 function (參數給予預設值)</li>
+<li>更好的 array callback（ function 獨立拆出並給予命名）</li>
+<li>更好的 邏輯運算子 || (改用陣列過濾)</li>
 </ul>
 <a id="more"></a>
 
-<h1 id="更好的-if-else-三元運算子"><a href="#更好的-if-else-三元運算子" class="headerlink" title="更好的 if else (三元運算子)"></a>更好的 if else (三元運算子)</h1><h2 id="if-else-寫法"><a href="#if-else-寫法" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="更好的-function-參數給予預設值"><a href="#更好的-function-參數給予預設值" class="headerlink" title="更好的 function (參數給予預設值)"></a>更好的 function (參數給予預設值)</h1><br>
 
-<h2 id="三元運算子"><a href="#三元運算子" class="headerlink" title="三元運算子"></a>三元運算子</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">id === <span class="number">1</span> ? alert(<span class="string">"ID 是 1"</span>) : alert(<span class="string">"ID 不是 1"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>處理動態資料時<br>將 function 給予預設值是一個好選擇<br>以免 API 未回傳正確資料時 APP 閃退<br>或發生各種不必要的悲劇</p>
+</blockquote>
+<p>當參數遇到 <strong>undefined</strong> 時則會給予預設值</p>
+<h2 id="Normal"><a href="#Normal" class="headerlink" title="Normal"></a>Normal</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getAPlusB = <span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b;</span><br><span class="line"></span><br><span class="line">getAPlusB();</span><br><span class="line"><span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="更好的-if-else（return-寫法）"><a href="#更好的-if-else（return-寫法）" class="headerlink" title="更好的 if else（return 寫法）"></a>更好的 if else（return 寫法）</h1><h2 id="if-else-寫法-1"><a href="#if-else-寫法-1" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Better-寫法一"><a href="#Better-寫法一" class="headerlink" title="Better 寫法一"></a>Better 寫法一</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getAPlusB = <span class="function">(<span class="params">a = <span class="number">0</span>, b = <span class="number">0</span></span>) =&gt;</span> a + b;</span><br><span class="line"></span><br><span class="line">getAPlusB();</span><br><span class="line"><span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="retrun"><a href="#retrun" class="headerlink" title="retrun"></a>retrun</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">1</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">2</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">3</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">  <span class="keyword">return</span> alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h2 id="Better-寫法二"><a href="#Better-寫法二" class="headerlink" title="Better 寫法二"></a>Better 寫法二</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getAPlusB = <span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">  a = a || <span class="number">0</span>;</span><br><span class="line">  b = b || <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">getAPlusB();</span><br><span class="line"><span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="更好的-if-else（物件寫法）"><a href="#更好的-if-else（物件寫法）" class="headerlink" title="更好的 if else（物件寫法）"></a>更好的 if else（物件寫法）</h1><h2 id="if-else-寫法-2"><a href="#if-else-寫法-2" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="更好的-array-callback（-function-獨立拆出並給予命名）"><a href="#更好的-array-callback（-function-獨立拆出並給予命名）" class="headerlink" title="更好的 array callback（ function 獨立拆出並給予命名）"></a>更好的 array callback（ function 獨立拆出並給予命名）</h1><br>
 
-<h2 id="物件"><a href="#物件" class="headerlink" title="物件"></a>物件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">"ID 不是 1, 2, 3"</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">"ID 是 1"</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">"ID 是 2"</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="string">"ID 是 3"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> selectedID = obj[id] || obj[<span class="number">0</span>];</span><br><span class="line">alert(selectedID);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>當 array 方法裡面的 callback function 較複雜的時候<br>將其獨立出來給予命名是一個好選擇<br>因為可以更直觀的了解其作用與功能</p>
+</blockquote>
+<h2 id="Normal-1"><a href="#Normal-1" class="headerlink" title="Normal"></a>Normal</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line">array.map(<span class="function">(<span class="params">item</span>) =&gt;</span> item * <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Better"><a href="#Better" class="headerlink" title="Better"></a>Better</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line"><span class="keyword">const</span> doubleEachNumber = <span class="function">(<span class="params">number</span>) =&gt;</span> number * <span class="number">2</span>;</span><br><span class="line">array.map(doubleEachNumber);</span><br></pre></td></tr></table></figure>
+
+<h1 id="更好的-邏輯運算子-改用陣列過濾"><a href="#更好的-邏輯運算子-改用陣列過濾" class="headerlink" title="更好的 邏輯運算子 || (改用陣列過濾)"></a>更好的 邏輯運算子 || (改用陣列過濾)</h1><br>
+
+<blockquote>
+<p>這邊範例是用 indexOf 來重構<br>但實際上用 includes 會更直觀<br>但使用上需要注意 indexOf 存在於 ES5<br>而 includes 則為 ES6 所加上的</p>
+</blockquote>
+<h2 id="Normal-2"><a href="#Normal-2" class="headerlink" title="Normal"></a>Normal</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getIdInfo = <span class="function">(<span class="params">id</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">1</span> || id === <span class="number">2</span> || id === <span class="number">3</span> || id === <span class="number">4</span> || id === <span class="number">5</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 1 到 5 之間"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">6</span> || id === <span class="number">7</span> || id === <span class="number">8</span> || id === <span class="number">9</span> || id === <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 6 到 10 之間"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 不存在"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Better-1"><a href="#Better-1" class="headerlink" title="Better"></a>Better</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arrayOne = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">const</span> arrayTwo = [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getIdInfo = <span class="function">(<span class="params">id</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (arrayOne.indexOf(id) !== <span class="number">-1</span>) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 1 到 5 之間"</span>);</span><br><span class="line">  <span class="keyword">if</span> (arrayTwo.indexOf(id) !== <span class="number">-1</span>) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 6 到 10 之間"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 不存在"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/15/refactor/">https://ckhoct.github.io//david-blog/2020/06/15/refactor/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/28/refactor2/">https://ckhoct.github.io//david-blog/2020/06/28/refactor2/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
 ]]></content>
       <categories>
         <category>javascript</category>
@@ -664,42 +648,6 @@
       <tags>
         <tag>javascript</tag>
         <tag>refactor</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Shell Script 程式化指令碼</title>
-    <url>/david-blog/2020/05/31/sh/</url>
-    <content><![CDATA[<p>在一些架構較大的專案中, 會時常使用到 <code>command line</code> 來執行相關的指令, 如: 啟動開發伺服器, 打包檔案, 部署檔案 etc. 通常會將單一功能的命令寫在 <code>package.json</code> 內的 <code>scripts</code> 裡, 但如果一次需要執行的命令不只一條, 其實可以將相關指令寫成腳本(.sh)放在專案根目錄下, 往後只要執行這隻檔案, 就可以按照腳本順序來執行一連串的相關指令, 以達到程式自動化的效果, 優點是減少重複行為並下錯指令的可能性</p>
-<p>另外建立的腳本檔案會需要修改權限才能執行<br>以下備註檔案修改權限的方法:</p>
-<a id="more"></a>
-
-<h1 id="將檔案執行權限打開"><a href="#將檔案執行權限打開" class="headerlink" title="將檔案執行權限打開"></a>將檔案執行權限打開</h1><p><strong><code>chmod 777 文件名</code></strong></p>
-<ul>
-<li><h2 id="chmod-為修改文件權限的指令"><a href="#chmod-為修改文件權限的指令" class="headerlink" title="chmod 為修改文件權限的指令"></a>chmod 為修改文件權限的指令</h2></li>
-<li><h2 id="第一個參數為操作文件的用戶權限"><a href="#第一個參數為操作文件的用戶權限" class="headerlink" title="第一個參數為操作文件的用戶權限"></a>第一個參數為操作文件的用戶權限</h2><p>三個數字分別代表:</p>
-<blockquote>
-<p>文件所有用戶<br>群組用戶<br>其他用戶</p>
-</blockquote>
-<p>每一個數字表示該用戶的權限:</p>
-<blockquote>
-<p>r: 讀取權限 (4)<br>w: 撰寫權限 (2)<br>x: 執行權限 (1)</p>
-<blockquote>
-<p>e.g. r(4)+w(2)+x(1) = rwx(7)</p>
-</blockquote>
-</blockquote>
-</li>
-<li><h2 id="第二個參數表示欲修改權限的檔案"><a href="#第二個參數表示欲修改權限的檔案" class="headerlink" title="第二個參數表示欲修改權限的檔案"></a>第二個參數表示欲修改權限的檔案</h2></li>
-</ul>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/05/31/sh/">https://ckhoct.github.io//david-blog/2020/05/31/sh/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
-]]></content>
-      <categories>
-        <category>自動化</category>
-      </categories>
-      <tags>
-        <tag>shell script</tag>
-        <tag>linux</tag>
-        <tag>command line</tag>
-        <tag>bash</tag>
       </tags>
   </entry>
   <entry>
@@ -741,54 +689,79 @@
       </categories>
       <tags>
         <tag>協定</tag>
-        <tag>linux</tag>
         <tag>遠端連線</tag>
         <tag>安全加密</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
-    <title>JavaScript 實用的小技巧（二）</title>
-    <url>/david-blog/2020/07/04/tips2/</url>
-    <content><![CDATA[<p>耶 第二彈 !!</p>
-<p>內文</p>
+    <title>hosts 主機表</title>
+    <url>/david-blog/2020/06/08/hosts/</url>
+    <content><![CDATA[<p>A: 網址好像連不對地方!?<br>B: 你要不要檢查一下你的主機表..</p>
+<p>內文:</p>
 <ul>
-<li>取連續陣列 方法一</li>
-<li>取連續陣列 方法二</li>
-<li>log 開關</li>
-<li>undefined 簡寫</li>
-<li>取外部 IP</li>
+<li>主機表介紹</li>
+<li>檔案位置</li>
 </ul>
 <a id="more"></a>
 
-<h1 id="取連續陣列-方法一"><a href="#取連續陣列-方法一" class="headerlink" title="取連續陣列 方法一"></a>取連續陣列 方法一</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[...Array(<span class="number">10</span>).keys()];</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+<h1 id="hosts-主機表"><a href="#hosts-主機表" class="headerlink" title="hosts 主機表"></a>hosts 主機表</h1><h2 id="主機表介紹"><a href="#主機表介紹" class="headerlink" title="主機表介紹"></a>主機表介紹</h2><br>
 
-<h1 id="取連續陣列-方法二"><a href="#取連續陣列-方法二" class="headerlink" title="取連續陣列 方法二"></a>取連續陣列 方法二</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(<span class="built_in">Array</span>(<span class="number">10</span>), (item, id) =&gt; id);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>這隻檔案其實就是本地的 DNS,<br>主要記載著 IP 與 Domain 的對應關係,<br>當輸入網址時就會根據 hosts 上的紀錄做解析,<br>當遇到本地沒有的紀錄時, 電腦才會上 DNS server 作詢問,</p>
+</blockquote>
+<p>雖然說這隻檔案現在很少會用到,<br>但有些專案在開發過程中,<br>還是會將內部網路的 IP 設定在主機表裡,<br>以便專案開發與測試</p>
+<p>下面附註檔案位置, 有興趣的話可以打開來看看</p>
+<h2 id="檔案位置"><a href="#檔案位置" class="headerlink" title="檔案位置"></a>檔案位置</h2><p><strong>Mac</strong>: <code>/private/etc/hosts</code></p>
+<p>在 CLI 上輸入 <code>sudo vim /private/etc/hosts</code><br>就可以用 vim 編輯器打開來了</p>
+<p>以下是我mac打開主機表的內容, 給大家參考一下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##</span><br><span class="line"># Host Database</span><br><span class="line">#</span><br><span class="line"># localhost is used to configure the loopback interface</span><br><span class="line"># when the system is booting.  Do not change this entry.</span><br><span class="line">##</span><br><span class="line">127.0.0.1       localhost</span><br><span class="line">255.255.255.255 broadcasthost</span><br><span class="line">::1             localhost</span><br></pre></td></tr></table></figure>
 
-<h1 id="log-開關"><a href="#log-開關" class="headerlink" title="log 開關"></a>log 開關</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ifDebug = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> oldLog = <span class="built_in">console</span>.log;</span><br><span class="line"><span class="built_in">console</span>.log = <span class="function"><span class="params">()</span> =&gt;</span> ifDebug &amp;&amp; oldLog.apply(<span class="built_in">console</span>, <span class="built_in">arguments</span>);</span><br></pre></td></tr></table></figure>
 
-<h1 id="undefined-簡寫"><a href="#undefined-簡寫" class="headerlink" title="undefined 簡寫"></a>undefined 簡寫</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<p>undefined 不是保留字 可以重新被賦值<br>故用 void 0 來取代 undefined 會更嚴謹</p>
-<p>void 後面接任何代碼都會執行 但只回 undefined</p>
-<h1 id="取外部-IP"><a href="#取外部-IP" class="headerlink" title="取外部 IP"></a>取外部 IP</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fetch(<span class="string">"https://api.ipify.org?format=json"</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>補充</strong></p>
-<p>終端機取法 (Mac OS)</p>
-<p>外部 IP</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl ifconfig.me</span><br></pre></td></tr></table></figure>
-
-<p>內部 IP </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
-
-<p><strong>內部 ip 會寫在 en0 那邊</strong></p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/07/04/tips2/">https://ckhoct.github.io//david-blog/2020/07/04/tips2/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/08/hosts/">https://ckhoct.github.io//david-blog/2020/06/08/hosts/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
 ]]></content>
       <categories>
-        <category>javascript</category>
+        <category>域名解析</category>
       </categories>
       <tags>
-        <tag>javascript</tag>
-        <tag>tips</tag>
+        <tag>dns</tag>
+        <tag>ip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Shell Script 程式化指令碼</title>
+    <url>/david-blog/2020/05/31/sh/</url>
+    <content><![CDATA[<p>在一些架構較大的專案中, 會時常使用到 <code>command line</code> 來執行相關的指令, 如: 啟動開發伺服器, 打包檔案, 部署檔案 etc. 通常會將單一功能的命令寫在 <code>package.json</code> 內的 <code>scripts</code> 裡, 但如果一次需要執行的命令不只一條, 其實可以將相關指令寫成腳本(.sh)放在專案根目錄下, 往後只要執行這隻檔案, 就可以按照腳本順序來執行一連串的相關指令, 以達到程式自動化的效果, 優點是減少重複行為並下錯指令的可能性</p>
+<p>另外建立的腳本檔案會需要修改權限才能執行<br>以下備註檔案修改權限的方法:</p>
+<a id="more"></a>
+
+<h1 id="將檔案執行權限打開"><a href="#將檔案執行權限打開" class="headerlink" title="將檔案執行權限打開"></a>將檔案執行權限打開</h1><p><strong><code>chmod 777 文件名</code></strong></p>
+<ul>
+<li><h2 id="chmod-為修改文件權限的指令"><a href="#chmod-為修改文件權限的指令" class="headerlink" title="chmod 為修改文件權限的指令"></a>chmod 為修改文件權限的指令</h2></li>
+<li><h2 id="第一個參數為操作文件的用戶權限"><a href="#第一個參數為操作文件的用戶權限" class="headerlink" title="第一個參數為操作文件的用戶權限"></a>第一個參數為操作文件的用戶權限</h2><p>三個數字分別代表:</p>
+<blockquote>
+<p>文件所有用戶<br>群組用戶<br>其他用戶</p>
+</blockquote>
+<p>每一個數字表示該用戶的權限:</p>
+<blockquote>
+<p>r: 讀取權限 (4)<br>w: 撰寫權限 (2)<br>x: 執行權限 (1)</p>
+<blockquote>
+<p>e.g. r(4)+w(2)+x(1) = rwx(7)</p>
+</blockquote>
+</blockquote>
+</li>
+<li><h2 id="第二個參數表示欲修改權限的檔案"><a href="#第二個參數表示欲修改權限的檔案" class="headerlink" title="第二個參數表示欲修改權限的檔案"></a>第二個參數表示欲修改權限的檔案</h2></li>
+</ul>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/05/31/sh/">https://ckhoct.github.io//david-blog/2020/05/31/sh/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+]]></content>
+      <categories>
+        <category>自動化</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shell script</tag>
+        <tag>command line</tag>
+        <tag>bash</tag>
       </tags>
   </entry>
   <entry>
@@ -831,69 +804,6 @@
         <tag>編輯器</tag>
         <tag>vim</tag>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Wget 強大的檔案下載工具</title>
-    <url>/david-blog/2020/06/26/wget/</url>
-    <content><![CDATA[<p>最近有一個需求 需要把瀏覽的整個網站給抓下來</p>
-<p>在瀏覽器上打開開發人員工具 點選 Sources<br>你可以看到 Server 下面 滿滿的資料夾與各種靜態資源</p>
-<p>但怎麼抓呢 那就是用… <strong>Wget</strong></p>
-<p>內文</p>
-<ul>
-<li>Wget 介紹</li>
-<li>如何安裝 Wget</li>
-<li>如何使用 Wget</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="Wget-介紹"><a href="#Wget-介紹" class="headerlink" title="Wget 介紹"></a>Wget 介紹</h1><br>
-
-<p>Wget 全名 : <strong>World Wide Web Get</strong></p>
-<p>在 Linux 作業系統上為內建的指令之一<br>是一個功能非常強大的檔案自動下載工具<br>雖然你知道 curl 也可以用來下載檔案<br>但有別於 curl 的地方在於 Wget 可以進行遞迴下載<br>所以特別適合抓取整個網站 以取得所有目錄及其檔案</p>
-<p>但 Mac 本身並未預設安裝此工具<br>所以如需使用需要另行安裝</p>
-<p>底下介紹安裝方式</p>
-<h1 id="如何安裝-Wget"><a href="#如何安裝-Wget" class="headerlink" title="如何安裝 Wget"></a>如何安裝 Wget</h1><br>
-
-<p>首先 安裝 MacOS 的套件管理工具 <a href="https://brew.sh/index_zh-tw" target="_blank" rel="noopener">Homebrew</a></p>
-<p>安裝方式 CLI 輸入以下指令:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
-
-<p>Homebrew 是什麼呢<br>如官網所提的 他就是 <strong>macOS 缺少套件的管理工具</strong></p>
-<p>你可以使用這個套件管理工具來安裝您 Mac 所需要用到的軟體<br>如 google chrome, adobe, nvm, 當然包括 <strong>Wget</strong> etc.</p>
-<ul>
-<li>確認你想安裝的軟體</li>
-</ul>
-<p><code>brew search wget</code></p>
-<ul>
-<li>安裝 Wget</li>
-</ul>
-<p><code>brew install wget</code></p>
-<p>OK 這樣就安裝完成了</p>
-<p>最後來說明使用 Wget 的方式</p>
-<h1 id="如何使用-Wget"><a href="#如何使用-Wget" class="headerlink" title="如何使用 Wget"></a>如何使用 Wget</h1><br>
-
-<p>Wget 的用法如下</p>
-<p><code>wget &lt;Options&gt; &lt;URL&gt;</code></p>
-<p>假設我要抓取 google 的網站到桌面</p>
-<p>那我就分別輸入以下指令</p>
-<p><code>cd ~/Desktop</code></p>
-<p><code>wget -r www.google.com</code></p>
-<p>最後介紹常用的參數</p>
-<ul>
-<li>-r (-recursive) : 用來表示遞迴下載</li>
-<li>-np (–no-parent) : 用來表示不向上遞迴下載</li>
-</ul>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/26/wget/">https://ckhoct.github.io//david-blog/2020/06/26/wget/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>brew</tag>
-        <tag>homebrew</tag>
-        <tag>wget</tag>
       </tags>
   </entry>
   <entry>
@@ -963,6 +873,69 @@
       </tags>
   </entry>
   <entry>
+    <title>Wget 強大的檔案下載工具</title>
+    <url>/david-blog/2020/06/26/wget/</url>
+    <content><![CDATA[<p>最近有一個需求 需要把瀏覽的整個網站給抓下來</p>
+<p>在瀏覽器上打開開發人員工具 點選 Sources<br>你可以看到 Server 下面 滿滿的資料夾與各種靜態資源</p>
+<p>但怎麼抓呢 那就是用… <strong>Wget</strong></p>
+<p>內文</p>
+<ul>
+<li>Wget 介紹</li>
+<li>如何安裝 Wget</li>
+<li>如何使用 Wget</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Wget-介紹"><a href="#Wget-介紹" class="headerlink" title="Wget 介紹"></a>Wget 介紹</h1><br>
+
+<p>Wget 全名 : <strong>World Wide Web Get</strong></p>
+<p>在 Linux 作業系統上為內建的指令之一<br>是一個功能非常強大的檔案自動下載工具<br>雖然你知道 curl 也可以用來下載檔案<br>但有別於 curl 的地方在於 Wget 可以進行遞迴下載<br>所以特別適合抓取整個網站 以取得所有目錄及其檔案</p>
+<p>但 Mac 本身並未預設安裝此工具<br>所以如需使用需要另行安裝</p>
+<p>底下介紹安裝方式</p>
+<h1 id="如何安裝-Wget"><a href="#如何安裝-Wget" class="headerlink" title="如何安裝 Wget"></a>如何安裝 Wget</h1><br>
+
+<p>首先 安裝 MacOS 的套件管理工具 <a href="https://brew.sh/index_zh-tw" target="_blank" rel="noopener">Homebrew</a></p>
+<p>安裝方式 CLI 輸入以下指令:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Homebrew 是什麼呢<br>如官網所提的 他就是 <strong>macOS 缺少套件的管理工具</strong></p>
+<p>你可以使用這個套件管理工具來安裝您 Mac 所需要用到的軟體<br>如 google chrome, adobe, nvm, 當然包括 <strong>Wget</strong> etc.</p>
+<ul>
+<li>確認你想安裝的軟體</li>
+</ul>
+<p><code>brew search wget</code></p>
+<ul>
+<li>安裝 Wget</li>
+</ul>
+<p><code>brew install wget</code></p>
+<p>OK 這樣就安裝完成了</p>
+<p>最後來說明使用 Wget 的方式</p>
+<h1 id="如何使用-Wget"><a href="#如何使用-Wget" class="headerlink" title="如何使用 Wget"></a>如何使用 Wget</h1><br>
+
+<p>Wget 的用法如下</p>
+<p><code>wget &lt;Options&gt; &lt;URL&gt;</code></p>
+<p>假設我要抓取 google 的網站到桌面</p>
+<p>那我就分別輸入以下指令</p>
+<p><code>cd ~/Desktop</code></p>
+<p><code>wget -r www.google.com</code></p>
+<p>最後介紹常用的參數</p>
+<ul>
+<li>-r (-recursive) : 用來表示遞迴下載</li>
+<li>-np (–no-parent) : 用來表示不向上遞迴下載</li>
+</ul>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/26/wget/">https://ckhoct.github.io//david-blog/2020/06/26/wget/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>brew</tag>
+        <tag>homebrew</tag>
+        <tag>wget</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>序</title>
     <url>/david-blog/2020/05/31/%E5%BA%8F/</url>
     <content><![CDATA[<p>此 Blog 正式啟用, 採用 Hexo 框架搭配 NexT 模板, 建置於 Github Page 於 2020年05月31日  </p>
@@ -970,49 +943,31 @@
 ]]></content>
   </entry>
   <entry>
-    <title>JavaScript 如何重構代碼（二）</title>
-    <url>/david-blog/2020/06/28/refactor2/</url>
-    <content><![CDATA[<p>重構代碼第二彈!!!<br>在沒有寫第二彈前…<br>我ㄧ直在想會不會所有規劃好的系列文 都只有一回…XD</p>
+    <title>JavaScript 如何重構代碼（一）</title>
+    <url>/david-blog/2020/06/15/refactor/</url>
+    <content><![CDATA[<p>這個主題打算寫系列文<br>先簡單介紹三個 if else 的重構方法</p>
 <p>內文</p>
 <ul>
-<li>更好的 function (參數給予預設值)</li>
-<li>更好的 array callback（ function 獨立拆出並給予命名）</li>
-<li>更好的 邏輯運算子 || (改用陣列過濾)</li>
+<li>更好的 if else 寫法 (三元運算子)</li>
+<li>更好的 if else 寫法（return）</li>
+<li>更好的 if else 寫法（物件）</li>
 </ul>
 <a id="more"></a>
 
-<h1 id="更好的-function-參數給予預設值"><a href="#更好的-function-參數給予預設值" class="headerlink" title="更好的 function (參數給予預設值)"></a>更好的 function (參數給予預設值)</h1><br>
+<h1 id="更好的-if-else-三元運算子"><a href="#更好的-if-else-三元運算子" class="headerlink" title="更好的 if else (三元運算子)"></a>更好的 if else (三元運算子)</h1><h2 id="if-else-寫法"><a href="#if-else-寫法" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>處理動態資料時<br>將 function 給予預設值是一個好選擇<br>以免 API 未回傳正確資料時 APP 閃退<br>或發生各種不必要的悲劇</p>
-</blockquote>
-<p>當參數遇到 <strong>undefined</strong> 時則會給予預設值</p>
-<h2 id="Normal"><a href="#Normal" class="headerlink" title="Normal"></a>Normal</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getAPlusB = <span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b;</span><br><span class="line"></span><br><span class="line">getAPlusB();</span><br><span class="line"><span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<h2 id="三元運算子"><a href="#三元運算子" class="headerlink" title="三元運算子"></a>三元運算子</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">id === <span class="number">1</span> ? alert(<span class="string">"ID 是 1"</span>) : alert(<span class="string">"ID 不是 1"</span>);</span><br></pre></td></tr></table></figure>
 
-<h2 id="Better-寫法一"><a href="#Better-寫法一" class="headerlink" title="Better 寫法一"></a>Better 寫法一</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getAPlusB = <span class="function">(<span class="params">a = <span class="number">0</span>, b = <span class="number">0</span></span>) =&gt;</span> a + b;</span><br><span class="line"></span><br><span class="line">getAPlusB();</span><br><span class="line"><span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<h1 id="更好的-if-else（return-寫法）"><a href="#更好的-if-else（return-寫法）" class="headerlink" title="更好的 if else（return 寫法）"></a>更好的 if else（return 寫法）</h1><h2 id="if-else-寫法-1"><a href="#if-else-寫法-1" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Better-寫法二"><a href="#Better-寫法二" class="headerlink" title="Better 寫法二"></a>Better 寫法二</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getAPlusB = <span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">  a = a || <span class="number">0</span>;</span><br><span class="line">  b = b || <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">getAPlusB();</span><br><span class="line"><span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<h2 id="retrun"><a href="#retrun" class="headerlink" title="retrun"></a>retrun</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">1</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">2</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">3</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">  <span class="keyword">return</span> alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 
-<h1 id="更好的-array-callback（-function-獨立拆出並給予命名）"><a href="#更好的-array-callback（-function-獨立拆出並給予命名）" class="headerlink" title="更好的 array callback（ function 獨立拆出並給予命名）"></a>更好的 array callback（ function 獨立拆出並給予命名）</h1><br>
+<h1 id="更好的-if-else（物件寫法）"><a href="#更好的-if-else（物件寫法）" class="headerlink" title="更好的 if else（物件寫法）"></a>更好的 if else（物件寫法）</h1><h2 id="if-else-寫法-2"><a href="#if-else-寫法-2" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>當 array 方法裡面的 callback function 較複雜的時候<br>將其獨立出來給予命名是一個好選擇<br>因為可以更直觀的了解其作用與功能</p>
-</blockquote>
-<h2 id="Normal-1"><a href="#Normal-1" class="headerlink" title="Normal"></a>Normal</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line">array.map(<span class="function">(<span class="params">item</span>) =&gt;</span> item * <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Better"><a href="#Better" class="headerlink" title="Better"></a>Better</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line"><span class="keyword">const</span> doubleEachNumber = <span class="function">(<span class="params">number</span>) =&gt;</span> number * <span class="number">2</span>;</span><br><span class="line">array.map(doubleEachNumber);</span><br></pre></td></tr></table></figure>
-
-<h1 id="更好的-邏輯運算子-改用陣列過濾"><a href="#更好的-邏輯運算子-改用陣列過濾" class="headerlink" title="更好的 邏輯運算子 || (改用陣列過濾)"></a>更好的 邏輯運算子 || (改用陣列過濾)</h1><br>
-
-<blockquote>
-<p>這邊範例是用 indexOf 來重構<br>但實際上用 includes 會更直觀<br>但使用上需要注意 indexOf 存在於 ES5<br>而 includes 則為 ES6 所加上的</p>
-</blockquote>
-<h2 id="Normal-2"><a href="#Normal-2" class="headerlink" title="Normal"></a>Normal</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getIdInfo = <span class="function">(<span class="params">id</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">1</span> || id === <span class="number">2</span> || id === <span class="number">3</span> || id === <span class="number">4</span> || id === <span class="number">5</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 1 到 5 之間"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">6</span> || id === <span class="number">7</span> || id === <span class="number">8</span> || id === <span class="number">9</span> || id === <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 6 到 10 之間"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 不存在"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Better-1"><a href="#Better-1" class="headerlink" title="Better"></a>Better</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arrayOne = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">const</span> arrayTwo = [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getIdInfo = <span class="function">(<span class="params">id</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (arrayOne.indexOf(id) !== <span class="number">-1</span>) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 1 到 5 之間"</span>);</span><br><span class="line">  <span class="keyword">if</span> (arrayTwo.indexOf(id) !== <span class="number">-1</span>) <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 介於 6 到 10 之間"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">"id 不存在"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="物件"><a href="#物件" class="headerlink" title="物件"></a>物件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">"ID 不是 1, 2, 3"</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">"ID 是 1"</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">"ID 是 2"</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="string">"ID 是 3"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> selectedID = obj[id] || obj[<span class="number">0</span>];</span><br><span class="line">alert(selectedID);</span><br></pre></td></tr></table></figure>
 
 
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/28/refactor2/">https://ckhoct.github.io//david-blog/2020/06/28/refactor2/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/06/15/refactor/">https://ckhoct.github.io//david-blog/2020/06/15/refactor/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
 ]]></content>
       <categories>
         <category>javascript</category>
@@ -1020,6 +975,51 @@
       <tags>
         <tag>javascript</tag>
         <tag>refactor</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript 實用的小技巧（二）</title>
+    <url>/david-blog/2020/07/04/tips2/</url>
+    <content><![CDATA[<p>耶 第二彈 !!</p>
+<p>內文</p>
+<ul>
+<li>取連續陣列 方法一</li>
+<li>取連續陣列 方法二</li>
+<li>log 開關</li>
+<li>undefined 簡寫</li>
+<li>取外部 IP</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="取連續陣列-方法一"><a href="#取連續陣列-方法一" class="headerlink" title="取連續陣列 方法一"></a>取連續陣列 方法一</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[...Array(<span class="number">10</span>).keys()];</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="取連續陣列-方法二"><a href="#取連續陣列-方法二" class="headerlink" title="取連續陣列 方法二"></a>取連續陣列 方法二</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(<span class="built_in">Array</span>(<span class="number">10</span>), (item, id) =&gt; id);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="log-開關"><a href="#log-開關" class="headerlink" title="log 開關"></a>log 開關</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ifDebug = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> oldLog = <span class="built_in">console</span>.log;</span><br><span class="line"><span class="built_in">console</span>.log = <span class="function"><span class="params">()</span> =&gt;</span> ifDebug &amp;&amp; oldLog.apply(<span class="built_in">console</span>, <span class="built_in">arguments</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="undefined-簡寫"><a href="#undefined-簡寫" class="headerlink" title="undefined 簡寫"></a>undefined 簡寫</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>undefined 不是保留字 可以重新被賦值<br>故用 void 0 來取代 undefined 會更嚴謹</p>
+<p>void 後面接任何代碼都會執行 但只回 undefined</p>
+<h1 id="取外部-IP"><a href="#取外部-IP" class="headerlink" title="取外部 IP"></a>取外部 IP</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fetch(<span class="string">"https://api.ipify.org?format=json"</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>補充</strong></p>
+<p>終端機取法 (Mac OS)</p>
+<p>外部 IP</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl ifconfig.me</span><br></pre></td></tr></table></figure>
+
+<p>內部 IP </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+
+<p><strong>內部 ip 會寫在 en0 那邊</strong></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io//david-blog/2020/07/04/tips2/">https://ckhoct.github.io//david-blog/2020/07/04/tips2/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>tips</tag>
       </tags>
   </entry>
 </search>
