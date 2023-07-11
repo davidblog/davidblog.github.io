@@ -376,6 +376,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ckhoct.github.io//david-blog/david-blog/2023/07/11/nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="David Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/david-blog/uploads/ram.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="David's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/david-blog/2023/07/11/nginx/" itemprop="url">如何在 Nginx 上面部署 React App</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2023-07-11T16:34:45+08:00">
+                2023-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/david-blog/categories/deployment/" itemprop="url" rel="index">
+                    <span itemprop="name">deployment</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/david-blog/2023/07/11/nginx/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2023/07/11/nginx/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Nginx 是常見的網頁伺服器<br>預設的情況下會將客戶端的所有請求轉發到後端的真實路徑<br>部署多頁式的網頁應用並沒有什麼問題 但是如果是單頁式應用呢</p>
+<p>React 是典型的單頁式應用 SPA (Single App Application)<br>React Router 提供多種類型的路由 如 BrowserRouter, HashRouter, MemoryRouter etc.<br>其中 React Router 官方最推薦的 Router 就是 <a href="https://reactrouter.com/en/main/routers/create-browser-router" target="_blank" rel="noopener">BrowserRouter</a></p>
+<p>BrowserRouter 會根據每次路徑的變化都和後端發送請求</p>
+<p>但實際上 React 只會有一個 index.html 位於 Nginx 的網站根目錄<br>此時如果 Nginx 嘗試將每個前端路由的的請求都轉發到後端的真實路徑<br>就會因為找不到實際的檔案可以回傳 而發生 404 Not Found</p>
+<p>底下就來說明如何解決這個問題</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/david-blog/2023/07/11/nginx/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ckhoct.github.io//david-blog/david-blog/2023/06/17/%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1831,171 +1992,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ckhoct.github.io//david-blog/david-blog/2020/06/26/wget/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="David Huang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/david-blog/uploads/ram.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="David's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/david-blog/2020/06/26/wget/" itemprop="url">Wget 強大的檔案下載工具</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-06-26T12:55:47+08:00">
-                2020-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/david-blog/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/david-blog/2020/06/26/wget/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2020/06/26/wget/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近有一個需求 需要把瀏覽的整個網站給抓下來</p>
-<p>在瀏覽器上打開開發人員工具 點選 Sources<br>你可以看到 Server 下面 滿滿的資料夾與各種靜態資源</p>
-<p>但怎麼抓呢 那就是用… <strong>Wget</strong></p>
-<p>內文</p>
-<ul>
-<li>Wget 介紹</li>
-<li>如何安裝 Wget</li>
-<li>如何使用 Wget</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/david-blog/2020/06/26/wget/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2053,7 +2049,7 @@
               
                 <a href="/david-blog/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -2064,7 +2060,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/david-blog/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分類</span>
                 </a>
               </div>
@@ -2075,7 +2071,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/david-blog/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">標籤</span>
                 </a>
               </div>
