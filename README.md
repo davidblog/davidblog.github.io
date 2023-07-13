@@ -13,4 +13,4 @@ Just click the below link and you can get to the blog:
 
 點擊下方連結, 即可進入 Blog:
 
-[David's Blog](https://davidhuang6.github.io/blog)
+[David's Blog](https://davidblog.github.io/blog)
