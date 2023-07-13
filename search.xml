@@ -66,86 +66,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Babel JS編譯器</title>
-    <url>/blog/2020/06/21/babel/</url>
-    <content><![CDATA[<p>JavaScript 的語法主要由 ECMA 組織所訂定<br>而語法上的支援則由各家瀏覽器來實作</p>
-<p>Babel 是 JavsScript 的編譯器<br>可以用來將 ES5+ 的版本轉譯為兼容各瀏覽器可運行的語法</p>
-<p>工作實務上則是為了能讓腳本兼容低階瀏覽器所造成的問題</p>
-<p>本篇介紹 babel 的簡單使用方式</p>
-<p>內文</p>
-<ul>
-<li>babel 相依套件</li>
-<li>babel 基本安裝</li>
-<li>babel 基本設定</li>
-<li>babel 基本使用</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="babel-相依套件"><a href="#babel-相依套件" class="headerlink" title="babel 相依套件"></a>babel 相依套件</h1><br>
-
-<ul>
-<li>babel-core</li>
-</ul>
-<p>babel 的核心模組</p>
-<ul>
-<li>babel-loader</li>
-</ul>
-<p>提供 webpack 在讀取腳本時, 使用 baebl 讀取</p>
-<ul>
-<li>babel-preset-env</li>
-</ul>
-<p>為轉譯的預設<br>決定 babel 如何轉譯<br>如果沒有設定 preset<br>轉譯的代碼會原封不動的複製一份</p>
-<ul>
-<li>babel-cli</li>
-</ul>
-<p>能夠在 CLI 上直接使用 babel</p>
-<ul>
-<li>babel-polyfill</li>
-</ul>
-<p>babel 主要只提供語法轉換<br>像是新版的 API (Promise, Array.from, Object.assign …)<br>則需要此套件來協助處理</p>
-<h1 id="babel-基本安裝"><a href="#babel-基本安裝" class="headerlink" title="babel 基本安裝"></a>babel 基本安裝</h1><br>
-
-<p>本篇介紹最基本的使用<br>只需要安裝以下兩項套件即可</p>
-<ul>
-<li>babel-cli</li>
-<li>babel-preset-env</li>
-</ul>
-<p><code>npm i -D babel-cli babel-preset-env</code></p>
-<h1 id="babel-基本設定"><a href="#babel-基本設定" class="headerlink" title="babel 基本設定"></a>babel 基本設定</h1><br>
-
-<p>有多種方式可以設定 babel<br>底下介紹常用的兩種方式(選其中一種即可):</p>
-<p><strong>第一種</strong></p>
-<p>在 <code>package.json</code> 內新增以下設定</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">"babel": &#123;</span><br><span class="line">    "presets": ["env"]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二種</strong></p>
-<p>在專案目錄下新增 <code>.babelrc</code> 檔案並作以下設定</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>: [<span class="string">"env"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="babel-基本使用"><a href="#babel-基本使用" class="headerlink" title="babel 基本使用"></a>babel 基本使用</h1><br>
-
-<p>有多種使用方式<br>底下介紹常用的兩種方式</p>
-<p><strong>直接在 CLI 下指令</strong></p>
-<p><code>npx babel &lt;檔案&gt; --out-dir &lt;資料夾&gt;</code></p>
-<p>p.s. 如果加上參數 –presets=babel-preset-env 則可以不用設定另外設定 preset</p>
-<p><strong>在 package.json 中設定指令後提供 CLI 使用</strong></p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "build": "babel &lt;檔案&gt; --out-dir &lt;資料夾&gt;"</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-
-<p><code>npm run build</code></p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/21/babel/">https://davidhuang6.github.io/blog/2020/06/21/babel/</a> </p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-        <tag>es5</tag>
-        <tag>es6</tag>
-        <tag>complier</tag>
-        <tag>babel</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Data URL vs Blob URL</title>
     <url>/blog/2023/06/08/Data-URL-vs-Blob-URL/</url>
     <content><![CDATA[<p>網頁應用常見的資源網址除了http URL外,<br>還有Data URL及Blob URL:  </p>
@@ -260,175 +180,110 @@
       </tags>
   </entry>
   <entry>
-    <title>Bookmarklet 書籤小程式</title>
-    <url>/blog/2020/05/31/bml/</url>
-    <content><![CDATA[<p>javascript 在客戶端瀏覽器上, 除了console內可以執行外, 也可以在網址列URL上執行, 只需要將協定的部分改為 <code>javascript:</code> 即可, 如: <code>javascript: alert(&#39;Hello Bookmarklet&#39;)</code>, 之前在工作上會寫給一些非開發人員做產品上簡單的測試, 如在CMS後台添加測試資料, 或是在前後台快速登入並執行相關功能, 通常會把書籤程式寫進匿名函式並壓縮成一行, 然後存在 chrome 的書籤裡, 接下來只要在程式要執行的頁面點擊書籤就可以執行程式了</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/05/31/bml/">https://davidhuang6.github.io/blog/2020/05/31/bml/</a> </p>
+    <title>部落格近3週年久違的更新</title>
+    <url>/blog/2023/05/20/blogHistory/</url>
+    <content><![CDATA[<p>回憶起這個部落格只有在建立初起比較常使用<br>後續就默默的擺著  </p>
+<p>幾乎所有應用只要一陣子沒更新就會出問題<br>這個部落格也不例外</p>
+<p>底下就來講講這裡曾經發生過的事吧</p>
+<a id="more"></a>
+
+<h1 id="部落格的歷史"><a href="#部落格的歷史" class="headerlink" title="部落格的歷史"></a>部落格的歷史</h1><p>最初建立這個部落格<br>除了想記錄自己的學習歷程<br>也想留下一個類似作品集的東西  </p>
+<p>不過沒有選擇作品集而是部落格<br>是因為部落格更務實<br>而且使用上更方便  </p>
+<p>這個部落格始終是放在 github page 上的<br>但當初為了讓這個網站看起來更專業<br>就去 GoDaddy 租了個兩年的網域<br>然後用 CloudFlare 來做網站託管<br>這樣就有一個專門的網址可以連到我的網站<br>也可以在 google 上搜尋到這格部落格裡的文章</p>
+<p>CloudFlare 除了可以免費託管網站<br>還提供了免費的CDN和SSL憑證相當不錯</p>
+<p>印象中這個部落格有出現過幾次問題</p>
+<h2 id="Hexo-選用的主題不再更新-而導致版面出問題"><a href="#Hexo-選用的主題不再更新-而導致版面出問題" class="headerlink" title="Hexo 選用的主題不再更新 而導致版面出問題"></a>Hexo 選用的主題不再更新 而導致版面出問題</h2><p>這個部落格是用 Hexo 這個框架來做的<br>裡面有提供很多很棒的版型稱為主體<br>我當初選了一個挺熱門的主體滿多工程師在用的<br>不過後續這個主題沒有更新<br>版面就出現一些奇怪的問題<br>後來上網查很多人都有遇到這個問題<br>幸運的是有找到他們提供解決的辦法<br>不過我有點忘記solution是直接換一個主體<br>還是根據原本的主題進行了局部的修改才把它搞好…<br>總之現在的版面是一個叫 next 的主題</p>
+<h2 id="網域沒有續約-網址失效-導致網站無法正常訪問"><a href="#網域沒有續約-網址失效-導致網站無法正常訪問" class="headerlink" title="網域沒有續約 網址失效 導致網站無法正常訪問"></a>網域沒有續約 網址失效 導致網站無法正常訪問</h2><p>當初是把部落格設置在github page主頁<br>另外有設置CNAME及一些自動轉址的功能<br>例如你從github page進來也會直接換到我的網域<br>讓人看不出這個網站是放在github上面<br>不過網域沒有續約就要把CNAME和自動轉址的功能拿掉<br>這樣才能在github page上正常的讓人訪問</p>
+<h2 id="google-搜尋引擎找不到部落格的文章了"><a href="#google-搜尋引擎找不到部落格的文章了" class="headerlink" title="google 搜尋引擎找不到部落格的文章了"></a>google 搜尋引擎找不到部落格的文章了</h2><p>最近有在研究一些關於 seo 的東西<br>有發現我的部落格在 google 引擎上已經找不到了<br>據我目前搜集的資訊了解<br>是因為 google 爬蟲不會特別去爬 github 上的 github page<br>可是可以用 google 提供的 search console 主動提供網站資訊<br>讓爬蟲建立網站索引<br>所以我就小小的更新了一下 Blog 順便發篇文<br>順利的話之後這裡的文章也可以在 google 上直接找到囉~</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/05/20/blogHistory/">https://davidhuang6.github.io/blog/2023/05/20/blogHistory/</a> </p>
+]]></content>
+      <categories>
+        <category>網站維護</category>
+      </categories>
+      <tags>
+        <tag>部落格</tag>
+        <tag>seo</tag>
+        <tag>網站維護</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Babel JS編譯器</title>
+    <url>/blog/2020/06/21/babel/</url>
+    <content><![CDATA[<p>JavaScript 的語法主要由 ECMA 組織所訂定<br>而語法上的支援則由各家瀏覽器來實作</p>
+<p>Babel 是 JavsScript 的編譯器<br>可以用來將 ES5+ 的版本轉譯為兼容各瀏覽器可運行的語法</p>
+<p>工作實務上則是為了能讓腳本兼容低階瀏覽器所造成的問題</p>
+<p>本篇介紹 babel 的簡單使用方式</p>
+<p>內文</p>
+<ul>
+<li>babel 相依套件</li>
+<li>babel 基本安裝</li>
+<li>babel 基本設定</li>
+<li>babel 基本使用</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="babel-相依套件"><a href="#babel-相依套件" class="headerlink" title="babel 相依套件"></a>babel 相依套件</h1><br>
+
+<ul>
+<li>babel-core</li>
+</ul>
+<p>babel 的核心模組</p>
+<ul>
+<li>babel-loader</li>
+</ul>
+<p>提供 webpack 在讀取腳本時, 使用 baebl 讀取</p>
+<ul>
+<li>babel-preset-env</li>
+</ul>
+<p>為轉譯的預設<br>決定 babel 如何轉譯<br>如果沒有設定 preset<br>轉譯的代碼會原封不動的複製一份</p>
+<ul>
+<li>babel-cli</li>
+</ul>
+<p>能夠在 CLI 上直接使用 babel</p>
+<ul>
+<li>babel-polyfill</li>
+</ul>
+<p>babel 主要只提供語法轉換<br>像是新版的 API (Promise, Array.from, Object.assign …)<br>則需要此套件來協助處理</p>
+<h1 id="babel-基本安裝"><a href="#babel-基本安裝" class="headerlink" title="babel 基本安裝"></a>babel 基本安裝</h1><br>
+
+<p>本篇介紹最基本的使用<br>只需要安裝以下兩項套件即可</p>
+<ul>
+<li>babel-cli</li>
+<li>babel-preset-env</li>
+</ul>
+<p><code>npm i -D babel-cli babel-preset-env</code></p>
+<h1 id="babel-基本設定"><a href="#babel-基本設定" class="headerlink" title="babel 基本設定"></a>babel 基本設定</h1><br>
+
+<p>有多種方式可以設定 babel<br>底下介紹常用的兩種方式(選其中一種即可):</p>
+<p><strong>第一種</strong></p>
+<p>在 <code>package.json</code> 內新增以下設定</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">"babel": &#123;</span><br><span class="line">    "presets": ["env"]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二種</strong></p>
+<p>在專案目錄下新增 <code>.babelrc</code> 檔案並作以下設定</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>: [<span class="string">"env"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="babel-基本使用"><a href="#babel-基本使用" class="headerlink" title="babel 基本使用"></a>babel 基本使用</h1><br>
+
+<p>有多種使用方式<br>底下介紹常用的兩種方式</p>
+<p><strong>直接在 CLI 下指令</strong></p>
+<p><code>npx babel &lt;檔案&gt; --out-dir &lt;資料夾&gt;</code></p>
+<p>p.s. 如果加上參數 –presets=babel-preset-env 則可以不用設定另外設定 preset</p>
+<p><strong>在 package.json 中設定指令後提供 CLI 使用</strong></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "build": "babel &lt;檔案&gt; --out-dir &lt;資料夾&gt;"</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p><code>npm run build</code></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/21/babel/">https://davidhuang6.github.io/blog/2020/06/21/babel/</a> </p>
 ]]></content>
       <categories>
         <category>javascript</category>
       </categories>
       <tags>
         <tag>javascript</tag>
-        <tag>bookmarklet</tag>
-        <tag>協定</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Frontend 前端免費資源匯集（ㄧ）</title>
-    <url>/blog/2020/06/27/free-sources/</url>
-    <content><![CDATA[<p>工程師不造輪胎 一個好的開始 就是直接站在巨人的肩膀上 這樣最快 最輕鬆 最開心!!!<br>所以這篇文章主要是彙整一些 優質 好用 而且<strong>免費</strong>的前端資源 感謝網路上巨人們的貢獻!!!</p>
-<p>p.s. 很多資源可以免費使用在商業上 但需不需要 credit 作者 記得還是先看一下 license</p>
-<p>內文</p>
-<ul>
-<li>圖片</li>
-<li>模板</li>
-<li>字型</li>
-<li>API</li>
-<li>CSS Animation</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="圖片"><a href="#圖片" class="headerlink" title="圖片"></a>圖片</h1><h2 id="Unsplash"><a href="#Unsplash" class="headerlink" title="Unsplash"></a><a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></h2><p>以前這個網站所有提供的圖片都是 CC0<br>真正的免費 可以完全任意的使用 無需標明出處來源 是一個非常受到歡迎的圖庫</p>
-<p>現在呢 許可改為 Unsplash 自己的許可 多了一些限制</p>
-<ul>
-<li>不能以 Unsplash 的圖片和 Unsplash 競爭</li>
-<li>圖片在未經過大幅度修改下不能直接進行販售</li>
-</ul>
-<p>但依然是可以進行商業或非商業使用 也無需標明出處來源<br>重點是品質都有相當高得水準 直接拿個一張圖片放在網頁上當 banner<br>你的網頁就直接昇華到了下一個檔次</p>
-<p>缺點是因為免費高品質 容易有撞衫的機會</p>
-<br>
-
-<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><h2 id="TEMPLATED"><a href="#TEMPLATED" class="headerlink" title="TEMPLATED"></a><a href="https://templated.co/" target="_blank" rel="noopener">TEMPLATED</a></h2><p>裡面超過 800 種版型 每種版型都包含了完整的 HTML, CSS 甚至是 RWD<br>可以做為商業與個人使用 主要的許可是 CC-by 簡單來說只要在網站上著名出處就可以了<br>如在 footer 上寫 <code>Designed by &lt;出處&gt;</code></p>
-<p>細部點進去看 還會發現有一些其實是 CC0 !!! 超級棒 !!!</p>
-<br>
-
-<h1 id="字型"><a href="#字型" class="headerlink" title="字型"></a>字型</h1><h2 id="Google-Fonts"><a href="#Google-Fonts" class="headerlink" title="Google Fonts"></a><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts</a></h2><p>字型推薦 Google Fonts<br>主要的許可是 Open Font License<br>可以自由地使用在產品 專案 及商業上 限制是不能直接去賣這個字型</p>
-<p>字型的使用上非常的便利<br>可以用 CDN 或是下載</p>
-<p>通常在網頁加上字型的話 可以大幅度的提升網頁的質感</p>
-<p>p.s. 如果網站地區是在大陸的話 要注意 CDN 可能會連不到 建議直接下載</p>
-<br>
-
-<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="public-apis"><a href="#public-apis" class="headerlink" title="public-apis"></a><a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis</a></h2><p>在 github 上有厲害的人們 彙整了相當多的 API<br>詳細可以直接閱讀 README 的部分<br>上面註明了是否需要授權以及可不可以跨域使用 etc.<br>另外 API 的種類還有分門別類 非常的用心</p>
-<p>如果前端應用需要一些動態資源 很適合來這邊尋找靈感</p>
-<br>
-
-<h1 id="CSS-Animation"><a href="#CSS-Animation" class="headerlink" title="CSS Animation"></a>CSS Animation</h1><h2 id="animate-style"><a href="#animate-style" class="headerlink" title="animate.style"></a><a href="https://animate.style/" target="_blank" rel="noopener">animate.style</a></h2><p>Animated.css 一個老牌的動畫 Library<br>不知道這個網站什麼時候改版了<br>一開始進去還有點認不出來<br>但看到熟悉的動畫效果馬上就認出來了<br>裡面提供非常多好用的 CSS Animation<br>許可為 MIT License</p>
-<p>以前只能使用 CDN 現在也提供了 npm 的使用方法<br>這個庫可以非常方便的在網頁上套用現成好看的動畫效果</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/27/free-sources/">https://davidhuang6.github.io/blog/2020/06/27/free-sources/</a> </p>
-]]></content>
-      <categories>
-        <category>免費資源</category>
-      </categories>
-      <tags>
-        <tag>free sources</tag>
-        <tag>api</tag>
-        <tag>images</tag>
-        <tag>cc0</tag>
-        <tag>font</tag>
-        <tag>css</tag>
-        <tag>animation</tag>
-        <tag>template</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>圖片預覽 (FileReader/Data URL)</title>
-    <url>/blog/2023/07/12/fileReader/</url>
-    <content><![CDATA[<p>之前介紹過 <a href="https://davidhuang6.github.io/blog/2023/06/08/Data-URL-vs-Blob-URL/#more">Data URL</a><br>而這篇文章將補充一個常見的應用場景：圖片預覽</p>
-<a id="more"></a>
-
-<p>先說明圖片預覽的主要流程</p>
-<ul>
-<li>根據 input 元素 來上傳圖片</li>
-<li>根據 FileReader 物件來讀取圖片的 Data URL</li>
-<li>根據 Data URL 將圖片顯示在畫面上</li>
-</ul>
-<p>底下代碼主要以 JSX 為範例：</p>
-<h2 id="根據-input-元素-來上傳圖片"><a href="#根據-input-元素-來上傳圖片" class="headerlink" title="根據 input 元素 來上傳圖片"></a>根據 input 元素 來上傳圖片</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;label htmlFor&#x3D;&quot;file-upload&quot;&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          id&#x3D;&quot;file-upload&quot;</span><br><span class="line">          accept&#x3D;&quot;image&#x2F;*&quot;</span><br><span class="line">          multiple&#x3D;&#123;true&#125;</span><br><span class="line">          type&#x3D;&quot;file&quot;</span><br><span class="line">          style&#x3D;&#123;&#123; display: &quot;none&quot; &#125;&#125;</span><br><span class="line">          onChange&#x3D;&#123;(e) &#x3D;&gt; &#123;</span><br><span class="line">            handleFileInputChange(e);</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        &#x2F;&gt;</span><br><span class="line">        &lt;span&gt;新增圖片&lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;label&gt;</span><br></pre></td></tr></table></figure>
-
-<p>這裡用了一個小技巧隱藏原本的 input 欄位<br>並以 label 的點擊來觸發 input 的點擊效果(for 屬性可以觸發相同 id)<br><strong>備註：JSX 的 for 屬性需要寫成 htmlFor</strong></p>
-<p>當選取圖片上傳便會觸發 onChange</p>
-<h2 id="根據-FileReader-物件來讀取圖片的-Data-URL"><a href="#根據-FileReader-物件來讀取圖片的-Data-URL" class="headerlink" title="根據 FileReader 物件來讀取圖片的 Data URL"></a>根據 FileReader 物件來讀取圖片的 Data URL</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function handleFileInputChange(event) &#123;</span><br><span class="line">  const files &#x3D; event.target.files;</span><br><span class="line">  const convertedImages &#x3D; [];</span><br><span class="line"></span><br><span class="line">  for (let i &#x3D; 0; i &lt; files.length; i++) &#123;</span><br><span class="line">    const file &#x3D; files[i];</span><br><span class="line">    const reader &#x3D; new FileReader();</span><br><span class="line"></span><br><span class="line">    reader.onload &#x3D; function (e) &#123;</span><br><span class="line">      const dataURL &#x3D; e.target.result;</span><br><span class="line">      convertedImages.push(dataURL);</span><br><span class="line"></span><br><span class="line">      if (convertedImages.length &#x3D;&#x3D;&#x3D; files.length) &#123;</span><br><span class="line">        setPhotoList(convertedImages);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    reader.readAsDataURL(file);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>基本上就是根據迴圈 搭配 FileReader 讀取每個檔案的 Data URL<br>並根據 setPhotoList 將轉換好的 URL 陣列放入 photoList 來重新渲染視圖<br><strong>如果有防呆邏輯也可以在這裡加上(如上傳圖片數量限制等等…)</strong></p>
-<h2 id="根據-Data-URL-將圖片顯示在畫面上"><a href="#根據-Data-URL-將圖片顯示在畫面上" class="headerlink" title="根據 Data URL 將圖片顯示在畫面上"></a>根據 Data URL 將圖片顯示在畫面上</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;photoList.map((url, index) &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;img key&#x3D;&#123;index&#125; src&#x3D;&#123;url&#125; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;)&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最後一步很單純<br>在專案需要的地方將 photoList 給渲染出來就好了</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/07/12/fileReader/">https://davidhuang6.github.io/blog/2023/07/12/fileReader/</a> </p>
-]]></content>
-      <categories>
-        <category>URL</category>
-      </categories>
-      <tags>
-        <tag>Data URL</tag>
-        <tag>FileReader</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React Debounce 去抖動</title>
-    <url>/blog/2020/09/26/debounce/</url>
-    <content><![CDATA[<p>最近在 app 上寫一個簡單的欄位試算功能<br>有用到去抖動這個小技巧<br>和大家簡單分享一下</p>
-<p>內文:</p>
-<ul>
-<li>Debounce</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="Debounce"><a href="#Debounce" class="headerlink" title="Debounce"></a>Debounce</h1><br>
-去抖動這個技巧
-主要是用在避免短時間內重複觸發事件而造成過多不必要的運算
-
-<p>可以利用 useEffect 在原件卸載時 執行 return function 把計時器清除<br>在 update 元件時 重新設定計時器要執行的代碼<br>代碼可參考如下:</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// ... 省略 ...</span></span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> result = amount * rate;</span><br><span class="line">      setResultAmount(result);</span><br><span class="line">    &#125;, <span class="number">500</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> clearTimeout(timer);</span><br><span class="line">  &#125;, [amount]);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ... 省略 ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/09/26/debounce/">https://davidhuang6.github.io/blog/2020/09/26/debounce/</a> </p>
-]]></content>
-      <categories>
-        <category>react</category>
-      </categories>
-      <tags>
-        <tag>react</tag>
-        <tag>hooks</tag>
-        <tag>debounce</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何擁有一個網站</title>
-    <url>/blog/2020/09/13/createWebsite/</url>
-    <content><![CDATA[<p>將一個<code>網頁</code>放到一個<code>網頁空間</code><br>再用一個<code>網域</code>指向你的<code>網頁空間</code>即可<br>現在你有一個網站了,只要在瀏覽器的網址列輸入網址,人人都可以連到你的網站囉!</p>
-<p>內文</p>
-<ul>
-<li>如何擁有網頁</li>
-<li>如何擁有網域</li>
-<li>如何擁有網頁空間</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="如何擁有網頁"><a href="#如何擁有網頁" class="headerlink" title="如何擁有網頁"></a>如何擁有網頁</h1><p>網頁會是一個副檔名為html的檔案,<br>裡面通常會包含樣式檔css, 與腳本檔案js,<br>這會是組成一個基本網頁的三元素,</p>
-<p>我們可以參考 <a href="https://templated.co/" target="_blank" rel="noopener">templated</a> 這個網站<br>裡面提供了非常多的免費模板可供使用, 許可通常是使用模板時在footer附註來源即可,<br>下載下來的模板已經完成了這個部分, 所以基本上可以直接使用,</p>
-<p>如何編輯呢,<br>基本上可以使用電腦內建的文字編輯器就可以囉,<br>如果想學習基本網頁的寫法或修改模板內容可以參考 <a href="https://www.w3schools.com/" target="_blank" rel="noopener">w3cschools</a><br>這個網站提供了很棒的入門教學</p>
-<h1 id="如何擁有網域"><a href="#如何擁有網域" class="headerlink" title="如何擁有網域"></a>如何擁有網域</h1><p>網域是網站的最重要要素之一,<br>像是一個地址可以讓每個人知道到何處拜訪你,</p>
-<p>通常我們會註冊一個頂級域名(如: .com, .io, .org, .tw etc.)<br>然後我們就擁有了這個域名底下的一個二級域名 如 myweb.com<br>這樣你就可以用這個域名來指向你的網站<br>當然你會擁有這個二級域名底下的所有三級域名及N及域名<br>而每個域名你都可以指向一個網站<br>所以當你註冊了一個域名 你可以提供給無數的網站使用XD</p>
-<p>底下介紹一個免費的網域註冊網站及一個付費的網域註冊網站</p>
-<ul>
-<li><a href="https://freenom.com" target="_blank" rel="noopener">freenom</a></li>
-<li><a href="https://godaddy.com/" target="_blank" rel="noopener">GoDaddy</a></li>
-</ul>
-<p>免費的網域可以用來簡單為小網站做測試或練習,<br>但不建議當作正式網站的網域,<br>因為有可能有隨時被停用的風險,<br>或是不能被一些網頁空間作為CNAME使用</p>
-<h1 id="如何擁有網頁空間"><a href="#如何擁有網頁空間" class="headerlink" title="如何擁有網頁空間"></a>如何擁有網頁空間</h1><p>網頁空間基本上也分為免費及付費的, 靜態的和動態的<br>如果是靜態網站要使用的, 基本上就是一個網頁伺服器(html server), 相對單純</p>
-<p>免費的網頁空間, 通常會有CANME的限制(能不能設定自己的網域), 及可能會有其他廣告的狀況<br>所以申請時需要特別留意此空間的規範是否符合自身的需求</p>
-<p>這部分這搜尋引擎上可以找大量的結果<br>所以這邊就不一一介紹了</p>
-<p>當然如果熟悉終端機使用的話<br>就可以使用 <a href="https://github.com" target="_blank" rel="noopener">Github</a><br>這個網站是很多工程師常用的代碼倉 裡面也提供 github page 可以用來呈現靜態網站</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/09/13/createWebsite/">https://davidhuang6.github.io/blog/2020/09/13/createWebsite/</a> </p>
-]]></content>
-      <categories>
-        <category>教學</category>
-      </categories>
-      <tags>
-        <tag>free sources</tag>
-        <tag>html</tag>
-        <tag>tutorial</tag>
+        <tag>es5</tag>
+        <tag>es6</tag>
+        <tag>complier</tag>
+        <tag>babel</tag>
       </tags>
   </entry>
   <entry>
@@ -540,6 +395,21 @@
       </tags>
   </entry>
   <entry>
+    <title>Bookmarklet 書籤小程式</title>
+    <url>/blog/2020/05/31/bml/</url>
+    <content><![CDATA[<p>javascript 在客戶端瀏覽器上, 除了console內可以執行外, 也可以在網址列URL上執行, 只需要將協定的部分改為 <code>javascript:</code> 即可, 如: <code>javascript: alert(&#39;Hello Bookmarklet&#39;)</code>, 之前在工作上會寫給一些非開發人員做產品上簡單的測試, 如在CMS後台添加測試資料, 或是在前後台快速登入並執行相關功能, 通常會把書籤程式寫進匿名函式並壓縮成一行, 然後存在 chrome 的書籤裡, 接下來只要在程式要執行的頁面點擊書籤就可以執行程式了</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/05/31/bml/">https://davidhuang6.github.io/blog/2020/05/31/bml/</a> </p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>bookmarklet</tag>
+        <tag>協定</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hosts 主機表</title>
     <url>/blog/2020/06/08/hosts/</url>
     <content><![CDATA[<p>A: 網址好像連不對地方!?<br>B: 你要不要檢查一下你的主機表..</p>
@@ -631,122 +501,102 @@
       </tags>
   </entry>
   <entry>
-    <title>部落格近3週年久違的更新</title>
-    <url>/blog/2023/05/20/blogHistory/</url>
-    <content><![CDATA[<p>回憶起這個部落格只有在建立初起比較常使用<br>後續就默默的擺著  </p>
-<p>幾乎所有應用只要一陣子沒更新就會出問題<br>這個部落格也不例外</p>
-<p>底下就來講講這裡曾經發生過的事吧</p>
+    <title>前端路由之導航狀態 (React Hook - useNavigate)</title>
+    <url>/blog/2023/07/12/navigate/</url>
+    <content><![CDATA[<p>導航狀態常用於頁面間的資料傳遞<br>特別適合單向的數據傳遞(只管數據帶到下一頁,不管帶回上一頁)<br>使用上直觀且簡單<br>另外現代瀏覽器多半有緩存機制可以保存各頁面的狀態<br>即便客戶端進行 Reload, 或點擊上下頁依然可以保存狀態</p>
+<p>應用上像是商品目錄頁進到商品內頁<br>可以藉由導航狀態先將部分資訊帶入內頁渲染<br>剩餘的資訊再藉由動態請求補齊<br>可以有效提升使用者體驗</p>
+<p>底下以 React Router v6 為例<br>來說明導航狀態的實際應用</p>
 <a id="more"></a>
 
-<h1 id="部落格的歷史"><a href="#部落格的歷史" class="headerlink" title="部落格的歷史"></a>部落格的歷史</h1><p>最初建立這個部落格<br>除了想記錄自己的學習歷程<br>也想留下一個類似作品集的東西  </p>
-<p>不過沒有選擇作品集而是部落格<br>是因為部落格更務實<br>而且使用上更方便  </p>
-<p>這個部落格始終是放在 github page 上的<br>但當初為了讓這個網站看起來更專業<br>就去 GoDaddy 租了個兩年的網域<br>然後用 CloudFlare 來做網站託管<br>這樣就有一個專門的網址可以連到我的網站<br>也可以在 google 上搜尋到這格部落格裡的文章</p>
-<p>CloudFlare 除了可以免費託管網站<br>還提供了免費的CDN和SSL憑證相當不錯</p>
-<p>印象中這個部落格有出現過幾次問題</p>
-<h2 id="Hexo-選用的主題不再更新-而導致版面出問題"><a href="#Hexo-選用的主題不再更新-而導致版面出問題" class="headerlink" title="Hexo 選用的主題不再更新 而導致版面出問題"></a>Hexo 選用的主題不再更新 而導致版面出問題</h2><p>這個部落格是用 Hexo 這個框架來做的<br>裡面有提供很多很棒的版型稱為主體<br>我當初選了一個挺熱門的主體滿多工程師在用的<br>不過後續這個主題沒有更新<br>版面就出現一些奇怪的問題<br>後來上網查很多人都有遇到這個問題<br>幸運的是有找到他們提供解決的辦法<br>不過我有點忘記solution是直接換一個主體<br>還是根據原本的主題進行了局部的修改才把它搞好…<br>總之現在的版面是一個叫 next 的主題</p>
-<h2 id="網域沒有續約-網址失效-導致網站無法正常訪問"><a href="#網域沒有續約-網址失效-導致網站無法正常訪問" class="headerlink" title="網域沒有續約 網址失效 導致網站無法正常訪問"></a>網域沒有續約 網址失效 導致網站無法正常訪問</h2><p>當初是把部落格設置在github page主頁<br>另外有設置CNAME及一些自動轉址的功能<br>例如你從github page進來也會直接換到我的網域<br>讓人看不出這個網站是放在github上面<br>不過網域沒有續約就要把CNAME和自動轉址的功能拿掉<br>這樣才能在github page上正常的讓人訪問</p>
-<h2 id="google-搜尋引擎找不到部落格的文章了"><a href="#google-搜尋引擎找不到部落格的文章了" class="headerlink" title="google 搜尋引擎找不到部落格的文章了"></a>google 搜尋引擎找不到部落格的文章了</h2><p>最近有在研究一些關於 seo 的東西<br>有發現我的部落格在 google 引擎上已經找不到了<br>據我目前搜集的資訊了解<br>是因為 google 爬蟲不會特別去爬 github 上的 github page<br>可是可以用 google 提供的 search console 主動提供網站資訊<br>讓爬蟲建立網站索引<br>所以我就小小的更新了一下 Blog 順便發篇文<br>順利的話之後這裡的文章也可以在 google 上直接找到囉~</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/05/20/blogHistory/">https://davidhuang6.github.io/blog/2023/05/20/blogHistory/</a> </p>
+<p>這是一個頁面級別的元件代碼範例<br>包含接收來自上一頁的 state<br>和將 state 帶入新頁面的方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const Page &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  const navigate &#x3D; useNavigate();</span><br><span class="line">  const location &#x3D; useLocation();</span><br><span class="line">  const &#123; state &#125; &#x3D; location;</span><br><span class="line">  const [viewModel, setViewModel] &#x3D; useState(state || &#123;&#125;);</span><br><span class="line"></span><br><span class="line">  const onNextPageClick &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const state &#x3D; &#123; data: &#39;example&#39; &#125;;</span><br><span class="line">    navigate(&quot;頁面路徑&quot;, &#123; state &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const fetchPageData &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">       const res &#x3D; await fetch(&quot;url&quot;);</span><br><span class="line">       const json &#x3D; await res.json();</span><br><span class="line">       const &#123; data &#125; &#x3D; json;</span><br><span class="line">       setViewModel(p &#x3D;&gt; (&#123;...p, ...data&#125;))</span><br><span class="line">    &#125; catch (err) &#123;</span><br><span class="line">       console.log(err.message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    fetchPageData()</span><br><span class="line">  &#125;, [])</span><br><span class="line"></span><br><span class="line">  return (頁面JSX代碼);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>從上面的代碼可以看到導航狀態來自於 location 的 state<br>可將其作為 viewModel 的預設值 之後主要用來更新視圖<br>當元件掛載完成後 便會觸發 fetchPageData 進行動態數據請求和視圖更新</p>
+<p>如果需要將狀態帶入新頁面 則可以參考 onNextPageClick 函式</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/07/12/navigate/">https://davidhuang6.github.io/blog/2023/07/12/navigate/</a> </p>
 ]]></content>
       <categories>
-        <category>網站維護</category>
+        <category>state</category>
       </categories>
       <tags>
-        <tag>部落格</tag>
-        <tag>seo</tag>
-        <tag>網站維護</tag>
+        <tag>react</tag>
+        <tag>hook</tag>
+        <tag>router</tag>
       </tags>
   </entry>
   <entry>
-    <title>PWA 漸進式網頁應用程式</title>
-    <url>/blog/2020/06/03/pwa/</url>
-    <content><![CDATA[<p>讓你的 Web 直接變 APP?! …當然沒那麼誇張, 但除了一些限制外, 看起來就和 APP 一樣…</p>
-<p><strong>內文備註：</strong></p>
-<ul>
-<li>基本設定</li>
-<li>插件推薦</li>
-<li>Tips</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="Progressive-Web-App"><a href="#Progressive-Web-App" class="headerlink" title="Progressive Web App"></a>Progressive Web App</h1><h2 id="基本設定"><a href="#基本設定" class="headerlink" title="基本設定"></a>基本設定</h2><p>這裏你只需放兩隻檔案在網頁根目錄並在 html 檔中引入相關設定即可完成</p>
-<p><strong>檔案說明</strong></p>
-<ul>
-<li><code>manifest.json</code><blockquote>
-<p>作用: 網頁加入手機桌面的必要資訊<br>引入: <code>&lt;link rel=&quot;manifest&quot; href=&quot;manifest.json&quot; /&gt;</code></p>
-</blockquote>
-</li>
-<li><code>service-worker.js</code><blockquote>
-<p>作用: 離線快取機制<br>引入:</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">   <span class="keyword">if</span> (<span class="string">"serviceWorker"</span> <span class="keyword">in</span> navigator) &#123;</span><br><span class="line">     <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, () =&gt; &#123;</span><br><span class="line">       navigator.serviceWorker.register(<span class="string">"./service-worker.js"</span>).then(</span><br><span class="line">         (registration) =&gt; &#123;</span><br><span class="line">           <span class="built_in">console</span>.log(</span><br><span class="line">             <span class="string">`ServiceWorker registration successful with scope: <span class="subst">$&#123;registration.scope&#125;</span>`</span></span><br><span class="line">           );</span><br><span class="line">         &#125;,</span><br><span class="line">         (error) =&gt; &#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">`ServiceWorker registration failed: <span class="subst">$&#123;error&#125;</span>`</span>);</span><br><span class="line">         &#125;</span><br><span class="line">       );</span><br><span class="line">     &#125;);</span><br><span class="line">   &#125;</span><br><span class="line"> &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><strong>至於這兩隻檔案怎麼寫呢???</strong><br>除了 Google 一下基本範例來自己寫…<br>底下提供好用插件可以直接產出這兩隻檔案!!!</p>
-<h2 id="插件推薦"><a href="#插件推薦" class="headerlink" title="插件推薦"></a>插件推薦</h2><p><a href="https://www.npmjs.com/package/create-pwa" target="_blank" rel="noopener">create-pwa</a></p>
-<blockquote>
-<p>照裡面的文件使用就對了<br>好了, 現在你已經有所有該具備的檔案了<br>接下來就可以試試安裝在電腦桌面或手機桌面上了</p>
-</blockquote>
-<p><strong>什麼?!.. 安裝不了?!…</strong><br>底下附註一些 Tips 幫你解決常見的問題</p>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>基本上安裝不了,主要和三個地方有關係, 檢查過後就可以安裝了!!!</p>
-<ol>
-<li>pwa 在 localhost 或 https 下, 才能安裝</li>
-<li>快取檔案路徑不正確</li>
-<li>ios 手機只能用 safari 隱晦的方式加入桌面</li>
-</ol>
-<p><strong>什麼?!.. 安裝好了可是沒有東西?!…</strong></p>
-<p>別緊張, 檢查一下 manifest.json 內的 start_url 是否正確</p>
-<blockquote>
-<p>其位置為 manifest.json 所在目錄的相對路徑</p>
-</blockquote>
-<p><strong>好了, 恭喜!!! 現在你有一個 PWA 了</strong></p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/03/pwa/">https://davidhuang6.github.io/blog/2020/06/03/pwa/</a> </p>
-]]></content>
-      <categories>
-        <category>PWA</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-        <tag>PWA</tag>
-        <tag>Progressive Web App</tag>
-        <tag>service work</tag>
-        <tag>manifest</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript 如何重構代碼（一）</title>
-    <url>/blog/2020/06/15/refactor/</url>
-    <content><![CDATA[<p>這個主題打算寫系列文<br>先簡單介紹三個 if else 的重構方法</p>
+    <title>如何擁有一個網站</title>
+    <url>/blog/2020/09/13/createWebsite/</url>
+    <content><![CDATA[<p>將一個<code>網頁</code>放到一個<code>網頁空間</code><br>再用一個<code>網域</code>指向你的<code>網頁空間</code>即可<br>現在你有一個網站了,只要在瀏覽器的網址列輸入網址,人人都可以連到你的網站囉!</p>
 <p>內文</p>
 <ul>
-<li>更好的 if else 寫法 (三元運算子)</li>
-<li>更好的 if else 寫法（return）</li>
-<li>更好的 if else 寫法（物件）</li>
+<li>如何擁有網頁</li>
+<li>如何擁有網域</li>
+<li>如何擁有網頁空間</li>
 </ul>
 <a id="more"></a>
 
-<h1 id="更好的-if-else-三元運算子"><a href="#更好的-if-else-三元運算子" class="headerlink" title="更好的 if else (三元運算子)"></a>更好的 if else (三元運算子)</h1><h2 id="if-else-寫法"><a href="#if-else-寫法" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="三元運算子"><a href="#三元運算子" class="headerlink" title="三元運算子"></a>三元運算子</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">id === <span class="number">1</span> ? alert(<span class="string">"ID 是 1"</span>) : alert(<span class="string">"ID 不是 1"</span>);</span><br></pre></td></tr></table></figure>
-
-<h1 id="更好的-if-else（return-寫法）"><a href="#更好的-if-else（return-寫法）" class="headerlink" title="更好的 if else（return 寫法）"></a>更好的 if else（return 寫法）</h1><h2 id="if-else-寫法-1"><a href="#if-else-寫法-1" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="retrun"><a href="#retrun" class="headerlink" title="retrun"></a>retrun</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">1</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">2</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">3</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">  <span class="keyword">return</span> alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<h1 id="更好的-if-else（物件寫法）"><a href="#更好的-if-else（物件寫法）" class="headerlink" title="更好的 if else（物件寫法）"></a>更好的 if else（物件寫法）</h1><h2 id="if-else-寫法-2"><a href="#if-else-寫法-2" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="物件"><a href="#物件" class="headerlink" title="物件"></a>物件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">"ID 不是 1, 2, 3"</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">"ID 是 1"</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">"ID 是 2"</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="string">"ID 是 3"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> selectedID = obj[id] || obj[<span class="number">0</span>];</span><br><span class="line">alert(selectedID);</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/15/refactor/">https://davidhuang6.github.io/blog/2020/06/15/refactor/</a> </p>
+<h1 id="如何擁有網頁"><a href="#如何擁有網頁" class="headerlink" title="如何擁有網頁"></a>如何擁有網頁</h1><p>網頁會是一個副檔名為html的檔案,<br>裡面通常會包含樣式檔css, 與腳本檔案js,<br>這會是組成一個基本網頁的三元素,</p>
+<p>我們可以參考 <a href="https://templated.co/" target="_blank" rel="noopener">templated</a> 這個網站<br>裡面提供了非常多的免費模板可供使用, 許可通常是使用模板時在footer附註來源即可,<br>下載下來的模板已經完成了這個部分, 所以基本上可以直接使用,</p>
+<p>如何編輯呢,<br>基本上可以使用電腦內建的文字編輯器就可以囉,<br>如果想學習基本網頁的寫法或修改模板內容可以參考 <a href="https://www.w3schools.com/" target="_blank" rel="noopener">w3cschools</a><br>這個網站提供了很棒的入門教學</p>
+<h1 id="如何擁有網域"><a href="#如何擁有網域" class="headerlink" title="如何擁有網域"></a>如何擁有網域</h1><p>網域是網站的最重要要素之一,<br>像是一個地址可以讓每個人知道到何處拜訪你,</p>
+<p>通常我們會註冊一個頂級域名(如: .com, .io, .org, .tw etc.)<br>然後我們就擁有了這個域名底下的一個二級域名 如 myweb.com<br>這樣你就可以用這個域名來指向你的網站<br>當然你會擁有這個二級域名底下的所有三級域名及N及域名<br>而每個域名你都可以指向一個網站<br>所以當你註冊了一個域名 你可以提供給無數的網站使用XD</p>
+<p>底下介紹一個免費的網域註冊網站及一個付費的網域註冊網站</p>
+<ul>
+<li><a href="https://freenom.com" target="_blank" rel="noopener">freenom</a></li>
+<li><a href="https://godaddy.com/" target="_blank" rel="noopener">GoDaddy</a></li>
+</ul>
+<p>免費的網域可以用來簡單為小網站做測試或練習,<br>但不建議當作正式網站的網域,<br>因為有可能有隨時被停用的風險,<br>或是不能被一些網頁空間作為CNAME使用</p>
+<h1 id="如何擁有網頁空間"><a href="#如何擁有網頁空間" class="headerlink" title="如何擁有網頁空間"></a>如何擁有網頁空間</h1><p>網頁空間基本上也分為免費及付費的, 靜態的和動態的<br>如果是靜態網站要使用的, 基本上就是一個網頁伺服器(html server), 相對單純</p>
+<p>免費的網頁空間, 通常會有CANME的限制(能不能設定自己的網域), 及可能會有其他廣告的狀況<br>所以申請時需要特別留意此空間的規範是否符合自身的需求</p>
+<p>這部分這搜尋引擎上可以找大量的結果<br>所以這邊就不一一介紹了</p>
+<p>當然如果熟悉終端機使用的話<br>就可以使用 <a href="https://github.com" target="_blank" rel="noopener">Github</a><br>這個網站是很多工程師常用的代碼倉 裡面也提供 github page 可以用來呈現靜態網站</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/09/13/createWebsite/">https://davidhuang6.github.io/blog/2020/09/13/createWebsite/</a> </p>
 ]]></content>
       <categories>
-        <category>javascript</category>
+        <category>教學</category>
       </categories>
       <tags>
-        <tag>javascript</tag>
-        <tag>refactor</tag>
+        <tag>html</tag>
+        <tag>free sources</tag>
+        <tag>tutorial</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在 Nginx 上面部署 React App</title>
+    <url>/blog/2023/07/11/nginx/</url>
+    <content><![CDATA[<p>Nginx 是常見的網頁伺服器<br>預設的情況下會將客戶端的所有請求轉發到後端的真實路徑<br>部署多頁式的網頁應用並沒有什麼問題 但是如果是單頁式應用呢</p>
+<p>React 是典型的單頁式應用 SPA (Single App Application)<br>React Router 提供多種類型的路由 如 BrowserRouter, HashRouter, MemoryRouter etc.<br>其中 React Router 官方最推薦的 Router 就是 <a href="https://reactrouter.com/en/main/routers/create-browser-router" target="_blank" rel="noopener">BrowserRouter</a></p>
+<p>BrowserRouter 會根據每次路徑的變化都和後端發送請求</p>
+<p>但實際上 React 只會有一個 index.html 位於 Nginx 的網站根目錄<br>此時如果 Nginx 嘗試將每個前端路由的的請求都轉發到後端的真實路徑<br>就會因為找不到實際的檔案可以回傳 而發生 404 Not Found</p>
+<p>底下就來說明如何解決這個問題</p>
+<a id="more"></a>
+
+<p>首先 要先打開 Nginx 的配置檔案<br>預設位置為 /etc/nginx/conf.d/default.conf<br>內容如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要將 try_files 加入 location / 下<br>代碼如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">        # url 切換時始终返回index.html</span><br><span class="line">        try_files $uri &#x2F;index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此時你在馬上打開網站<br>你會發先還是 404 Not Found</p>
+<p>記得當修改完配置要在執行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>這樣才能重新讀取並套用新的配置<br>然後在開網站 就正常囉～</p>
+<p>另外如果發現 React 有些頁面抓不到靜態資源<br>可以檢查專案下的 package.json<br>並確認 homepage 設定是否正確<br>如果專案是部署在網站根目錄下 設定如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;homepage&quot;: &quot;&#x2F;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>以上就是將 React App 部署在 Nginx 網頁伺服器的方法哩</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/07/11/nginx/">https://davidhuang6.github.io/blog/2023/07/11/nginx/</a> </p>
+]]></content>
+      <categories>
+        <category>deployment</category>
+      </categories>
+      <tags>
+        <tag>react</tag>
+        <tag>router</tag>
+        <tag>deploy</tag>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -800,161 +650,6 @@
       <tags>
         <tag>javascript</tag>
         <tag>refactor</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>前端路由之導航狀態 (React Hook - useNavigate)</title>
-    <url>/blog/2023/07/12/navigate/</url>
-    <content><![CDATA[<p>導航狀態常用於頁面間的資料傳遞<br>特別適合單向的數據傳遞(只管數據帶到下一頁,不管帶回上一頁)<br>使用上直觀且簡單<br>另外現代瀏覽器多半有緩存機制可以保存各頁面的狀態<br>即便客戶端進行 Reload, 或點擊上下頁依然可以保存狀態</p>
-<p>應用上像是商品目錄頁進到商品內頁<br>可以藉由導航狀態先將部分資訊帶入內頁渲染<br>剩餘的資訊再藉由動態請求補齊<br>可以有效提升使用者體驗</p>
-<p>底下以 React Router v6 為例<br>來說明導航狀態的實際應用</p>
-<a id="more"></a>
-
-<p>這是一個頁面級別的元件代碼範例<br>包含接收來自上一頁的 state<br>和將 state 帶入新頁面的方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const Page &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  const navigate &#x3D; useNavigate();</span><br><span class="line">  const location &#x3D; useLocation();</span><br><span class="line">  const &#123; state &#125; &#x3D; location;</span><br><span class="line">  const [viewModel, setViewModel] &#x3D; useState(state || &#123;&#125;);</span><br><span class="line"></span><br><span class="line">  const onNextPageClick &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const state &#x3D; &#123; data: &#39;example&#39; &#125;;</span><br><span class="line">    navigate(&quot;頁面路徑&quot;, &#123; state &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  const fetchPageData &#x3D; async () &#x3D;&gt; &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">       const res &#x3D; await fetch(&quot;url&quot;);</span><br><span class="line">       const json &#x3D; await res.json();</span><br><span class="line">       const &#123; data &#125; &#x3D; json;</span><br><span class="line">       setViewModel(p &#x3D;&gt; (&#123;...p, ...data&#125;))</span><br><span class="line">    &#125; catch (err) &#123;</span><br><span class="line">       console.log(err.message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    fetchPageData()</span><br><span class="line">  &#125;, [])</span><br><span class="line"></span><br><span class="line">  return (頁面JSX代碼);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>從上面的代碼可以看到導航狀態來自於 location 的 state<br>可將其作為 viewModel 的預設值 之後主要用來更新視圖<br>當元件掛載完成後 便會觸發 fetchPageData 進行動態數據請求和視圖更新</p>
-<p>如果需要將狀態帶入新頁面 則可以參考 onNextPageClick 函式</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/07/12/navigate/">https://davidhuang6.github.io/blog/2023/07/12/navigate/</a> </p>
-]]></content>
-      <categories>
-        <category>state</category>
-      </categories>
-      <tags>
-        <tag>react</tag>
-        <tag>hook</tag>
-        <tag>router</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSH 金鑰與遠端連線</title>
-    <url>/blog/2020/06/09/ssh/</url>
-    <content><![CDATA[<p>遠端推送不用帳密了!! (撒花</p>
-<p>內文</p>
-<ul>
-<li>SSH 介紹</li>
-<li>如何產生金鑰</li>
-<li>金鑰檔案位置</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="SSH-金鑰與遠端連線"><a href="#SSH-金鑰與遠端連線" class="headerlink" title="SSH 金鑰與遠端連線"></a>SSH 金鑰與遠端連線</h1><h2 id="SSH-介紹"><a href="#SSH-介紹" class="headerlink" title="SSH 介紹"></a>SSH 介紹</h2><br>
-
-<blockquote>
-<p>一種加密的網路傳輸協定,<br>常見的用途為遠端登入</p>
-</blockquote>
-<p>使用方法為先在本地產生一對金鑰,<br>將公鑰放上遠端的 server,<br>私鑰則留在本地電腦妥善保管,<br>當開始進行 ssh 連線時,<br>遠端公鑰則會和本地私鑰進行比對,<br>比對成功即可連線</p>
-<h2 id="如何產生金鑰"><a href="#如何產生金鑰" class="headerlink" title="如何產生金鑰"></a>如何產生金鑰</h2><p>CLI 輸入以下指令即可:<br><code>ssh-keygen</code></p>
-<p>或是可以加上參數:<br><code>ssh-keygen -t rsa -C &lt;comment&gt;</code></p>
-<p>參數說明:</p>
-<ul>
-<li>-t 指定生成密鑰的類型</li>
-<li>-C 提供一個新註釋</li>
-</ul>
-<h2 id="金鑰檔案位置"><a href="#金鑰檔案位置" class="headerlink" title="金鑰檔案位置"></a>金鑰檔案位置</h2><p><strong>Mac</strong>: <code>/Users/&lt;使用者名稱&gt;/.ssh/</code></p>
-<p>在金鑰產生後 .ssh 資料夾下會有兩隻檔案</p>
-<ul>
-<li>公鑰: <code>id_rsa.pub</code></li>
-<li>私鑰: <code>id_rsa</code></li>
-</ul>
-<p><strong>最後把公鑰放上遠端 server 即可完成 ssh 連線前設定</strong></p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/09/ssh/">https://davidhuang6.github.io/blog/2020/06/09/ssh/</a> </p>
-]]></content>
-      <categories>
-        <category>遠端連線</category>
-      </categories>
-      <tags>
-        <tag>協定</tag>
-        <tag>遠端連線</tag>
-        <tag>安全加密</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript 實用的小技巧（二）</title>
-    <url>/blog/2020/07/04/tips2/</url>
-    <content><![CDATA[<p>耶 第二彈 !!</p>
-<p>內文</p>
-<ul>
-<li>取連續陣列 方法一</li>
-<li>取連續陣列 方法二</li>
-<li>log 開關</li>
-<li>undefined 簡寫</li>
-<li>取外部 IP</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="取連續陣列-方法一"><a href="#取連續陣列-方法一" class="headerlink" title="取連續陣列 方法一"></a>取連續陣列 方法一</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[...Array(<span class="number">10</span>).keys()];</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="取連續陣列-方法二"><a href="#取連續陣列-方法二" class="headerlink" title="取連續陣列 方法二"></a>取連續陣列 方法二</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(<span class="built_in">Array</span>(<span class="number">10</span>), (item, id) =&gt; id);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="log-開關"><a href="#log-開關" class="headerlink" title="log 開關"></a>log 開關</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ifDebug = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> oldLog = <span class="built_in">console</span>.log;</span><br><span class="line"><span class="built_in">console</span>.log = <span class="function"><span class="params">()</span> =&gt;</span> ifDebug &amp;&amp; oldLog.apply(<span class="built_in">console</span>, <span class="built_in">arguments</span>);</span><br></pre></td></tr></table></figure>
-
-<h1 id="undefined-簡寫"><a href="#undefined-簡寫" class="headerlink" title="undefined 簡寫"></a>undefined 簡寫</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<p>undefined 不是保留字 可以重新被賦值<br>故用 void 0 來取代 undefined 會更嚴謹</p>
-<p>void 後面接任何代碼都會執行 但只回 undefined</p>
-<h1 id="取外部-IP"><a href="#取外部-IP" class="headerlink" title="取外部 IP"></a>取外部 IP</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fetch(<span class="string">"https://api.ipify.org?format=json"</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>補充</strong></p>
-<p>終端機取法 (Mac OS)</p>
-<p>外部 IP</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl ifconfig.me</span><br></pre></td></tr></table></figure>
-
-<p>內部 IP </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
-
-<p><strong>內部 ip 會寫在 en0 那邊</strong></p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/07/04/tips2/">https://davidhuang6.github.io/blog/2020/07/04/tips2/</a> </p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>javascript</tag>
-        <tag>tips</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vim 古老編輯器的簡明使用方法</title>
-    <url>/blog/2020/06/13/vim/</url>
-    <content><![CDATA[<p>A: 這裡是哪裡???為什麼進得去出不來?!<br>B: <code>:q</code><br>A: 那我每次都 <code>:q</code> 可以嗎?<br>B: 恩… 也是可以…</p>
-<p>內文</p>
-<ul>
-<li>基本操作</li>
-</ul>
-<a id="more"></a>
-
-<h1 id="Vim-古老編輯器的簡明使用方法"><a href="#Vim-古老編輯器的簡明使用方法" class="headerlink" title="Vim 古老編輯器的簡明使用方法"></a>Vim 古老編輯器的簡明使用方法</h1><br>
-
-<blockquote>
-<p>如果你有使用 git 的話<br>你一定見過 vim<br>像是 merge 別人的分支<br>或是 commit 的時候</p>
-</blockquote>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>以下介紹:</p>
-<h3 id="如何使用-vim-開啟文檔"><a href="#如何使用-vim-開啟文檔" class="headerlink" title="如何使用 vim 開啟文檔"></a>如何使用 vim 開啟文檔</h3><p>使用 vim 開啟文檔的方法非常簡單,<br>只需要在 CLI 上輸入以下指令即可:</p>
-<p><code>vim /&lt;path&gt;/&lt;file&gt;</code></p>
-<p>for instance:</p>
-<p>打開所在目錄下 file.txt 文檔</p>
-<p><code>vim file.txt</code></p>
-<h3 id="模式切換與編輯文件"><a href="#模式切換與編輯文件" class="headerlink" title="模式切換與編輯文件"></a>模式切換與編輯文件</h3><p>一開始進入 vim 編輯器的時候為<strong>普通模式</strong><br>在任何模式下按<code>esc</code>皆可以退至<strong>普通模式</strong></p>
-<p>在<strong>普通模式</strong>按下<code>i</code>可以進入<strong>插入模式</strong><br>此模式可以開始進行文檔上的編輯</p>
-<p>在<strong>普通模式</strong>下按下 <code>:</code> 可以進入<strong>指令模式</strong><br>此模式可以退出文檔</p>
-<h3 id="編輯器離開方式"><a href="#編輯器離開方式" class="headerlink" title="編輯器離開方式"></a>編輯器離開方式</h3><p>離開前必須進入指令模式<br>相關指令如下:</p>
-<ul>
-<li><code>q</code> : 離開編輯器</li>
-<li><code>q!</code> : 不存檔強制離開編輯器</li>
-<li><code>w</code> : 存檔</li>
-<li><code>wq</code> : 存檔離開編輯器</li>
-</ul>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/13/vim/">https://davidhuang6.github.io/blog/2020/06/13/vim/</a> </p>
-]]></content>
-      <categories>
-        <category>編輯器</category>
-      </categories>
-      <tags>
-        <tag>編輯器</tag>
-        <tag>vim</tag>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1022,39 +717,229 @@
       </tags>
   </entry>
   <entry>
-    <title>Shell Script 程式化指令碼</title>
-    <url>/blog/2020/05/31/sh/</url>
-    <content><![CDATA[<p>在一些架構較大的專案中, 會時常使用到 <code>command line</code> 來執行相關的指令, 如: 啟動開發伺服器, 打包檔案, 部署檔案 etc. 通常會將單一功能的命令寫在 <code>package.json</code> 內的 <code>scripts</code> 裡, 但如果一次需要執行的命令不只一條, 其實可以將相關指令寫成腳本(.sh)放在專案根目錄下, 往後只要執行這隻檔案, 就可以按照腳本順序來執行一連串的相關指令, 以達到程式自動化的效果, 優點是減少重複行為並下錯指令的可能性</p>
-<p>另外建立的腳本檔案會需要修改權限才能執行<br>以下備註檔案修改權限的方法:</p>
+    <title>圖片預覽 (FileReader/Data URL)</title>
+    <url>/blog/2023/07/12/fileReader/</url>
+    <content><![CDATA[<p>之前介紹過 <a href="https://davidhuang6.github.io/blog/2023/06/08/Data-URL-vs-Blob-URL/#more">Data URL</a><br>而這篇文章將補充一個常見的應用場景：圖片預覽</p>
 <a id="more"></a>
 
-<h1 id="將檔案執行權限打開"><a href="#將檔案執行權限打開" class="headerlink" title="將檔案執行權限打開"></a>將檔案執行權限打開</h1><p><strong><code>chmod 777 文件名</code></strong></p>
+<p>先說明圖片預覽的主要流程</p>
 <ul>
-<li><h2 id="chmod-為修改文件權限的指令"><a href="#chmod-為修改文件權限的指令" class="headerlink" title="chmod 為修改文件權限的指令"></a>chmod 為修改文件權限的指令</h2></li>
-<li><h2 id="第一個參數為操作文件的用戶權限"><a href="#第一個參數為操作文件的用戶權限" class="headerlink" title="第一個參數為操作文件的用戶權限"></a>第一個參數為操作文件的用戶權限</h2><p>三個數字分別代表:</p>
-<blockquote>
-<p>文件所有用戶<br>群組用戶<br>其他用戶</p>
-</blockquote>
-<p>每一個數字表示該用戶的權限:</p>
-<blockquote>
-<p>r: 讀取權限 (4)<br>w: 撰寫權限 (2)<br>x: 執行權限 (1)</p>
-<blockquote>
-<p>e.g. r(4)+w(2)+x(1) = rwx(7)</p>
-</blockquote>
-</blockquote>
-</li>
-<li><h2 id="第二個參數表示欲修改權限的檔案"><a href="#第二個參數表示欲修改權限的檔案" class="headerlink" title="第二個參數表示欲修改權限的檔案"></a>第二個參數表示欲修改權限的檔案</h2></li>
+<li>根據 input 元素 來上傳圖片</li>
+<li>根據 FileReader 物件來讀取圖片的 Data URL</li>
+<li>根據 Data URL 將圖片顯示在畫面上</li>
 </ul>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/05/31/sh/">https://davidhuang6.github.io/blog/2020/05/31/sh/</a> </p>
+<p>底下代碼主要以 JSX 為範例：</p>
+<h2 id="根據-input-元素-來上傳圖片"><a href="#根據-input-元素-來上傳圖片" class="headerlink" title="根據 input 元素 來上傳圖片"></a>根據 input 元素 來上傳圖片</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;label htmlFor&#x3D;&quot;file-upload&quot;&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          id&#x3D;&quot;file-upload&quot;</span><br><span class="line">          accept&#x3D;&quot;image&#x2F;*&quot;</span><br><span class="line">          multiple&#x3D;&#123;true&#125;</span><br><span class="line">          type&#x3D;&quot;file&quot;</span><br><span class="line">          style&#x3D;&#123;&#123; display: &quot;none&quot; &#125;&#125;</span><br><span class="line">          onChange&#x3D;&#123;(e) &#x3D;&gt; &#123;</span><br><span class="line">            handleFileInputChange(e);</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        &#x2F;&gt;</span><br><span class="line">        &lt;span&gt;新增圖片&lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;label&gt;</span><br></pre></td></tr></table></figure>
+
+<p>這裡用了一個小技巧隱藏原本的 input 欄位<br>並以 label 的點擊來觸發 input 的點擊效果(for 屬性可以觸發相同 id)<br><strong>備註：JSX 的 for 屬性需要寫成 htmlFor</strong></p>
+<p>當選取圖片上傳便會觸發 onChange</p>
+<h2 id="根據-FileReader-物件來讀取圖片的-Data-URL"><a href="#根據-FileReader-物件來讀取圖片的-Data-URL" class="headerlink" title="根據 FileReader 物件來讀取圖片的 Data URL"></a>根據 FileReader 物件來讀取圖片的 Data URL</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function handleFileInputChange(event) &#123;</span><br><span class="line">  const files &#x3D; event.target.files;</span><br><span class="line">  const convertedImages &#x3D; [];</span><br><span class="line"></span><br><span class="line">  for (let i &#x3D; 0; i &lt; files.length; i++) &#123;</span><br><span class="line">    const file &#x3D; files[i];</span><br><span class="line">    const reader &#x3D; new FileReader();</span><br><span class="line"></span><br><span class="line">    reader.onload &#x3D; function (e) &#123;</span><br><span class="line">      const dataURL &#x3D; e.target.result;</span><br><span class="line">      convertedImages.push(dataURL);</span><br><span class="line"></span><br><span class="line">      if (convertedImages.length &#x3D;&#x3D;&#x3D; files.length) &#123;</span><br><span class="line">        setPhotoList(convertedImages);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    reader.readAsDataURL(file);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>基本上就是根據迴圈 搭配 FileReader 讀取每個檔案的 Data URL<br>並根據 setPhotoList 將轉換好的 URL 陣列放入 photoList 來重新渲染視圖<br><strong>如果有防呆邏輯也可以在這裡加上(如上傳圖片數量限制等等…)</strong></p>
+<h2 id="根據-Data-URL-將圖片顯示在畫面上"><a href="#根據-Data-URL-將圖片顯示在畫面上" class="headerlink" title="根據 Data URL 將圖片顯示在畫面上"></a>根據 Data URL 將圖片顯示在畫面上</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;photoList.map((url, index) &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;img key&#x3D;&#123;index&#125; src&#x3D;&#123;url&#125; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後一步很單純<br>在專案需要的地方將 photoList 給渲染出來就好了</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/07/12/fileReader/">https://davidhuang6.github.io/blog/2023/07/12/fileReader/</a> </p>
 ]]></content>
       <categories>
-        <category>自動化</category>
+        <category>URL</category>
       </categories>
       <tags>
+        <tag>Data URL</tag>
+        <tag>FileReader</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript 如何重構代碼（一）</title>
+    <url>/blog/2020/06/15/refactor/</url>
+    <content><![CDATA[<p>這個主題打算寫系列文<br>先簡單介紹三個 if else 的重構方法</p>
+<p>內文</p>
+<ul>
+<li>更好的 if else 寫法 (三元運算子)</li>
+<li>更好的 if else 寫法（return）</li>
+<li>更好的 if else 寫法（物件）</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="更好的-if-else-三元運算子"><a href="#更好的-if-else-三元運算子" class="headerlink" title="更好的 if else (三元運算子)"></a>更好的 if else (三元運算子)</h1><h2 id="if-else-寫法"><a href="#if-else-寫法" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三元運算子"><a href="#三元運算子" class="headerlink" title="三元運算子"></a>三元運算子</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">id === <span class="number">1</span> ? alert(<span class="string">"ID 是 1"</span>) : alert(<span class="string">"ID 不是 1"</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="更好的-if-else（return-寫法）"><a href="#更好的-if-else（return-寫法）" class="headerlink" title="更好的 if else（return 寫法）"></a>更好的 if else（return 寫法）</h1><h2 id="if-else-寫法-1"><a href="#if-else-寫法-1" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="retrun"><a href="#retrun" class="headerlink" title="retrun"></a>retrun</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">1</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">2</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">  <span class="keyword">if</span> (id === <span class="number">3</span>) <span class="keyword">return</span> alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">  <span class="keyword">return</span> alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h1 id="更好的-if-else（物件寫法）"><a href="#更好的-if-else（物件寫法）" class="headerlink" title="更好的 if else（物件寫法）"></a>更好的 if else（物件寫法）</h1><h2 id="if-else-寫法-2"><a href="#if-else-寫法-2" class="headerlink" title="if else 寫法"></a>if else 寫法</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (id === <span class="number">1</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 1"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">2</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 2"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (id === <span class="number">3</span>) &#123;</span><br><span class="line">  alert(<span class="string">"ID 是 3"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  alert(<span class="string">"ID 不是 1, 2, 3"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="物件"><a href="#物件" class="headerlink" title="物件"></a>物件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">"ID 不是 1, 2, 3"</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">"ID 是 1"</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">"ID 是 2"</span>,</span><br><span class="line">  <span class="number">3</span>: <span class="string">"ID 是 3"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> selectedID = obj[id] || obj[<span class="number">0</span>];</span><br><span class="line">alert(selectedID);</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/15/refactor/">https://davidhuang6.github.io/blog/2020/06/15/refactor/</a> </p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>refactor</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PWA 漸進式網頁應用程式</title>
+    <url>/blog/2020/06/03/pwa/</url>
+    <content><![CDATA[<p>讓你的 Web 直接變 APP?! …當然沒那麼誇張, 但除了一些限制外, 看起來就和 APP 一樣…</p>
+<p><strong>內文備註：</strong></p>
+<ul>
+<li>基本設定</li>
+<li>插件推薦</li>
+<li>Tips</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Progressive-Web-App"><a href="#Progressive-Web-App" class="headerlink" title="Progressive Web App"></a>Progressive Web App</h1><h2 id="基本設定"><a href="#基本設定" class="headerlink" title="基本設定"></a>基本設定</h2><p>這裏你只需放兩隻檔案在網頁根目錄並在 html 檔中引入相關設定即可完成</p>
+<p><strong>檔案說明</strong></p>
+<ul>
+<li><code>manifest.json</code><blockquote>
+<p>作用: 網頁加入手機桌面的必要資訊<br>引入: <code>&lt;link rel=&quot;manifest&quot; href=&quot;manifest.json&quot; /&gt;</code></p>
+</blockquote>
+</li>
+<li><code>service-worker.js</code><blockquote>
+<p>作用: 離線快取機制<br>引入:</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">   <span class="keyword">if</span> (<span class="string">"serviceWorker"</span> <span class="keyword">in</span> navigator) &#123;</span><br><span class="line">     <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, () =&gt; &#123;</span><br><span class="line">       navigator.serviceWorker.register(<span class="string">"./service-worker.js"</span>).then(</span><br><span class="line">         (registration) =&gt; &#123;</span><br><span class="line">           <span class="built_in">console</span>.log(</span><br><span class="line">             <span class="string">`ServiceWorker registration successful with scope: <span class="subst">$&#123;registration.scope&#125;</span>`</span></span><br><span class="line">           );</span><br><span class="line">         &#125;,</span><br><span class="line">         (error) =&gt; &#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">`ServiceWorker registration failed: <span class="subst">$&#123;error&#125;</span>`</span>);</span><br><span class="line">         &#125;</span><br><span class="line">       );</span><br><span class="line">     &#125;);</span><br><span class="line">   &#125;</span><br><span class="line"> &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>至於這兩隻檔案怎麼寫呢???</strong><br>除了 Google 一下基本範例來自己寫…<br>底下提供好用插件可以直接產出這兩隻檔案!!!</p>
+<h2 id="插件推薦"><a href="#插件推薦" class="headerlink" title="插件推薦"></a>插件推薦</h2><p><a href="https://www.npmjs.com/package/create-pwa" target="_blank" rel="noopener">create-pwa</a></p>
+<blockquote>
+<p>照裡面的文件使用就對了<br>好了, 現在你已經有所有該具備的檔案了<br>接下來就可以試試安裝在電腦桌面或手機桌面上了</p>
+</blockquote>
+<p><strong>什麼?!.. 安裝不了?!…</strong><br>底下附註一些 Tips 幫你解決常見的問題</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>基本上安裝不了,主要和三個地方有關係, 檢查過後就可以安裝了!!!</p>
+<ol>
+<li>pwa 在 localhost 或 https 下, 才能安裝</li>
+<li>快取檔案路徑不正確</li>
+<li>ios 手機只能用 safari 隱晦的方式加入桌面</li>
+</ol>
+<p><strong>什麼?!.. 安裝好了可是沒有東西?!…</strong></p>
+<p>別緊張, 檢查一下 manifest.json 內的 start_url 是否正確</p>
+<blockquote>
+<p>其位置為 manifest.json 所在目錄的相對路徑</p>
+</blockquote>
+<p><strong>好了, 恭喜!!! 現在你有一個 PWA 了</strong></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/03/pwa/">https://davidhuang6.github.io/blog/2020/06/03/pwa/</a> </p>
+]]></content>
+      <categories>
+        <category>PWA</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>PWA</tag>
+        <tag>Progressive Web App</tag>
+        <tag>service work</tag>
+        <tag>manifest</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Frontend 前端免費資源匯集（ㄧ）</title>
+    <url>/blog/2020/06/27/free-sources/</url>
+    <content><![CDATA[<p>工程師不造輪胎 一個好的開始 就是直接站在巨人的肩膀上 這樣最快 最輕鬆 最開心!!!<br>所以這篇文章主要是彙整一些 優質 好用 而且<strong>免費</strong>的前端資源 感謝網路上巨人們的貢獻!!!</p>
+<p>p.s. 很多資源可以免費使用在商業上 但需不需要 credit 作者 記得還是先看一下 license</p>
+<p>內文</p>
+<ul>
+<li>圖片</li>
+<li>模板</li>
+<li>字型</li>
+<li>API</li>
+<li>CSS Animation</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="圖片"><a href="#圖片" class="headerlink" title="圖片"></a>圖片</h1><h2 id="Unsplash"><a href="#Unsplash" class="headerlink" title="Unsplash"></a><a href="https://unsplash.com/" target="_blank" rel="noopener">Unsplash</a></h2><p>以前這個網站所有提供的圖片都是 CC0<br>真正的免費 可以完全任意的使用 無需標明出處來源 是一個非常受到歡迎的圖庫</p>
+<p>現在呢 許可改為 Unsplash 自己的許可 多了一些限制</p>
+<ul>
+<li>不能以 Unsplash 的圖片和 Unsplash 競爭</li>
+<li>圖片在未經過大幅度修改下不能直接進行販售</li>
+</ul>
+<p>但依然是可以進行商業或非商業使用 也無需標明出處來源<br>重點是品質都有相當高得水準 直接拿個一張圖片放在網頁上當 banner<br>你的網頁就直接昇華到了下一個檔次</p>
+<p>缺點是因為免費高品質 容易有撞衫的機會</p>
+<br>
+
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><h2 id="TEMPLATED"><a href="#TEMPLATED" class="headerlink" title="TEMPLATED"></a><a href="https://templated.co/" target="_blank" rel="noopener">TEMPLATED</a></h2><p>裡面超過 800 種版型 每種版型都包含了完整的 HTML, CSS 甚至是 RWD<br>可以做為商業與個人使用 主要的許可是 CC-by 簡單來說只要在網站上著名出處就可以了<br>如在 footer 上寫 <code>Designed by &lt;出處&gt;</code></p>
+<p>細部點進去看 還會發現有一些其實是 CC0 !!! 超級棒 !!!</p>
+<br>
+
+<h1 id="字型"><a href="#字型" class="headerlink" title="字型"></a>字型</h1><h2 id="Google-Fonts"><a href="#Google-Fonts" class="headerlink" title="Google Fonts"></a><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts</a></h2><p>字型推薦 Google Fonts<br>主要的許可是 Open Font License<br>可以自由地使用在產品 專案 及商業上 限制是不能直接去賣這個字型</p>
+<p>字型的使用上非常的便利<br>可以用 CDN 或是下載</p>
+<p>通常在網頁加上字型的話 可以大幅度的提升網頁的質感</p>
+<p>p.s. 如果網站地區是在大陸的話 要注意 CDN 可能會連不到 建議直接下載</p>
+<br>
+
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="public-apis"><a href="#public-apis" class="headerlink" title="public-apis"></a><a href="https://github.com/public-apis/public-apis" target="_blank" rel="noopener">public-apis</a></h2><p>在 github 上有厲害的人們 彙整了相當多的 API<br>詳細可以直接閱讀 README 的部分<br>上面註明了是否需要授權以及可不可以跨域使用 etc.<br>另外 API 的種類還有分門別類 非常的用心</p>
+<p>如果前端應用需要一些動態資源 很適合來這邊尋找靈感</p>
+<br>
+
+<h1 id="CSS-Animation"><a href="#CSS-Animation" class="headerlink" title="CSS Animation"></a>CSS Animation</h1><h2 id="animate-style"><a href="#animate-style" class="headerlink" title="animate.style"></a><a href="https://animate.style/" target="_blank" rel="noopener">animate.style</a></h2><p>Animated.css 一個老牌的動畫 Library<br>不知道這個網站什麼時候改版了<br>一開始進去還有點認不出來<br>但看到熟悉的動畫效果馬上就認出來了<br>裡面提供非常多好用的 CSS Animation<br>許可為 MIT License</p>
+<p>以前只能使用 CDN 現在也提供了 npm 的使用方法<br>這個庫可以非常方便的在網頁上套用現成好看的動畫效果</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/27/free-sources/">https://davidhuang6.github.io/blog/2020/06/27/free-sources/</a> </p>
+]]></content>
+      <categories>
+        <category>免費資源</category>
+      </categories>
+      <tags>
+        <tag>free sources</tag>
+        <tag>api</tag>
+        <tag>images</tag>
+        <tag>cc0</tag>
+        <tag>font</tag>
+        <tag>css</tag>
+        <tag>animation</tag>
+        <tag>template</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSH 金鑰與遠端連線</title>
+    <url>/blog/2020/06/09/ssh/</url>
+    <content><![CDATA[<p>遠端推送不用帳密了!! (撒花</p>
+<p>內文</p>
+<ul>
+<li>SSH 介紹</li>
+<li>如何產生金鑰</li>
+<li>金鑰檔案位置</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="SSH-金鑰與遠端連線"><a href="#SSH-金鑰與遠端連線" class="headerlink" title="SSH 金鑰與遠端連線"></a>SSH 金鑰與遠端連線</h1><h2 id="SSH-介紹"><a href="#SSH-介紹" class="headerlink" title="SSH 介紹"></a>SSH 介紹</h2><br>
+
+<blockquote>
+<p>一種加密的網路傳輸協定,<br>常見的用途為遠端登入</p>
+</blockquote>
+<p>使用方法為先在本地產生一對金鑰,<br>將公鑰放上遠端的 server,<br>私鑰則留在本地電腦妥善保管,<br>當開始進行 ssh 連線時,<br>遠端公鑰則會和本地私鑰進行比對,<br>比對成功即可連線</p>
+<h2 id="如何產生金鑰"><a href="#如何產生金鑰" class="headerlink" title="如何產生金鑰"></a>如何產生金鑰</h2><p>CLI 輸入以下指令即可:<br><code>ssh-keygen</code></p>
+<p>或是可以加上參數:<br><code>ssh-keygen -t rsa -C &lt;comment&gt;</code></p>
+<p>參數說明:</p>
+<ul>
+<li>-t 指定生成密鑰的類型</li>
+<li>-C 提供一個新註釋</li>
+</ul>
+<h2 id="金鑰檔案位置"><a href="#金鑰檔案位置" class="headerlink" title="金鑰檔案位置"></a>金鑰檔案位置</h2><p><strong>Mac</strong>: <code>/Users/&lt;使用者名稱&gt;/.ssh/</code></p>
+<p>在金鑰產生後 .ssh 資料夾下會有兩隻檔案</p>
+<ul>
+<li>公鑰: <code>id_rsa.pub</code></li>
+<li>私鑰: <code>id_rsa</code></li>
+</ul>
+<p><strong>最後把公鑰放上遠端 server 即可完成 ssh 連線前設定</strong></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/09/ssh/">https://davidhuang6.github.io/blog/2020/06/09/ssh/</a> </p>
+]]></content>
+      <categories>
+        <category>遠端連線</category>
+      </categories>
+      <tags>
+        <tag>協定</tag>
+        <tag>遠端連線</tag>
+        <tag>安全加密</tag>
         <tag>linux</tag>
-        <tag>shell script</tag>
-        <tag>command line</tag>
-        <tag>bash</tag>
       </tags>
   </entry>
   <entry>
@@ -1121,40 +1006,157 @@
       </tags>
   </entry>
   <entry>
-    <title>如何在 Nginx 上面部署 React App</title>
-    <url>/blog/2023/07/11/nginx/</url>
-    <content><![CDATA[<p>Nginx 是常見的網頁伺服器<br>預設的情況下會將客戶端的所有請求轉發到後端的真實路徑<br>部署多頁式的網頁應用並沒有什麼問題 但是如果是單頁式應用呢</p>
-<p>React 是典型的單頁式應用 SPA (Single App Application)<br>React Router 提供多種類型的路由 如 BrowserRouter, HashRouter, MemoryRouter etc.<br>其中 React Router 官方最推薦的 Router 就是 <a href="https://reactrouter.com/en/main/routers/create-browser-router" target="_blank" rel="noopener">BrowserRouter</a></p>
-<p>BrowserRouter 會根據每次路徑的變化都和後端發送請求</p>
-<p>但實際上 React 只會有一個 index.html 位於 Nginx 的網站根目錄<br>此時如果 Nginx 嘗試將每個前端路由的的請求都轉發到後端的真實路徑<br>就會因為找不到實際的檔案可以回傳 而發生 404 Not Found</p>
-<p>底下就來說明如何解決這個問題</p>
+    <title>Shell Script 程式化指令碼</title>
+    <url>/blog/2020/05/31/sh/</url>
+    <content><![CDATA[<p>在一些架構較大的專案中, 會時常使用到 <code>command line</code> 來執行相關的指令, 如: 啟動開發伺服器, 打包檔案, 部署檔案 etc. 通常會將單一功能的命令寫在 <code>package.json</code> 內的 <code>scripts</code> 裡, 但如果一次需要執行的命令不只一條, 其實可以將相關指令寫成腳本(.sh)放在專案根目錄下, 往後只要執行這隻檔案, 就可以按照腳本順序來執行一連串的相關指令, 以達到程式自動化的效果, 優點是減少重複行為並下錯指令的可能性</p>
+<p>另外建立的腳本檔案會需要修改權限才能執行<br>以下備註檔案修改權限的方法:</p>
 <a id="more"></a>
 
-<p>首先 要先打開 Nginx 的配置檔案<br>預設位置為 /etc/nginx/conf.d/default.conf<br>內容如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>需要將 try_files 加入 location / 下<br>代碼如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen  [::]:80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">        # url 切換時始终返回index.html</span><br><span class="line">        try_files $uri &#x2F;index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此時你在馬上打開網站<br>你會發先還是 404 Not Found</p>
-<p>記得當修改完配置要在執行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<p>這樣才能重新讀取並套用新的配置<br>然後在開網站 就正常囉～</p>
-<p>另外如果發現 React 有些頁面抓不到靜態資源<br>可以檢查專案下的 package.json<br>並確認 homepage 設定是否正確<br>如果專案是部署在網站根目錄下 設定如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;homepage&quot;: &quot;&#x2F;&quot;</span><br></pre></td></tr></table></figure>
-
-<p>以上就是將 React App 部署在 Nginx 網頁伺服器的方法哩</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/07/11/nginx/">https://davidhuang6.github.io/blog/2023/07/11/nginx/</a> </p>
+<h1 id="將檔案執行權限打開"><a href="#將檔案執行權限打開" class="headerlink" title="將檔案執行權限打開"></a>將檔案執行權限打開</h1><p><strong><code>chmod 777 文件名</code></strong></p>
+<ul>
+<li><h2 id="chmod-為修改文件權限的指令"><a href="#chmod-為修改文件權限的指令" class="headerlink" title="chmod 為修改文件權限的指令"></a>chmod 為修改文件權限的指令</h2></li>
+<li><h2 id="第一個參數為操作文件的用戶權限"><a href="#第一個參數為操作文件的用戶權限" class="headerlink" title="第一個參數為操作文件的用戶權限"></a>第一個參數為操作文件的用戶權限</h2><p>三個數字分別代表:</p>
+<blockquote>
+<p>文件所有用戶<br>群組用戶<br>其他用戶</p>
+</blockquote>
+<p>每一個數字表示該用戶的權限:</p>
+<blockquote>
+<p>r: 讀取權限 (4)<br>w: 撰寫權限 (2)<br>x: 執行權限 (1)</p>
+<blockquote>
+<p>e.g. r(4)+w(2)+x(1) = rwx(7)</p>
+</blockquote>
+</blockquote>
+</li>
+<li><h2 id="第二個參數表示欲修改權限的檔案"><a href="#第二個參數表示欲修改權限的檔案" class="headerlink" title="第二個參數表示欲修改權限的檔案"></a>第二個參數表示欲修改權限的檔案</h2></li>
+</ul>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/05/31/sh/">https://davidhuang6.github.io/blog/2020/05/31/sh/</a> </p>
 ]]></content>
       <categories>
-        <category>deployment</category>
+        <category>自動化</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shell script</tag>
+        <tag>command line</tag>
+        <tag>bash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React Debounce 去抖動</title>
+    <url>/blog/2020/09/26/debounce/</url>
+    <content><![CDATA[<p>最近在 app 上寫一個簡單的欄位試算功能<br>有用到去抖動這個小技巧<br>和大家簡單分享一下</p>
+<p>內文:</p>
+<ul>
+<li>Debounce</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Debounce"><a href="#Debounce" class="headerlink" title="Debounce"></a>Debounce</h1><br>
+去抖動這個技巧
+主要是用在避免短時間內重複觸發事件而造成過多不必要的運算
+
+<p>可以利用 useEffect 在原件卸載時 執行 return function 把計時器清除<br>在 update 元件時 重新設定計時器要執行的代碼<br>代碼可參考如下:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// ... 省略 ...</span></span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> result = amount * rate;</span><br><span class="line">      setResultAmount(result);</span><br><span class="line">    &#125;, <span class="number">500</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> clearTimeout(timer);</span><br><span class="line">  &#125;, [amount]);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ... 省略 ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/09/26/debounce/">https://davidhuang6.github.io/blog/2020/09/26/debounce/</a> </p>
+]]></content>
+      <categories>
+        <category>react</category>
       </categories>
       <tags>
         <tag>react</tag>
-        <tag>router</tag>
-        <tag>deploy</tag>
-        <tag>nginx</tag>
+        <tag>hooks</tag>
+        <tag>debounce</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>上拉加載</title>
+    <url>/blog/2023/06/17/%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BC%89/</url>
+    <content><![CDATA[<p>上拉加載 下拉更新 原本是 APP 很常見的功能<br>現在 Web 也很常見 因為越來越多的 Web 得做得和 APP 越來越像 …</p>
+<p>今天這篇先講上拉加載的部分</p>
+<a id="more"></a>
+
+<p>實現加載的關鍵就在滾動事件  </p>
+<p>當長清單列表的元素滾動到底部時<br>得觸發一個 Callback function 來獲取新的資料<br>並將此資料加入原清單列表的陣列當中  </p>
+<p>這邊先看一下偵測滾動到底部的代碼：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const detectScrollToBottom &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; clientHeight, scrollHeight, ScrollTop &#125; &#x3D; document.querySelector(&#39;#el&#39;);</span><br><span class="line">    if(clientHeight + ScrollTop &gt;&#x3D; scrollHeight) &#123;</span><br><span class="line">        console.log(&#39;已滑動至底部&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">document.querySelector(&#39;#el&#39;).addEventListener(&#39;scroll&#39;, () &#x3D;&gt; detectScrollToBottom());</span><br></pre></td></tr></table></figure>
+
+<p>首先解釋一下元素解構出來的這幾個屬性意思</p>
+<table>
+<thead>
+<tr>
+<th>scrollHeight</th>
+<th>clientHeight</th>
+<th>scrollTop</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>元素可視與不可視區的高度</td>
+<td>元素可視區的高度</td>
+<td>元素可視區頂部到元素不可視區頂部的距離</td>
+</tr>
+</tbody></table>
+<p>基本上 scrollHeight 與 clientHeight 都是固定的高度<br>只有 scrollTop 會隨著滾動而改變數值<br>當 clientHeight + ScrollTop 的數值 大於等於 scrollHeight 就表示到了底部</p>
+<p><strong>但實際上</strong></p>
+<p>這樣寫會有問題<br>因為scrollTop 在滾動時會有浮點數(0.5)<br>而浮點數可能會造成計算的不精準<br>像是明明已經滑動到底部了<br>但是因為差0.5而沒有偵測到底部去觸發回函  </p>
+<p>所以這邊可以加上 1 來作為緩衝</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const detectScrollToBottom &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; clientHeight, scrollHeight, ScrollTop &#125; &#x3D; document.querySelector(&#39;#el&#39;);</span><br><span class="line">    if(clientHeight + ScrollTop + 1 &gt;&#x3D; scrollHeight) &#123;</span><br><span class="line">        console.log(&#39;已滑動至底部&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">document.querySelector(&#39;#el&#39;).addEventListener(&#39;scroll&#39;, () &#x3D;&gt; detectScrollToBottom());</span><br></pre></td></tr></table></figure>
+
+<p>或是多加一些 range 可以讓元素快到底部時就觸發回函</p>
+<p><strong>但是… 這樣又會有一些問題</strong></p>
+<p>因為加上了緩衝的range就有可能讓回函重複觸發</p>
+<p><strong>所以</strong></p>
+<p>為了避免事件重複觸發而不斷請求資料<br>可以加上一個 isLoading 的 Flag 來防呆<br>如果已經偵測到底部並請求資料時<br>就必須等到 timeout 或資料獲取完畢才能夠再觸發請求的回函</p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/06/17/上拉加載/">https://davidhuang6.github.io/blog/2023/06/17/上拉加載/</a> </p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>scroll</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vim 古老編輯器的簡明使用方法</title>
+    <url>/blog/2020/06/13/vim/</url>
+    <content><![CDATA[<p>A: 這裡是哪裡???為什麼進得去出不來?!<br>B: <code>:q</code><br>A: 那我每次都 <code>:q</code> 可以嗎?<br>B: 恩… 也是可以…</p>
+<p>內文</p>
+<ul>
+<li>基本操作</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Vim-古老編輯器的簡明使用方法"><a href="#Vim-古老編輯器的簡明使用方法" class="headerlink" title="Vim 古老編輯器的簡明使用方法"></a>Vim 古老編輯器的簡明使用方法</h1><br>
+
+<blockquote>
+<p>如果你有使用 git 的話<br>你一定見過 vim<br>像是 merge 別人的分支<br>或是 commit 的時候</p>
+</blockquote>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>以下介紹:</p>
+<h3 id="如何使用-vim-開啟文檔"><a href="#如何使用-vim-開啟文檔" class="headerlink" title="如何使用 vim 開啟文檔"></a>如何使用 vim 開啟文檔</h3><p>使用 vim 開啟文檔的方法非常簡單,<br>只需要在 CLI 上輸入以下指令即可:</p>
+<p><code>vim /&lt;path&gt;/&lt;file&gt;</code></p>
+<p>for instance:</p>
+<p>打開所在目錄下 file.txt 文檔</p>
+<p><code>vim file.txt</code></p>
+<h3 id="模式切換與編輯文件"><a href="#模式切換與編輯文件" class="headerlink" title="模式切換與編輯文件"></a>模式切換與編輯文件</h3><p>一開始進入 vim 編輯器的時候為<strong>普通模式</strong><br>在任何模式下按<code>esc</code>皆可以退至<strong>普通模式</strong></p>
+<p>在<strong>普通模式</strong>按下<code>i</code>可以進入<strong>插入模式</strong><br>此模式可以開始進行文檔上的編輯</p>
+<p>在<strong>普通模式</strong>下按下 <code>:</code> 可以進入<strong>指令模式</strong><br>此模式可以退出文檔</p>
+<h3 id="編輯器離開方式"><a href="#編輯器離開方式" class="headerlink" title="編輯器離開方式"></a>編輯器離開方式</h3><p>離開前必須進入指令模式<br>相關指令如下:</p>
+<ul>
+<li><code>q</code> : 離開編輯器</li>
+<li><code>q!</code> : 不存檔強制離開編輯器</li>
+<li><code>w</code> : 存檔</li>
+<li><code>wq</code> : 存檔離開編輯器</li>
+</ul>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/06/13/vim/">https://davidhuang6.github.io/blog/2020/06/13/vim/</a> </p>
+]]></content>
+      <categories>
+        <category>編輯器</category>
+      </categories>
+      <tags>
+        <tag>編輯器</tag>
+        <tag>vim</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1224,57 +1226,55 @@
       </tags>
   </entry>
   <entry>
-    <title>上拉加載</title>
-    <url>/blog/2023/06/17/%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BC%89/</url>
-    <content><![CDATA[<p>上拉加載 下拉更新 原本是 APP 很常見的功能<br>現在 Web 也很常見 因為越來越多的 Web 得做得和 APP 越來越像 …</p>
-<p>今天這篇先講上拉加載的部分</p>
-<a id="more"></a>
-
-<p>實現加載的關鍵就在滾動事件  </p>
-<p>當長清單列表的元素滾動到底部時<br>得觸發一個 Callback function 來獲取新的資料<br>並將此資料加入原清單列表的陣列當中  </p>
-<p>這邊先看一下偵測滾動到底部的代碼：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const detectScrollToBottom &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; clientHeight, scrollHeight, ScrollTop &#125; &#x3D; document.querySelector(&#39;#el&#39;);</span><br><span class="line">    if(clientHeight + ScrollTop &gt;&#x3D; scrollHeight) &#123;</span><br><span class="line">        console.log(&#39;已滑動至底部&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">document.querySelector(&#39;#el&#39;).addEventListener(&#39;scroll&#39;, () &#x3D;&gt; detectScrollToBottom());</span><br></pre></td></tr></table></figure>
-
-<p>首先解釋一下元素解構出來的這幾個屬性意思</p>
-<table>
-<thead>
-<tr>
-<th>scrollHeight</th>
-<th>clientHeight</th>
-<th>scrollTop</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>元素可視與不可視區的高度</td>
-<td>元素可視區的高度</td>
-<td>元素可視區頂部到元素不可視區頂部的距離</td>
-</tr>
-</tbody></table>
-<p>基本上 scrollHeight 與 clientHeight 都是固定的高度<br>只有 scrollTop 會隨著滾動而改變數值<br>當 clientHeight + ScrollTop 的數值 大於等於 scrollHeight 就表示到了底部</p>
-<p><strong>但實際上</strong></p>
-<p>這樣寫會有問題<br>因為scrollTop 在滾動時會有浮點數(0.5)<br>而浮點數可能會造成計算的不精準<br>像是明明已經滑動到底部了<br>但是因為差0.5而沒有偵測到底部去觸發回函  </p>
-<p>所以這邊可以加上 1 來作為緩衝</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const detectScrollToBottom &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const &#123; clientHeight, scrollHeight, ScrollTop &#125; &#x3D; document.querySelector(&#39;#el&#39;);</span><br><span class="line">    if(clientHeight + ScrollTop + 1 &gt;&#x3D; scrollHeight) &#123;</span><br><span class="line">        console.log(&#39;已滑動至底部&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">document.querySelector(&#39;#el&#39;).addEventListener(&#39;scroll&#39;, () &#x3D;&gt; detectScrollToBottom());</span><br></pre></td></tr></table></figure>
-
-<p>或是多加一些 range 可以讓元素快到底部時就觸發回函</p>
-<p><strong>但是… 這樣又會有一些問題</strong></p>
-<p>因為加上了緩衝的range就有可能讓回函重複觸發</p>
-<p><strong>所以</strong></p>
-<p>為了避免事件重複觸發而不斷請求資料<br>可以加上一個 isLoading 的 Flag 來防呆<br>如果已經偵測到底部並請求資料時<br>就必須等到 timeout 或資料獲取完畢才能夠再觸發請求的回函</p>
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2023/06/17/上拉加載/">https://davidhuang6.github.io/blog/2023/06/17/上拉加載/</a> </p>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>scroll</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>序</title>
     <url>/blog/2020/05/31/%E5%BA%8F/</url>
     <content><![CDATA[<p>此 Blog 正式啟用, 採用 Hexo 框架搭配 NexT 模板, 建置於 Github Page 於 2020年05月31日  </p>
 <p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/05/31/序/">https://davidhuang6.github.io/blog/2020/05/31/序/</a> </p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>JavaScript 實用的小技巧（二）</title>
+    <url>/blog/2020/07/04/tips2/</url>
+    <content><![CDATA[<p>耶 第二彈 !!</p>
+<p>內文</p>
+<ul>
+<li>取連續陣列 方法一</li>
+<li>取連續陣列 方法二</li>
+<li>log 開關</li>
+<li>undefined 簡寫</li>
+<li>取外部 IP</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="取連續陣列-方法一"><a href="#取連續陣列-方法一" class="headerlink" title="取連續陣列 方法一"></a>取連續陣列 方法一</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[...Array(<span class="number">10</span>).keys()];</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="取連續陣列-方法二"><a href="#取連續陣列-方法二" class="headerlink" title="取連續陣列 方法二"></a>取連續陣列 方法二</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(<span class="built_in">Array</span>(<span class="number">10</span>), (item, id) =&gt; id);</span><br><span class="line"></span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="log-開關"><a href="#log-開關" class="headerlink" title="log 開關"></a>log 開關</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ifDebug = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> oldLog = <span class="built_in">console</span>.log;</span><br><span class="line"><span class="built_in">console</span>.log = <span class="function"><span class="params">()</span> =&gt;</span> ifDebug &amp;&amp; oldLog.apply(<span class="built_in">console</span>, <span class="built_in">arguments</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="undefined-簡寫"><a href="#undefined-簡寫" class="headerlink" title="undefined 簡寫"></a>undefined 簡寫</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>undefined 不是保留字 可以重新被賦值<br>故用 void 0 來取代 undefined 會更嚴謹</p>
+<p>void 後面接任何代碼都會執行 但只回 undefined</p>
+<h1 id="取外部-IP"><a href="#取外部-IP" class="headerlink" title="取外部 IP"></a>取外部 IP</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">fetch(<span class="string">"https://api.ipify.org?format=json"</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>補充</strong></p>
+<p>終端機取法 (Mac OS)</p>
+<p>外部 IP</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl ifconfig.me</span><br></pre></td></tr></table></figure>
+
+<p>內部 IP </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+
+<p><strong>內部 ip 會寫在 en0 那邊</strong></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidhuang6.github.io/blog/2020/07/04/tips2/">https://davidhuang6.github.io/blog/2020/07/04/tips2/</a> </p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>tips</tag>
+      </tags>
   </entry>
 </search>
