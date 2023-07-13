@@ -177,7 +177,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -401,7 +401,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CORS 跨域</h1>
+          <h2 class="post-title" itemprop="name headline">CORS 跨域</h2>
         
 
         <div class="post-meta">
@@ -580,7 +580,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">"cors"</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="keyword">const</span> port = <span class="number">3000</span>;</span><br><span class="line"></span><br><span class="line">app.use(cors());</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">"/test"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="built_in">JSON</span>.stringify(&#123; <span class="attr">token</span>: <span class="string">"Z29vZG1hbg=="</span> &#125;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(port, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`App listening on port <span class="subst">$&#123;port&#125;</span>!`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 
-<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io/david-blog/2020/06/29/cors/">https://ckhoct.github.io/david-blog/2020/06/29/cors/</a> <br /><strong>版權聲明</strong>： All articles are licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://ckhoct.github.io/david-blog/2020/06/29/cors/">https://ckhoct.github.io/david-blog/2020/06/29/cors/</a> </p>
 
       
     </div>
@@ -717,7 +717,7 @@
                 alt="David Huang" />
             
               <p class="site-author-name" itemprop="name">David Huang</p>
-              <p class="site-description motion-element" itemprop="description">Javascript Developer</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
