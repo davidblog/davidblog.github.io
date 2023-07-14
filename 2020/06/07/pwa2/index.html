@@ -248,9 +248,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             歸檔
           </a>
@@ -315,6 +315,36 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          <style>
+    #typed, .typed-cursor {
+        color: #fff;
+        font-size: 1.2rem;
+    }
+    .typed-wrapper {
+        text-align: center;
+    }
+</style>
+
+<div id="typed-strings">
+  <p>歡迎來到<strong> David 的部落格</strong></p>
+  <p>一個紀錄<strong>個人心得</strong>與<strong>技術文章</strong>的地方</p>
+</div>
+<div class="typed-wrapper">
+  <span id="typed"></span>
+</div>
+
+<!-- Load library from the CDN -->
+<script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
+<!-- Setup and start animation! -->
+<script>
+  var typed = new Typed('#typed', {
+    stringsElement: '#typed-strings',
+    loop: true,
+    typeSpeed: 50,
+    backDelay: 2e3
+  });
+</script>
           <div id="content" class="content">
             
 
@@ -628,7 +658,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives">
+                <a href="/archives/%7C%7C%20archive">
               
                   <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">文章</span>
@@ -725,15 +755,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
