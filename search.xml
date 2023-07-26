@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>發佈 npm 套件的小細節</title>
+    <url>/2023/07/26/%E7%99%BC%E4%BD%88-npm-%E5%A5%97%E4%BB%B6%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80/</url>
+    <content><![CDATA[<p>最近發佈了一個套件 <a href="https://www.npmjs.com/package/date-reminder" target="_blank" rel="noopener">date-reminder</a></p>
+<p>起因是為了可以讓部落格<span style="color: blue">在特別的節日發出祝賀詞</span><br>但因為自己是懶人…<br>所以不可能自己在每個節日前手動更新網站<br>於是乎上網找了可以提醒的套件<br>結果…<span style="color: lightcoral">沒有！！！</span></p>
+<p>就手動做了一個套件順便上傳  </p>
+<p>底下講講發佈 npm 時我的遇到的問題與想法<br>還有首次製作 npm 時可以特別留意的小細節：</p>
+<ul>
+<li>撰寫 README.md</li>
+<li>發佈 npm 時指定產品代碼與排除原始代碼</li>
+<li>Webpack 打包時兼顧 Script Include 與 Script Module</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="撰寫-README-md"><a href="#撰寫-README-md" class="headerlink" title="撰寫 README.md"></a>撰寫 README.md</h2><p>替套件撰寫 README.md 應該是最重要的事</p>
+<p>任何人要使用一個網路上的套件時<br>都會先看 README.md 寫的完不完整<br>能不能看完就理解套件是如何運作與使用<br>再來是看有沒有提供 Demo 與範例</p>
+<p>當然還有更新日期與星星數等指標</p>
+<p>總之就是要判斷這個套件好不好用<br>還有會不會有後續問題<br>才來決定要不要使用</p>
+<p>我這邊先分享一個網站 <a href="https://readme.so/editor" target="_blank" rel="noopener">readme.so</a><br>這個網站提供了一些常用的範例<br>可以作為 readme 的架構</p>
+<p>另外底下提供我認為比較通俗的範本：</p>
+<figure class="highlight md"><table><tr><td class="code"><pre><span class="line"><span class="section"># Package Name (套件名稱)</span></span><br><span class="line"></span><br><span class="line"><span class="section">## Description (說明)</span></span><br><span class="line"></span><br><span class="line">套件的主要用途與功能簡單說明</span><br><span class="line"></span><br><span class="line"><span class="section">## Installation (安裝方式)</span></span><br><span class="line"></span><br><span class="line">安裝說明</span><br><span class="line"></span><br><span class="line"><span class="section">## Usage (使用方式)</span></span><br><span class="line"></span><br><span class="line">需要包含代碼範例還有 API 文件</span><br><span class="line"></span><br><span class="line"><span class="section">## License (許可)</span></span><br><span class="line"></span><br><span class="line">許可說明</span><br></pre></td></tr></table></figure>
+
+<h2 id="發佈-npm-時指定產品代碼與排除原始代碼"><a href="#發佈-npm-時指定產品代碼與排除原始代碼" class="headerlink" title="發佈 npm 時指定產品代碼與排除原始代碼"></a>發佈 npm 時指定產品代碼與排除原始代碼</h2><p>講這個是因為我首次</p>
+<p><code>npm publish</code></p>
+<p>就把所有專案上的所有東西一起推上去了 XD</p>
+<p>但是用套件的人安裝下去<br>其實只需要打包後的產品代碼呀 哈哈</p>
+<p>所以我後續做了一些補救措施<br>也就是排除原始代碼與指定發佈檔案</p>
+<p>如果要排除發佈的檔案<br>可以在專案根目錄加上 .npmignore<br>把用不著的原始代碼都給忽略掉</p>
+<p>像是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"></span><br><span class="line">!&#x2F;dist&#x2F;js&#x2F;</span><br><span class="line">!package.json</span><br><span class="line">!README.md</span><br></pre></td></tr></table></figure>
+
+<p>這樣<code>npm publish</code>時就會根據文檔案的內容決定哪些要推送哪些不要</p>
+<p><strong>另外一種方式我比較推薦：</strong></p>
+<p>就是直接在 package.json 裡面設定 files 屬性<br>如果有設定這個屬性基本上<code>npm publish</code>就只會看這個來決定有哪些檔案是要發佈的</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;files&quot;: [</span><br><span class="line">  &quot;dist&#x2F;js&#x2F;&quot;,</span><br><span class="line">  &quot;package.json&quot;,</span><br><span class="line">  &quot;README.md&quot;</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<h2 id="Webpack-打包時兼顧-Script-Include-與-Script-Module"><a href="#Webpack-打包時兼顧-Script-Include-與-Script-Module" class="headerlink" title="Webpack 打包時兼顧 Script Include 與 Script Module"></a>Webpack 打包時兼顧 Script Include 與 Script Module</h2><p>Script Include 就是 js 傳統模組化方式<br>就是在 html 裡面用 sciprt 標籤引入代碼的這種方式</p>
+<p>Script Module 就是 Es Module 的模組化方式<br>可以使用 <code>import</code> 和 <code>export</code> 來進行匯入與匯出</p>
+<p>如果是用 webpack 來打包產品的話<br>為了能使用 Script Include 的模組方式<br>要特別在 output 設定 library</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  path: path.resolve(__dirname, &quot;dist&quot;),</span><br><span class="line">  filename: &quot;js&#x2F;[name].js&quot;,</span><br><span class="line">  library: &quot;dateReminder&quot;,</span><br><span class="line">  libraryTarget: &quot;umd&quot;,</span><br><span class="line">  libraryExport: &#39;default&#39;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>屬性</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>library</td>
+<td>模組的函數名稱</td>
+</tr>
+<tr>
+<td>libraryTarget</td>
+<td>模組的目標環境</td>
+</tr>
+<tr>
+<td>libraryExport</td>
+<td>模組的匯出方式</td>
+</tr>
+</tbody></table>
+<p>library 的名稱基本上就是暴露出來的接口名稱可以在當前的全域環境裡調用<br>libraryTarget umd（Universal Module Definition）可以讓模組同時支持瀏覽器環境與 node 環境</p>
+<p>另外比較特別的是這個 <span style="color: lightcoral">libraryExport</span></p>
+<p>如果入口文件最後使用 export default 預設匯出的方式<br>就要特別在 webpack 設定 libraryExport: ‘default’<br>不然無法在全局裡直接根據 library 名稱來調用</p>
+<p>其它備註：</p>
+<table>
+<thead>
+<tr>
+<th><code>libraryTarget</code></th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;var&quot;</code></td>
+<td>在瀏覽器環境中將模組作為一個變數。</td>
+</tr>
+<tr>
+<td><code>&quot;assign&quot;</code></td>
+<td>在瀏覽器環境中將模組分配給特定的全局變數。</td>
+</tr>
+<tr>
+<td><code>&quot;this&quot;</code></td>
+<td>在瀏覽器環境中將模組分配給 <code>this</code> 對象。</td>
+</tr>
+<tr>
+<td><code>&quot;window&quot;</code></td>
+<td>在瀏覽器環境中將模組分配給 <code>window</code> 對象。</td>
+</tr>
+<tr>
+<td><code>&quot;global&quot;</code></td>
+<td>在 Node.js 環境中將模組分配給 <code>global</code> 對象。</td>
+</tr>
+<tr>
+<td><code>&quot;commonjs&quot;</code></td>
+<td>使用 CommonJS 的 <code>module.exports</code> 將模組暴露給瀏覽器或 Node.js 環境。</td>
+</tr>
+<tr>
+<td><code>&quot;commonjs2&quot;</code></td>
+<td>使用 CommonJS2 的 <code>module.exports</code> 將模組暴露給瀏覽器或 Node.js 環境。</td>
+</tr>
+<tr>
+<td><code>&quot;amd&quot;</code></td>
+<td>將模組定義為 AMD (Asynchronous Module Definition) 的形式，供瀏覽器使用。</td>
+</tr>
+<tr>
+<td><code>&quot;umd&quot;</code></td>
+<td>支持在 AMD 和 CommonJS 環境中使用的通用模組定義（Universal Module Definition）。</td>
+</tr>
+<tr>
+<td><code>&quot;umd2&quot;</code></td>
+<td>類似於 UMD，但使用了 CommonJS2 的 <code>module.exports</code>，適用於瀏覽器和 Node.js 環境。</td>
+</tr>
+<tr>
+<td><code>&quot;thisGlobal&quot;</code></td>
+<td>在瀏覽器中使用 <code>this</code> 對象，在 Node.js 中使用 <code>global</code> 對象，以便在兩者中都可使用。</td>
+</tr>
+</tbody></table>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidblog.github.io/2023/07/26/發佈-npm-套件的小細節/">https://davidblog.github.io/2023/07/26/發佈-npm-套件的小細節/</a> </p>
+]]></content>
+      <categories>
+        <category>技術文章</category>
+      </categories>
+  </entry>
+  <entry>
     <title>活動網頁實用套件</title>
     <url>/2023/07/24/%E6%B4%BB%E5%8B%95%E7%B6%B2%E9%A0%81%E5%AF%A6%E7%94%A8%E5%A5%97%E4%BB%B6/</url>
     <content><![CDATA[<p>活動網頁和一般網頁差在哪裡呢?<br>答案是 <span style="color:gold;">登登登登登</span><br>許多<span style="color:lightcoral;">炫炮動畫</span></p>
