@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://davidblog.github.io/2023/07/27/%E5%A4%9A%E6%AD%A5%E9%A9%9F%E9%A0%81%E9%9D%A2%E7%9A%84%E7%8B%80%E6%85%8B%E7%AE%A1%E7%90%86/</loc>
+    
+    <lastmod>2023-07-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://davidblog.github.io/2023/07/26/%E7%99%BC%E4%BD%88-npm-%E5%A5%97%E4%BB%B6%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80/</loc>
     
-    <lastmod>2023-07-26</lastmod>
+    <lastmod>2023-07-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://davidblog.github.io/2023/07/12/fileReader/</loc>
+    
+    <lastmod>2023-07-27</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -164,15 +182,6 @@
   </url>
   
   <url>
-    <loc>https://davidblog.github.io/2023/07/12/fileReader/</loc>
-    
-    <lastmod>2023-07-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://davidblog.github.io/2020/09/26/debounce/</loc>
     
     <lastmod>2023-07-22</lastmod>
@@ -292,7 +301,7 @@
 
   <url>
     <loc>https://davidblog.github.io/</loc>
-    <lastmod>2023-07-26</lastmod>
+    <lastmod>2023-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -302,14 +311,14 @@
   
   <url>
     <loc>https://davidblog.github.io/categories/%E6%8A%80%E8%A1%93%E6%96%87%E7%AB%A0/</loc>
-    <lastmod>2023-07-26</lastmod>
+    <lastmod>2023-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://davidblog.github.io/categories/%E9%83%A8%E8%90%BD%E6%A0%BC%E6%AD%B7%E5%8F%B2/</loc>
-    <lastmod>2023-07-26</lastmod>
+    <lastmod>2023-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

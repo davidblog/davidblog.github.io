@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>多步驟頁面的狀態管理 (React Hook - useContext)</title>
+    <url>/2023/07/27/%E5%A4%9A%E6%AD%A5%E9%A9%9F%E9%A0%81%E9%9D%A2%E7%9A%84%E7%8B%80%E6%85%8B%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<p>很常見的一個應用場景<br>就是讓用戶完成多步驟的表單頁面並在最後送出<br>中間的過程中用戶可以自由返回上一頁<br>並對尚未提交的內容進行修改</p>
+<p>之前有寫一篇<a href="./2023/07/12/navigate/">前端路由的導航狀態</a><br>是講前端如何在不同的頁面之間傳遞數據的方法<br>雖然可以實現這個功能<br>但相當不方便<br>因為需要在每一頁重複設定一樣的方法將數據帶來帶去<br>這種情況如果將狀態統一管理就會輕鬆很多</p>
+<p>狀態統一管理最常聽到的就是 <strong>Redux</strong><br>然而在 React 裡頭還有 <strong>Context</strong> 這個方法<br>如果要說這兩個的差別在哪裡<br>我想 <strong>Context</strong> 更符合 React 的元件思維<br>也特別適合簡單的應用場景</p>
+<p>所以這篇主要講 React 的 useContext：</p>
+<ul>
+<li>用 createContext 方法建立 Provider 元件</li>
+<li>在前端路由的 Layout 置放 Provider 元件</li>
+<li>在需要使用共同狀態的步驟頁面使用 useContext</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="用-createContext-方法建立-Provider-元件"><a href="#用-createContext-方法建立-Provider-元件" class="headerlink" title="用 createContext 方法建立 Provider 元件"></a>用 createContext 方法建立 Provider 元件</h2><p>createContext 創建出來的 Context.Provider 是元件容器的概念<br>裡面的設定的 value 是可以和底下元件共享的</p>
+<p>另外因為是要做頁面級別的元件容器<br>所以還需要使用 react-router-dom 裡面的 Outlet</p>
+<p><strong>註：在 context 中用 setState 方法時所有子元件也會重新渲染,</strong><br><strong>如果應用場景較為複雜可加上 useReducer, 來更好的控制子元件更新以節省效能</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createContext, useState, useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Outlet, useLocation &#125; <span class="keyword">from</span> <span class="string">"react-router-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> StepsContext = createContext();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StepsProvider = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isMounted = useRef(<span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">const</span> location = useLocation();</span><br><span class="line">  <span class="keyword">const</span> [info, setInfo] = useState(&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> stepsInit = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setInfo(&#123;&#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isMounted.current) &#123;</span><br><span class="line">      isMounted.current = <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果有頁面需要將數據初始化可以這邊設定</span></span><br><span class="line">      <span class="keyword">if</span> ([<span class="string">"/path1"</span>, <span class="string">"/path2"</span>].includes(location.pathname)) &#123;</span><br><span class="line">        stepsInit();</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [location, info]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;StepsContext.Provider</span><br><span class="line">      value=&#123;&#123;</span><br><span class="line">        info,</span><br><span class="line">        setInfo,</span><br><span class="line">        stepsInit,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;Outlet /&gt;</span><br><span class="line">    &lt;<span class="regexp">/StepsContext.Provider&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default StepsProvider;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="在前端路由的-Layout-置放-Provider-元件"><a href="#在前端路由的-Layout-置放-Provider-元件" class="headerlink" title="在前端路由的 Layout 置放 Provider 元件"></a>在前端路由的 Layout 置放 Provider 元件</h2><p>這邊挺單純的<br>直接看代碼就可以了</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;Routes&gt;</span><br><span class="line">  &lt;Route path=<span class="string">"multiple-steps"</span> element=&#123;&lt;StepProvider /&gt;&#125;&gt;</span><br><span class="line">    &lt;Route index element=&#123;&lt;multipleStep /&gt;&#125; /&gt;</span><br><span class="line">    &lt;Route path=<span class="string">"step1"</span> element=&#123;&lt;Step1 /&gt;&#125; /&gt;</span><br><span class="line">    &lt;Route path=<span class="string">"step2"</span> element=&#123;&lt;Step2 /&gt;&#125; /&gt;</span><br><span class="line">    &lt;Route path=<span class="string">"step3"</span> element=&#123;&lt;Step3 /&gt;&#125; /&gt;</span><br><span class="line">    &lt;Route path=<span class="string">"step4"</span> element=&#123;&lt;Step4 /&gt;&#125; /&gt;</span><br><span class="line">    &lt;Route path=<span class="string">"step5"</span> element=&#123;&lt;Step5 /&gt;&#125; /&gt;</span><br><span class="line">  &lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>Routes&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在需要使用共同狀態的步驟頁面使用-useContext"><a href="#在需要使用共同狀態的步驟頁面使用-useContext" class="headerlink" title="在需要使用共同狀態的步驟頁面使用 useContext"></a>在需要使用共同狀態的步驟頁面使用 useContext</h2><p>這邊有個小技巧<br>可以將 setState 的觸發時機放在 componentWillUnmount 裡面<br>因為不論用戶按上一頁或下一頁都會觸發元件卸載<br>可以藉此來更新狀態！</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Step3 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; info, setInfo &#125; = useContext(StepsContext);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    register,</span><br><span class="line">    formState: &#123; erros &#125;,</span><br><span class="line">    handleSubmit,</span><br><span class="line">  &#125; = useForm(&#123; <span class="attr">defaultValues</span>: info &#125;);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      handleSubmit(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        setInfo(data);</span><br><span class="line">      &#125;)();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, [handleSubmit, setInfo]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">// JSX 元件代碼</span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Step3;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidblog.github.io/2023/07/27/多步驟頁面的狀態管理/">https://davidblog.github.io/2023/07/27/多步驟頁面的狀態管理/</a> </p>
+]]></content>
+      <categories>
+        <category>技術文章</category>
+      </categories>
+  </entry>
+  <entry>
     <title>發佈 npm 套件的小細節</title>
     <url>/2023/07/26/%E7%99%BC%E4%BD%88-npm-%E5%A5%97%E4%BB%B6%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80/</url>
     <content><![CDATA[<p>最近發佈了一個套件 <a href="https://www.npmjs.com/package/date-reminder" target="_blank" rel="noopener">date-reminder</a></p>
@@ -24,7 +56,7 @@
 
 <h2 id="發佈-npm-時指定產品代碼與排除原始代碼"><a href="#發佈-npm-時指定產品代碼與排除原始代碼" class="headerlink" title="發佈 npm 時指定產品代碼與排除原始代碼"></a>發佈 npm 時指定產品代碼與排除原始代碼</h2><p>講這個是因為我首次</p>
 <p><code>npm publish</code></p>
-<p>就把所有專案上的所有東西一起推上去了 XD</p>
+<p>就把專案上的所有東西一起推上去了 XD</p>
 <p>但是用套件的人安裝下去<br>其實只需要打包後的產品代碼呀 哈哈</p>
 <p>所以我後續做了一些補救措施<br>也就是排除原始代碼與指定發佈檔案</p>
 <p>如果要排除發佈的檔案<br>可以在專案根目錄加上 .npmignore<br>把用不著的原始代碼都給忽略掉</p>
@@ -306,7 +338,7 @@
   <entry>
     <title>圖片預覽 (FileReader/Data URL)</title>
     <url>/2023/07/12/fileReader/</url>
-    <content><![CDATA[<p>之前介紹過 <a href="https://davidblog.github.io/2023/06/08/Data-URL-vs-Blob-URL/#more">Data URL</a><br>而這篇文章將補充一個常見的應用場景：圖片預覽</p>
+    <content><![CDATA[<p>之前介紹過 <a href="./2023/06/08/Data-URL-vs-Blob-URL/#more">Data URL</a><br>而這篇文章將補充一個常見的應用場景：圖片預覽</p>
 <a id="more"></a>
 
 <p>先說明圖片預覽的主要流程</p>
