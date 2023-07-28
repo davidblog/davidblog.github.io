@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>根據畫面剩餘高度建立滾動區域</title>
+    <url>/2023/07/28/%E6%A0%B9%E6%93%9A%E7%95%AB%E9%9D%A2%E5%89%A9%E9%A4%98%E9%AB%98%E5%BA%A6%E5%BB%BA%E7%AB%8B%E6%BB%BE%E5%8B%95%E5%8D%80%E5%9F%9F/</url>
+    <content><![CDATA[<p>這個應用場境是什麼時候會出現呢？<br>大概是製作<span style="color: lightcoral">手機版型的網頁</span>時會出現…</p>
+<p>實現的方法具體來說很簡單<br>只需要用到兩個 CSS 的特性：</p>
+<ul>
+<li>flex</li>
+<li>calc</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2><p>flex 應該還是目前比較主流的排版方式<br>手機的版型一般來說是縱向設計<br>所以會需要在容器的父元素加上：</p>
+<ul>
+<li><code>display=&quot;flex&quot;</code></li>
+<li><code>flexDirection=&quot;column&quot;</code></li>
+</ul>
+<p>當然還有父元素高度要設定</p>
+<ul>
+<li><code>height=&quot;100vh&quot;</code></li>
+</ul>
+<p>再來就是讓需要建立滾動區塊的子元素佔滿剩餘可用空間：</p>
+<ul>
+<li><code>flex={1}</code></li>
+<li><code>overflow=&quot;auto&quot;</code></li>
+</ul>
+<p>JSX 代碼範例可以參考下方：</p>
+<p><strong>實際的寫法可以根據專案需求再做調整</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;Box display=<span class="string">"flex"</span> flexDirection=<span class="string">"column"</span> height=<span class="string">"100vh"</span>&gt;</span><br><span class="line">  &lt;TopBar title=<span class="string">"頁面標題"</span> /&gt;</span><br><span class="line">  &lt;Tabs currentTab=&#123;currentTab&#125; setCurrentTab=&#123;setCurrentTab&#125; /&gt;</span><br><span class="line">  &#123;<span class="comment">/* 利用剩餘高度建立的滾動區塊 */</span>&#125;</span><br><span class="line">  &lt;Box flex=&#123;<span class="number">1</span>&#125; overflow=<span class="string">"auto"</span>&gt;</span><br><span class="line">    &lt;List /&gt;</span><br><span class="line">  &lt;<span class="regexp">/Box&gt;</span></span><br><span class="line"><span class="regexp">  &lt;ButtonGroup /</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/Box&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="calc"><a href="#calc" class="headerlink" title="calc"></a>calc</h2><p>根據不同專案的 layout 設計<br>可能會出現固定式的 TopBar 或 FooterBar  </p>
+<p>萬一遇到這種情況要如何處理呢<br>可以用 calc 這個 css 特型來對高度進行輔助計算</p>
+<p>這邊的場景是假設 layout 還包含了一個 position: fixed 的 FooterBar（80px）<br>這樣頁面父元素的高度可以改寫為：</p>
+<ul>
+<li><code>height=&quot;calc(100vh - 80px)&quot;</code></li>
+</ul>
+<p>改寫後 JSX 代碼範例可以參考下方：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;Box display=<span class="string">"flex"</span> flexDirection=<span class="string">"column"</span> height=<span class="string">"calc(100vh - 80px)"</span>&gt;</span><br><span class="line">  &lt;TopBar title=<span class="string">"頁面標題"</span> /&gt;</span><br><span class="line">  &lt;Tabs currentTab=&#123;currentTab&#125; setCurrentTab=&#123;setCurrentTab&#125; /&gt;</span><br><span class="line">  &#123;<span class="comment">/* 利用剩餘高度建立的滾動區塊 */</span>&#125;</span><br><span class="line">  &lt;Box flex=&#123;<span class="number">1</span>&#125; overflow=<span class="string">"auto"</span>&gt;</span><br><span class="line">    &lt;List /&gt;</span><br><span class="line">  &lt;<span class="regexp">/Box&gt;</span></span><br><span class="line"><span class="regexp">  &lt;ButtonGroup /</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/Box&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidblog.github.io/2023/07/28/根據畫面剩餘高度建立滾動區域/">https://davidblog.github.io/2023/07/28/根據畫面剩餘高度建立滾動區域/</a> </p>
+]]></content>
+      <categories>
+        <category>技術文章</category>
+      </categories>
+  </entry>
+  <entry>
     <title>多步驟頁面的狀態管理 (React Hook - useContext)</title>
     <url>/2023/07/27/%E5%A4%9A%E6%AD%A5%E9%A9%9F%E9%A0%81%E9%9D%A2%E7%9A%84%E7%8B%80%E6%85%8B%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<p>很常見的一個應用場景<br>就是讓用戶完成多步驟的表單頁面並在最後送出<br>中間的過程中用戶可以自由返回上一頁<br>並對尚未提交的內容進行修改</p>
@@ -339,16 +384,16 @@
     <title>圖片預覽 (FileReader/Data URL)</title>
     <url>/2023/07/12/fileReader/</url>
     <content><![CDATA[<p>之前介紹過 <a href="./2023/06/08/Data-URL-vs-Blob-URL/#more">Data URL</a><br>而這篇文章將補充一個常見的應用場景：圖片預覽</p>
-<a id="more"></a>
-
-<p>先說明圖片預覽的主要流程</p>
+<p>先說明實現圖片預覽的主要流程：</p>
 <ul>
 <li>根據 input 元素 來上傳圖片</li>
 <li>根據 FileReader 物件來讀取圖片的 Data URL</li>
 <li>根據 Data URL 將圖片顯示在畫面上</li>
 </ul>
-<p>底下代碼主要以 JSX 為範例：</p>
-<h2 id="根據-input-元素-來上傳圖片"><a href="#根據-input-元素-來上傳圖片" class="headerlink" title="根據 input 元素 來上傳圖片"></a>根據 input 元素 來上傳圖片</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">htmlFor</span>=<span class="string">"file-upload"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">          <span class="attr">id</span>=<span class="string">"file-upload"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">accept</span>=<span class="string">"image/*"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">multiple</span>=<span class="string">&#123;true&#125;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">type</span>=<span class="string">"file"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">display:</span> "<span class="attr">none</span>" &#125;&#125;</span></span><br><span class="line"><span class="tag">          <span class="attr">onChange</span>=<span class="string">&#123;(e)</span> =&gt;</span> &#123;</span><br><span class="line">            handleFileInputChange(e);</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>新增圖片<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h2 id="根據-input-元素-來上傳圖片"><a href="#根據-input-元素-來上傳圖片" class="headerlink" title="根據 input 元素 來上傳圖片"></a>根據 input 元素 來上傳圖片</h2><p>內文以 JSX 為範例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">htmlFor</span>=<span class="string">"file-upload"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">          <span class="attr">id</span>=<span class="string">"file-upload"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">accept</span>=<span class="string">"image/*"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">multiple</span>=<span class="string">&#123;true&#125;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">type</span>=<span class="string">"file"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">display:</span> "<span class="attr">none</span>" &#125;&#125;</span></span><br><span class="line"><span class="tag">          <span class="attr">onChange</span>=<span class="string">&#123;(e)</span> =&gt;</span> &#123;</span><br><span class="line">            handleFileInputChange(e);</span><br><span class="line">          &#125;&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>新增圖片<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>這裡用了一個小技巧隱藏原本的 input 欄位<br>並以 label 的點擊來觸發 input 的點擊效果(for 屬性可以觸發相同 id)<br><strong>備註：JSX 的 for 屬性需要寫成 htmlFor</strong></p>
 <p>當選取圖片上傳便會觸發 onChange</p>
@@ -369,10 +414,13 @@
     <url>/2023/07/12/navigate/</url>
     <content><![CDATA[<p>導航狀態常用於頁面間的資料傳遞<br>特別適合單向的數據傳遞(只管數據帶到下一頁,不管帶回上一頁)<br>使用上直觀且簡單<br>另外現代瀏覽器多半有緩存機制可以保存各頁面的狀態<br>即便客戶端進行 Reload, 或點擊上下頁依然可以保存狀態</p>
 <p>應用上像是商品目錄頁進到商品內頁<br>可以藉由導航狀態先將部分資訊帶入內頁渲染<br>剩餘的資訊再藉由動態請求補齊<br>可以有效提升使用者體驗</p>
-<p>底下以 React Router v6 為例<br>來說明導航狀態的實際應用</p>
+<p>底下以 React Router v6 為例<br>來說明導航狀態的實際應用：</p>
+<ul>
+<li>useNavigate</li>
+</ul>
 <a id="more"></a>
 
-<p>這是一個頁面級別的元件代碼範例<br>包含接收來自上一頁的 state<br>和將 state 帶入新頁面的方法</p>
+<h2 id="useNavigate"><a href="#useNavigate" class="headerlink" title="useNavigate"></a>useNavigate</h2><p>這是一個頁面級別的元件代碼範例<br>包含接收來自上一頁的 state<br>和將 state 帶入新頁面的方法</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Page = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> navigate = useNavigate();</span><br><span class="line">  <span class="keyword">const</span> location = useLocation();</span><br><span class="line">  <span class="keyword">const</span> &#123; state &#125; = location;</span><br><span class="line">  <span class="keyword">const</span> [viewModel, setViewModel] = useState(state || &#123;&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> onNextPageClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> state = &#123; <span class="attr">data</span>: <span class="string">'example'</span> &#125;;</span><br><span class="line">    navigate(<span class="string">"頁面路徑"</span>, &#123; state &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> fetchPageData = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">       <span class="keyword">const</span> res = <span class="keyword">await</span> fetch(<span class="string">"url"</span>);</span><br><span class="line">       <span class="keyword">const</span> json = <span class="keyword">await</span> res.json();</span><br><span class="line">       <span class="keyword">const</span> &#123; data &#125; = json;</span><br><span class="line">       setViewModel(<span class="function"><span class="params">p</span> =&gt;</span> (&#123;...p, ...data&#125;))</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">       <span class="built_in">console</span>.log(err.message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    fetchPageData()</span><br><span class="line">  &#125;, [])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (頁面JSX代碼);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>從上面的代碼可以看到導航狀態來自於 location 的 state<br>可將其作為 viewModel 的預設值 之後主要用來更新視圖<br>當元件掛載完成後 便會觸發 fetchPageData 進行動態數據請求和視圖更新</p>
@@ -391,9 +439,13 @@
 <p>BrowserRouter 會根據每次路徑的變化都和後端發送請求</p>
 <p>但實際上 React 只會有一個 index.html 位於 Nginx 的網站根目錄<br>此時如果 Nginx 嘗試將每個前端路由的的請求都轉發到後端的真實路徑<br>就會因為找不到實際的檔案可以回傳 而發生 404 Not Found</p>
 <p>底下就來說明如何解決這個問題</p>
+<ul>
+<li>nginx 設定檔配置</li>
+</ul>
 <a id="more"></a>
 
-<p>首先 要先打開 Nginx 的配置檔案<br>預設位置為 /etc/nginx/conf.d/default.conf<br>內容如下：</p>
+<h2 id="nginx-設定檔配置"><a href="#nginx-設定檔配置" class="headerlink" title="nginx 設定檔配置"></a>nginx 設定檔配置</h2><p>Nginx 的配置檔案預設位置為：<br><code>/etc/nginx/conf.d/default.conf</code>  </p>
+<p>內容如下：</p>
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">server</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">listen</span>       <span class="number">80</span><span class="string">;</span></span><br><span class="line">    <span class="string">listen</span>  <span class="string">[::]:80;</span></span><br><span class="line">    <span class="string">server_name</span>  <span class="string">localhost;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">location</span> <span class="string">/</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="string">root</span>   <span class="string">/usr/share/nginx/html;</span></span><br><span class="line">        <span class="string">index</span>  <span class="string">index.html</span> <span class="string">index.htm;</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>需要將 try_files 加入 location / 下<br>代碼如下：</p>
@@ -418,10 +470,13 @@
     <title>上拉加載</title>
     <url>/2023/06/17/%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BC%89/</url>
     <content><![CDATA[<p>上拉加載 下拉更新 原本是 APP 很常見的功能<br>現在 Web 也很常見 因為越來越多的 Web 得做得和 APP 越來越像 …</p>
-<p>今天這篇先講上拉加載的部分</p>
+<p>今天這篇先講上拉加載的部分：</p>
+<ul>
+<li>scrollHeight + clientHeight + scrollTop</li>
+</ul>
 <a id="more"></a>
 
-<p>實現加載的關鍵就在滾動事件  </p>
+<h2 id="scrollHeight-clientHeight-scrollTop"><a href="#scrollHeight-clientHeight-scrollTop" class="headerlink" title="scrollHeight + clientHeight + scrollTop"></a>scrollHeight + clientHeight + scrollTop</h2><p>實現加載的關鍵就在滾動事件  </p>
 <p>當長清單列表的元素滾動到底部時<br>得觸發一個 Callback function 來獲取新的資料<br>並將此資料加入原清單列表的陣列當中  </p>
 <p>這邊先看一下偵測滾動到底部的代碼：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> detectScrollToBottom = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; clientHeight, scrollHeight, ScrollTop &#125; = <span class="built_in">document</span>.querySelector(<span class="string">'#el'</span>);</span><br><span class="line">    <span class="keyword">if</span>(clientHeight + ScrollTop &gt;= scrollHeight) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'已滑動至底部'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'#el'</span>).addEventListener(<span class="string">'scroll'</span>, () =&gt; detectScrollToBottom());</span><br></pre></td></tr></table></figure>
@@ -461,35 +516,42 @@
   <entry>
     <title>Data URL vs Blob URL</title>
     <url>/2023/06/08/Data-URL-vs-Blob-URL/</url>
-    <content><![CDATA[<p>網頁應用常見的資源網址除了http URL外,<br>還有Data URL及Blob URL:  </p>
+    <content><![CDATA[<p>網頁應用常見的資源網址除了 http URL 外,<br>還有 Data URL 及 Blob URL</p>
+<p>這兩種類型的網址，也很常用在資源下載及顯示<br>內文將介紹這兩種 URL 的基本使用方法</p>
 <ul>
 <li>Data URL (資料網址)</li>
 <li>Blob URL (二進制大型物件網址)</li>
+<li>附註常見的 MIME 類型 （Media Type）</li>
 </ul>
-<p>這兩種類型的網址，也很常用在資源下載及顯示<br>內文將介紹這兩種URL 的基本使用方法</p>
 <a id="more"></a>
 
-<h1 id="Data-URL-vs-Blob-URL"><a href="#Data-URL-vs-Blob-URL" class="headerlink" title="Data URL vs Blob URL"></a>Data URL vs Blob URL</h1><h2 id="Data-URL"><a href="#Data-URL" class="headerlink" title="Data URL"></a>Data URL</h2><p>Data URL 可以使資源以文本格式直接鑲嵌在HTML中使用<br>如常見的圖片以base64置入於img標籤的src內<br>也可以將其放入a標籤的href內供使用者下載</p>
+<h2 id="Data-URL-資料網址"><a href="#Data-URL-資料網址" class="headerlink" title="Data URL (資料網址)"></a>Data URL (資料網址)</h2><p>Data URL 可以使資源以文本格式直接鑲嵌在 HTML 中使用<br>如常見的圖片以 base64 置入於 img 標籤的 src 內<br>也可以將其放入 a 標籤的 href 內供使用者下載</p>
 <p>Data URL 的基本編碼格式如下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">data:[media type][;編碼格式],編碼</span><br></pre></td></tr></table></figure>
+
 <p>圖片範例：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">data:image&#x2F;png;base64,[base64代碼]</span><br></pre></td></tr></table></figure>
+
 <p>純文字範例：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">data:text&#x2F;plain;charset&#x3D;utf-8,[字串符]</span><br></pre></td></tr></table></figure>
+
 <p>圖片資源加載範例:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;data:image&#x2F;png;base64,[base64代碼]&quot; alt&#x3D;&quot;圖片描述&quot;&gt;</span><br></pre></td></tr></table></figure>
+
 <p>圖片資源下載範例:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;data:image&#x2F;png;base64,[base64代碼]&quot; download&#x3D;&quot;檔案名稱&quot;&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Blob-URL"><a href="#Blob-URL" class="headerlink" title="Blob URL"></a>Blob URL</h2><p>Blob URL 可以生成一個暫時的網址<br>並將其資源暫放在瀏覽器的記憶體中  </p>
-<p>創建Blob URL範例:</p>
+<h2 id="Blob-URL-二進制大型物件網址"><a href="#Blob-URL-二進制大型物件網址" class="headerlink" title="Blob URL (二進制大型物件網址)"></a>Blob URL (二進制大型物件網址)</h2><p>Blob URL 可以生成一個暫時的網址<br>並將其資源暫放在瀏覽器的記憶體中</p>
+<p>創建 Blob URL 範例:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const string &#x3D; &#39;Hello Blob URL&#39;;</span><br><span class="line">const file &#x3D; new Blob([string], &#123;type: text&#x2F;plain&#125;);</span><br><span class="line">const BlobURL &#x3D; URL.createObjectURL(file); &#x2F;&#x2F; 這個就是Blob URL</span><br></pre></td></tr></table></figure>
-<p>使用Blob URL下載檔案的範例：</p>
+
+<p>使用 Blob URL 下載檔案的範例：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const link &#x3D; document.createElement(&#39;a&#39;);</span><br><span class="line">link.href &#x3D; BlobURL;</span><br><span class="line">link.download &#x3D; &#39;檔案名稱&#39;;</span><br><span class="line">link.click();</span><br></pre></td></tr></table></figure>
+
 <p>清除下載連結及釋放記憶體</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">link.href &#x3D; &quot;&quot;;</span><br><span class="line">URL.revokeObjectURL(BlobURL);</span><br></pre></td></tr></table></figure>
 
-<h2 id="附註常見的MIME類型-（Media-Type）"><a href="#附註常見的MIME類型-（Media-Type）" class="headerlink" title="附註常見的MIME類型 （Media Type）"></a>附註常見的MIME類型 （Media Type）</h2><table>
+<h2 id="附註常見的-MIME-類型-（Media-Type）"><a href="#附註常見的-MIME-類型-（Media-Type）" class="headerlink" title="附註常見的 MIME 類型 （Media Type）"></a>附註常見的 MIME 類型 （Media Type）</h2><table>
 <thead>
 <tr>
 <th>MIME 類型</th>
@@ -568,14 +630,20 @@
       </categories>
   </entry>
   <entry>
-    <title>部落格近3週年久違的更新</title>
+    <title>久違的更新</title>
     <url>/2023/05/20/blogHistory/</url>
-    <content><![CDATA[<p>回憶起這個部落格只有在建立初起比較常使用<br>後續就默默的擺著  </p>
+    <content><![CDATA[<p>部落格近3年久違的更新<br>回憶起這個部落格只有在建立初起比較常使用<br>後續就默默的擺著  </p>
 <p>幾乎所有應用只要一陣子沒更新就會出問題<br>這個部落格也不例外</p>
 <p>底下就來講講這裡曾經發生過的事吧</p>
+<ul>
+<li>部落格起源</li>
+<li>Hexo 選用的主題不再更新 而導致版面出問題</li>
+<li>網域沒有續約 網址失效 導致網站無法正常訪問</li>
+<li>google 搜尋引擎找不到部落格的文章了</li>
+</ul>
 <a id="more"></a>
 
-<h1 id="部落格的歷史"><a href="#部落格的歷史" class="headerlink" title="部落格的歷史"></a>部落格的歷史</h1><p>最初建立這個部落格<br>除了想記錄自己的學習歷程<br>也想留下一個類似作品集的東西  </p>
+<h2 id="部落格起源"><a href="#部落格起源" class="headerlink" title="部落格起源"></a>部落格起源</h2><p>最初建立這個部落格<br>除了想記錄自己的學習歷程<br>也想留下一個類似作品集的東西  </p>
 <p>不過沒有選擇作品集而是部落格<br>是因為部落格更務實<br>而且使用上更方便  </p>
 <p>這個部落格始終是放在 github page 上的<br>但當初為了讓這個網站看起來更專業<br>就去 GoDaddy 租了個兩年的網域<br>然後用 CloudFlare 來做網站託管<br>這樣就有一個專門的網址可以連到我的網站<br>也可以在 google 上搜尋到這格部落格裡的文章</p>
 <p>CloudFlare 除了可以免費託管網站<br>還提供了免費的CDN和SSL憑證相當不錯</p>
