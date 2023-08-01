@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://davidblog.github.io/2023/07/22/%E9%83%A8%E8%90%BD%E6%A0%BC%E5%A4%A7%E7%BF%BB%E6%96%B0/</loc>
+    
+    <lastmod>2023-08-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://davidblog.github.io/2023/07/31/%E7%AD%86%E9%9B%BB%E8%88%87%E7%A8%8B%E5%BC%8F%E9%96%8B%E7%99%BC/</loc>
     
     <lastmod>2023-08-01</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://davidblog.github.io/2023/08/01/recalling-small-topic/</loc>
-    
-    <lastmod>2023-08-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://davidblog.github.io/2023/07/22/%E9%83%A8%E8%90%BD%E6%A0%BC%E5%A4%A7%E7%BF%BB%E6%96%B0/</loc>
     
     <lastmod>2023-08-01</lastmod>
     
