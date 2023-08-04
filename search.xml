@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>調用攝像鏡頭</title>
+    <url>/2023/08/04/%E8%AA%BF%E7%94%A8%E6%94%9D%E5%83%8F%E9%8F%A1%E9%A0%AD/</url>
+    <content><![CDATA[<p>調用硬體的攝像鏡頭可以實現許多有趣的功能<br>像是<strong>拍照</strong>或是<strong>掃描 QR code</strong></p>
+<p>底下來說明<strong>調用攝像鏡頭</strong>的方法吧：</p>
+<ul>
+<li>認識 MediaDevices 的 getUserMedia 方法</li>
+<li>使用 getUserMedia 來調用攝像鏡頭(啟動及關閉)</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="認識-MediaDevices-的-getUserMedia-方法"><a href="#認識-MediaDevices-的-getUserMedia-方法" class="headerlink" title="認識 MediaDevices 的 getUserMedia 方法"></a>認識 MediaDevices 的 getUserMedia 方法</h2><p>調用鏡頭會需要先認識 MediaDevices 這個瀏覽器物件<br>詳細可以參考 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia" target="_blank" rel="noopener">MDN(Mozilla Developer Network)</a> 的文檔</p>
+<p>這邊就先列一下幾個比較重要的代碼範例：</p>
+<p>調用方式：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">navigator.mediaDevices</span><br><span class="line">  .getUserMedia(constraints)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">stream</span>) </span>&#123;&#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>constraints 這個參數可以指定要調用的硬體設備<br>像是<strong>麥克風</strong>或是<strong>攝像頭</strong></p>
+<p>調用攝像頭：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  video: <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>調用攝像頭並<strong>優先使用前鏡頭</strong>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  video: &#123;</span><br><span class="line">    facingMode: <span class="string">"user"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>調用攝像頭並<strong>優先使用後鏡頭</strong>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  video: &#123;</span><br><span class="line">    facingMode: <span class="string">"environment"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>調用攝像頭並<strong>強制使用後鏡頭</strong>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  video: &#123;</span><br><span class="line">    facingMode: &#123;</span><br><span class="line">      exact: <span class="string">"environment"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font color="lightcoral">註： 我這邊實測沒有強制使用前鏡頭的設定，只有後鏡頭是可以強制設定的！</font></p>
+<h2 id="使用-getUserMedia-來調用攝像鏡頭-啟動及關閉"><a href="#使用-getUserMedia-來調用攝像鏡頭-啟動及關閉" class="headerlink" title="使用 getUserMedia 來調用攝像鏡頭(啟動及關閉)"></a>使用 getUserMedia 來調用攝像鏡頭(啟動及關閉)</h2><p>啟動攝像鏡頭的方法比較單純<br>至於關閉攝像鏡頭則會需要先記住 mediaStream<br>這邊是使用閉包的方式讓啟動和關閉相機的函式都可訪問這個變數<br>並在停用相機時清除 mediaStream 的引用和 video.srcObject 的位置<br>讓其在不被需要時可以被正確回收記憶體</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> onCamera = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> video = <span class="built_in">document</span>.querySelector(<span class="string">"video"</span>);</span><br><span class="line">  <span class="keyword">let</span> mediaStream;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 開啟攝像頭</span></span><br><span class="line">  <span class="keyword">const</span> startCamera = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      mediaStream = <span class="keyword">await</span> navigator.mediaDevices.getUserMedia(&#123;</span><br><span class="line">        video: &#123; <span class="attr">facingMode</span>: <span class="string">"environment"</span>, <span class="attr">width</span>: <span class="number">300</span> &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">      video.srcObject = mediaStream;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"GetUserMedia Error:"</span>, err.message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 關閉攝像頭</span></span><br><span class="line">  <span class="keyword">const</span> stopCamera = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (mediaStream) &#123;</span><br><span class="line">      <span class="keyword">const</span> videoTracks = mediaStream.getVideoTracks();</span><br><span class="line">      videoTracks.forEach(<span class="function">(<span class="params">track</span>) =&gt;</span> track.stop());</span><br><span class="line">      <span class="comment">// 釋放資源</span></span><br><span class="line">      mediaStream = <span class="literal">null</span>;</span><br><span class="line">      video.srcObject = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123; startCamera, stopCamera &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; startCamera, stopCamera &#125; = onCamera();</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidblog.github.io/2023/08/04/調用攝像鏡頭/">https://davidblog.github.io/2023/08/04/調用攝像鏡頭/</a> </p>
+]]></content>
+      <categories>
+        <category>技術文章</category>
+      </categories>
+  </entry>
+  <entry>
     <title>語言學習應用</title>
     <url>/2023/08/03/recalling-lang-topic/</url>
     <content><![CDATA[<p>之前嘗試做過一個簡單的語言學習應用<br>網址已經關閉了，不過還是可以把當初實作的一些想法放在這裡！٩(๑❛ᴗ❛๑)۶</p>
