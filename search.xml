@@ -1,6 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>前端技術雜談</title>
+    <url>/2023/08/08/%E5%89%8D%E7%AB%AF%E5%B0%88%E6%A1%88%E6%8A%80%E8%A1%93%E9%9B%9C%E8%AB%87/</url>
+    <content><![CDATA[<p>之前專案遇到可以談論的主題會先寫在日誌上<br>這樣部落格沒有靈感的話就可以直接取用 ʕ•̀ ω • ʔ<br>但有些想談論的主題沒有很深<br>無法單獨寫成一篇文章 ┑(￣ Д ￣)┍</p>
+<p>所以想說可以用雜談的方式來聊：</p>
+<ul>
+<li>URL search 搜索字符串的常見參數與用途</li>
+<li>.gitignore 忽略已追蹤過的檔案</li>
+<li>傳統開發使用 polyfill 來模擬 ES6+ 的環境</li>
+<li>CRA 專案預設的 eslint 規則</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="URL-search-搜索字符串的常見參數與用途"><a href="#URL-search-搜索字符串的常見參數與用途" class="headerlink" title="URL search 搜索字符串的常見參數與用途"></a>URL search 搜索字符串的常見參數與用途</h2><p>首先附上 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/URL/search" target="_blank" rel="noopener">MDN 的文件介紹</a><br>還有它提供的代碼範例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="keyword">new</span> URL(</span><br><span class="line">  <span class="string">"https://developer.mozilla.org/zh-CN/docs/Web/API/URL/search?q=123"</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">var</span> queryString = url.search; <span class="comment">// Returns:"?q=123"</span></span><br></pre></td></tr></table></figure>
+
+<p>URL search 是一個很方便且靈活的工具<br>很常被用來控制檢索畫面時的顯示訊息<br>基本上在各個大型網頁都會出現</p>
+<p>所以設計網頁應用的過程<br>也可以多留意使用這個技巧</p>
+<hr>
+<p>底下列舉一些常用的參數與用途：</p>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>modal</code></td>
+<td>控制是否在模態框中打開搜索結果。</td>
+<td><code>?modal=true</code> 或 <code>?modal=false</code></td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>控制顯示的分頁。</td>
+<td><code>?page=2</code></td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>指定搜索的關鍵詞或查詢字符串。</td>
+<td><code>?q=keyword</code></td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>指定搜索結果的排序方式。</td>
+<td><code>?sort=date</code></td>
+</tr>
+<tr>
+<td><code>lang</code></td>
+<td>指定搜索結果的語言。</td>
+<td><code>?lang=en</code></td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>限制搜索結果在特定日期範圍內。</td>
+<td><code>?date=2023-01-01..2023-07-31</code></td>
+</tr>
+</tbody></table>
+<h2 id="gitignore-忽略已追蹤過的檔案"><a href="#gitignore-忽略已追蹤過的檔案" class="headerlink" title=".gitignore 忽略已追蹤過的檔案"></a>.gitignore 忽略已追蹤過的檔案</h2><p>.gitignore 基本上就是用來記錄不要加入版控的檔案<br>這個 .gitignore 通常會在專案搭建的一開始就定義好</p>
+<p>不過處理專案的實務上<br>還是會遇到<br>噎…這個檔案不應該加在版控裡面呀<br>但是它已經被追縱過了<br>所以當你在.gitignore 新增已經追縱過的檔案時<br>就沒有作用了</p>
+<p>解決方法可以用<code>git rm -r --cached .</code><br>來把本地緩存的紀錄給刪除<br>這樣再提交就沒問題了</p>
+<h2 id="傳統開發使用-polyfill-來模擬-ES6-的環境"><a href="#傳統開發使用-polyfill-來模擬-ES6-的環境" class="headerlink" title="傳統開發使用 polyfill 來模擬 ES6+ 的環境"></a>傳統開發使用 polyfill 來模擬 ES6+ 的環境</h2><p>基本上現代專案開發都使用框架來搭建專案<br>一般來說可以不用自己去處理 webpack 和 babel 等腳手架設定<br>只需要專注在前端程式的開發就好</p>
+<p>但有些簡單的畫面可能已經有設計人員切好版<br>你只需要直接撰寫程式即可</p>
+<p>這種情況下<br>基於兼顧瀏覽器的相容性<br>你可以使用 jQuery 或是 ES5 來撰寫</p>
+<p>另一種方式是可以引入 <a href="https://www.jsdelivr.com/package/npm/@babel/polyfill" target="_blank" rel="noopener">@babel/polyfill</a></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">https://cdn.jsdelivr.net/npm/@babel/polyfill@7.12.1/dist/polyfill.min.js</span></span></span><br><span class="line"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這個版本的@babel/polyfill 可以模擬 ES6+ ~ ES10(ES2019)的環境<br><strong>註：@babel/polyfill 包含 core-js v2.x 和 regenerator-runtime</strong></p>
+<p>但上網查在 Babel 某個版本之後 @babel/polyfill 已經被棄用了<br>而改用 core-js v3 和 regenerator-runtime 來進行一些更細部的操作和避免過去全局污染的潛在問題</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/core-js@3.20.1/dist/core.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>這邊附註一下 core-js 與 regenerator-runtime 說明的參考資料：</p>
+<table>
+<thead>
+<tr>
+<th>特點</th>
+<th>core-js</th>
+<th>regenerator-runtime</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目的</td>
+<td>用於填充 ECMAScript 功能的庫</td>
+<td>用於異步生成器的運行時庫</td>
+</tr>
+<tr>
+<td>兼容性</td>
+<td>提供新的 ECMAScript API</td>
+<td>專注於生成器/轉譯器需求</td>
+</tr>
+<tr>
+<td>使用</td>
+<td>通常用於所有 JavaScript 代碼</td>
+<td>通常與 async/await 一起使用</td>
+</tr>
+<tr>
+<td>填充範圍</td>
+<td>涵蓋廣泛的新功能</td>
+<td>專門針對生成器函數</td>
+</tr>
+<tr>
+<td>大小</td>
+<td>由於填充範圍更廣，所以較大</td>
+<td>由於專注於特定用途，所以較小</td>
+</tr>
+<tr>
+<td>異步/等待</td>
+<td>不直接處理異步代碼</td>
+<td>處理異步生成器函數</td>
+</tr>
+<tr>
+<td>生成器支持</td>
+<td>不提供生成器功能</td>
+<td>增強異步生成器性能</td>
+</tr>
+<tr>
+<td>導入方式</td>
+<td>根據需要導入各個功能</td>
+<td>作為整體導入，用於生成器功能</td>
+</tr>
+<tr>
+<td>自定義性</td>
+<td>提供選項以包括特定功能</td>
+<td>自定義選項有限</td>
+</tr>
+</tbody></table>
+<h2 id="CRA-專案預設的-eslint-規則"><a href="#CRA-專案預設的-eslint-規則" class="headerlink" title="CRA 專案預設的 eslint 規則"></a>CRA 專案預設的 eslint 規則</h2><p>如果你是用 create-react-app 來搭建專案<br>基本上專案裡頭就已經包含了 eslist 的設定<br>而這個預設的規則就是 <code>react-app</code><br>可以在 package.json 裡面看到：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">"eslintConfig": &#123;</span><br><span class="line">  "extends": "react-app"</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>但是如果想搭配 VS code 的 ESLint 插件來檢查語法<br>可能會用<code>eslint --init</code>來創建設定檔<br>不過在裡頭的 react 相關配置中沒有 <code>react-app</code><br>只有 <code>eslint:recommended</code> 和 <code>plugin:react/recommended</code></p>
+<p>如果還是想用 CRA 預設的 eslint 規則可修改 <code>.eslintrc.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// extends: ["eslint:recommended", "plugin:react/recommended"],</span></span><br><span class="line">extends: [<span class="string">"react-app"</span>],</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>底下附註這幾項規則的參考資料：</p>
+<table>
+<thead>
+<tr>
+<th>特點</th>
+<th>react-app</th>
+<th>eslint:recommended</th>
+<th>plugin:react/recommended</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>規則來源</td>
+<td>專為 React 項目設計</td>
+<td>ESLint 官方推薦規則</td>
+<td>React 插件官方推薦規則</td>
+</tr>
+<tr>
+<td>覆蓋範圍</td>
+<td>針對 React 相關規則</td>
+<td>一般的 JavaScript 規則</td>
+<td>React 特定規則</td>
+</tr>
+<tr>
+<td>JSX 規則</td>
+<td>包含 JSX 相關規則</td>
+<td>無</td>
+<td>包含 JSX 相關規則</td>
+</tr>
+<tr>
+<td>異步渲染支持</td>
+<td>不包含異步渲染規則</td>
+<td>無</td>
+<td>不包含異步渲染規則</td>
+</tr>
+<tr>
+<td>類型檢查支持</td>
+<td>不包含 TypeScript/Flow 等類型檢查規則</td>
+<td>無</td>
+<td>不包含類型檢查規則</td>
+</tr>
+<tr>
+<td>特定框架功能檢查</td>
+<td>檢查特定的 React 功能和最佳實踐</td>
+<td>基本的 JavaScript 代碼質量檢查</td>
+<td>檢查特定的 React 功能和最佳實踐</td>
+</tr>
+<tr>
+<td>自定義性</td>
+<td>有限，適用於大多數 Create React App 項目</td>
+<td>可以根據項目需求進行配置</td>
+<td>可以根據項目需求進行配置</td>
+</tr>
+<tr>
+<td>適用場景</td>
+<td>Create React App 項目中建議使用</td>
+<td>通用 JavaScript 項目中建議使用</td>
+<td>React 項目中建議使用</td>
+</tr>
+</tbody></table>
+<p><strong>本文作者</strong>： David Huang <br /><strong>本文地址</strong>： <a href="https://davidblog.github.io/2023/08/08/前端專案技術雜談/">https://davidblog.github.io/2023/08/08/前端專案技術雜談/</a> </p>
+]]></content>
+      <categories>
+        <category>技術文章</category>
+      </categories>
+  </entry>
+  <entry>
     <title>我的單眼相機</title>
     <url>/2023/08/07/%E6%88%91%E7%9A%84%E5%96%AE%E7%9C%BC%E7%9B%B8%E6%A9%9F/</url>
     <content><![CDATA[<p>首先來分享一個很棒的網站 <a href="https://www.dxomark.com/smartphones/" target="_blank" rel="noopener">DXOMARK</a><br>這個網站包含常見的手機, 相機, 鏡頭的排名<br>這樣一來你就可以很輕鬆的知道自己硬體設備的性能位階大該落在哪裡<br>以後要換設備或是添購新設備皆可以參考真的很方便</p>
